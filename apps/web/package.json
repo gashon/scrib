@@ -10,6 +10,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.12",
+    "@apollo/link-context": "2.0.0-beta.3",
     "@scrib/ui": "workspace:*",
     "next": "latest",
     "react": "^18.2.0",
