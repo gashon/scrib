@@ -1,15 +1,13 @@
 import { ApolloServer } from 'apollo-server-express';
 import cookieParser from 'cookie-parser';
 import express from 'express';
-// todo integrate
-
 import rateLimit from 'express-rate-limit';
 import { makeExecutableSchema } from 'graphql-tools';
 import morgan from 'morgan';
+// todo integrate
 import throng from 'throng';
 
-import resolvers from './graphql/resolvers';
-import typeDefs from './graphql/schema/type-defs';
+import { resolvers, typeDefs } from './graphql';
 
 const port = parseInt(process.env.PORT!, 10) || 7000;
 const dev = process.env.NODE_ENV !== 'production';

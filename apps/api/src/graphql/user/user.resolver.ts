@@ -1,6 +1,6 @@
 import User from '@scrib/db/models/user';
 
-const resolvers = {
+export const userResolvers = {
   Query: {
     users: () => User.find(),
     user: (_: any, { id }: { id: string }) => User.findById(id),
@@ -41,5 +41,3 @@ const resolvers = {
     },
   },
 };
-
-export default resolvers;
