@@ -7,6 +7,6 @@
       "@scrib/db/*": ["../../packages/db/src/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "codegen.ts"],
   "exclude": ["node_modules"]
 }

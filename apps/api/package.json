@@ -7,6 +7,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon src/server.ts",
+    "graphql:codegen": "graphql-codegen",
+    "graphql:codegen:watch": "graphql-codegen --watch",
     "lint": "eslint . --ext .ts",
     "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,6 +29,8 @@
     "throng": "^5.0.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^3.3.1",
+    "@graphql-codegen/client-preset": "^3.0.1",
     "@scrib/eslint-config-custom": "workspace:*",
     "@scrib/tsconfig": "workspace:*",
     "@types/cookie-parser": "^1.4.3",
