@@ -1,6 +1,10 @@
 {
   "name": "scrib",
   "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
     "apps:build": "turbo run build",
     "apps:dev": "turbo run dev",

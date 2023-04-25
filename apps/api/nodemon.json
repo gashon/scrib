@@ -1,0 +1,6 @@
+{
+    "$schema": "https://json.schemastore.org/nodemon.json",
+    "exec": "node -r esbuild-register",
+    "watch": ["src/**/*.ts", "../../packages/server-lib/**/*", "../../package/common/**/*"]
+  }
+  

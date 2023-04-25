@@ -1,0 +1,19 @@
+{
+  "name": "@scrib/api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon src/server.ts",
+    "start": "node dist/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ext .ts"
+  },
+  "dependencies": {
+    "esbuild": "^0.17.18",
+    "esbuild-register": "^3.4.2"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.3"
+  }
+}
