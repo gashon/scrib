@@ -3,23 +3,25 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build:analyze": "ANALYZE=true next build",
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next start"
   },
   "dependencies": {
+    "@scrib/ui": "workspace:*",
     "next": "latest",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@scrib/ui": "workspace:*"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^13.3.1",
+    "@scrib/eslint-config-custom": "workspace:*",
+    "@scrib/tsconfig": "workspace:*",
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
-    "@scrib/eslint-config-custom": "workspace:*",
-    "@scrib/tsconfig": "workspace:*",
     "typescript": "^4.5.3"
   }
 }
