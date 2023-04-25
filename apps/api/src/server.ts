@@ -1,46 +1,41 @@
+import { ApolloServer } from 'apollo-server-express';
 import cookieParser from 'cookie-parser';
 import express from 'express';
-import morgan from 'morgan';
+// todo integrate
 
-import 'reflect-metadata';
 import rateLimit from 'express-rate-limit';
-import { InversifyExpressServer } from 'inversify-express-utils';
+import { makeExecutableSchema } from 'graphql-tools';
+import morgan from 'morgan';
+import throng from 'throng';
 
-import { container } from './domains/inversify.config';
+import resolvers from './graphql/resolvers';
+import typeDefs from './graphql/schema/type-defs';
 
 const port = parseInt(process.env.PORT!, 10) || 7000;
 const dev = process.env.NODE_ENV !== 'production';
 
-const server = new InversifyExpressServer(container);
+const app = express();
 
-server.setConfig((app) => {
-  app.set('trust proxy', !dev);
-  app.disable('x-powered-by');
+app.set('trust proxy', !dev);
+app.disable('x-powered-by');
 
-  app.use(morgan(dev ? 'dev' : 'combined'));
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: false }));
-  app.use(cookieParser());
+app.use(morgan(dev ? 'dev' : 'combined'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-  app.use(
-    rateLimit({
-      windowMs: 15 * 60 * 1000, // 15 minutes
-      max: dev ? Number.MAX_SAFE_INTEGER : 100, // limit each IP to x requests per windowMs
-      message:
-        'Too many requests from this IP, please try again after 15 minutes',
-    }),
-  );
-});
+app.use(
+  rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: dev ? Number.MAX_SAFE_INTEGER : 100, // limit each IP to x requests per windowMs
+    message:
+      'Too many requests from this IP, please try again after 15 minutes',
+  }),
+);
 
-// server.setErrorConfig((app) => {
-//   app.use(errorHandler);
-// });
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+const server = new ApolloServer({ schema });
 
-export async function start() {
-  const serverInstance = server.build();
-  serverInstance.listen(port, () => console.log('Listening on port', port));
-}
+server.applyMiddleware({ app, path: '/graphql' });
 
-if (!module.parent) {
-  start();
-}
+app.listen(port, () => console.log('Listening on port', port));

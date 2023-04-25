@@ -1,6 +1,12 @@
 {
-    "extends": "@scrib/tsconfig/base.json",
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-    "exclude": ["node_modules"]
-  }
-  
+  "extends": "@scrib/tsconfig/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@scrib/api/*": ["./src/*"],
+      "@scrib/db/*": ["../../packages/db/src/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
