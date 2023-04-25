@@ -10,10 +10,16 @@
     "lint": "eslint . --ext .ts"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "esbuild": "^0.17.18",
-    "esbuild-register": "^3.4.2"
+    "esbuild-register": "^3.4.2",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "inversify-express-utils": "^6.4.3",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "@types/node": "^17.0.12",
     "typescript": "^4.5.3"
   }
 }
