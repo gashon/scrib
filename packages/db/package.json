@@ -1,0 +1,17 @@
+{
+  "name": "@scrib/db",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\""
+  },
+  "dependencies": {
+    "mongoose": "^7.0.5",
+    "mongoose-autopopulate": "^0.17.1"
+  },
+  "devDependencies": {
+    "@scrib/eslint-config-custom": "workspace:*",
+    "@scrib/tsconfig": "workspace:*",
+    "eslint": "^7.32.0"
+  }
+}
