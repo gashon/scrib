@@ -1,3 +1,4 @@
+import { resolvers, typeDefs } from '@scrib/api/graphql';
 import { ApolloServer } from 'apollo-server-express';
 import cookieParser from 'cookie-parser';
 import express from 'express';
@@ -6,8 +7,6 @@ import { makeExecutableSchema } from 'graphql-tools';
 import morgan from 'morgan';
 // todo integrate
 import throng from 'throng';
-
-import { resolvers, typeDefs } from './graphql';
 
 const port = parseInt(process.env.PORT!, 10) || 7000;
 const dev = process.env.NODE_ENV !== 'production';
@@ -34,6 +33,12 @@ app.use(
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 const server = new ApolloServer({ schema });
 
-server.applyMiddleware({ app, path: '/graphql' });
+async function startServer() {
+  // Add await server.start() before server.applyMiddleware
+  await server.start();
+  server.applyMiddleware({ app, path: '/graphql' });
 
-app.listen(port, () => console.log('Listening on port', port));
+  app.listen(port, () => console.log('Listening on port', port));
+}
+
+startServer();

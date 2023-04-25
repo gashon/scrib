@@ -1,4 +1,3 @@
-// index.ts
 import { gql } from 'apollo-server-express';
 import { merge } from 'lodash';
 
