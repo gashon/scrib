@@ -2,11 +2,14 @@
   "extends": "@scrib/tsconfig/base.json",
   "compilerOptions": {
     "lib": ["ES2019", "DOM"],
-    "module": "CommonJS",
+    "module": "commonjs",
     "outDir": "dist",
     "rootDir": ".",
     "typeRoots": ["node_modules/@types"],
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "paths": {
+      "@scrib/db/*": ["./*"]
+    }
   },
   "exclude": ["node_modules", "**/.*"]
 }
