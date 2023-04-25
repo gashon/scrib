@@ -6,9 +6,9 @@
     "outDir": "dist",
     "rootDir": ".",
     "typeRoots": ["node_modules/@types"],
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@scrib/db/*": ["./*"]
+      "@scrib/db/*": ["./src/*"]
     }
   },
   "exclude": ["node_modules", "**/.*"]

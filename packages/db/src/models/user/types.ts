@@ -1,4 +1,4 @@
-import mongoose from '@scrib/db/mongo';
+import mongoose from '@scrib/db/mongoose';
 import { Resource } from '@scrib/db/util';
 
 export interface IUser extends Resource {
