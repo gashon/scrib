@@ -1,7 +1,7 @@
 import { gql } from 'apollo-server-express';
 import { merge } from 'lodash';
 
-import { userResolvers, userTypeDefs } from './user';
+import { userResolvers, userTypeDefs } from './modules';
 
 const rootTypeDefs = gql`
   type Query {
