@@ -1,62 +1,31 @@
-import User from '@scrib/db/models/user';
 import { RequestContext } from '@scrib/api/graphql/context';
+import User from '@scrib/db/models/user';
 
 export const userResolvers = {
   Query: {
-    users: (_: any, __: any, context: RequestContext) => {
-      // Access the `user` property from the context object
-      const currentUser = context.user;
+    users: (_: any, __: any, ___: RequestContext) => {
       return User.find();
     },
-    user: (_: any, { id }: { id: string }, context: RequestContext) => {
-      // Access the `user` property from the context object
-      const currentUser = context.user;
+    user: (_: any, { id }: { id: string }, ___: RequestContext) => {
       return User.findById(id);
     },
   },
   Mutation: {
-    createUser: async (
+    deleteUser: async (
       _: any,
-      { title, description }: { title: string; description: string },
+      { id }: { id: string },
       context: RequestContext,
     ) => {
+      if (!context.user)
+        throw new Error('You must be logged in to delete a user');
       // Access the `user` property from the context object
-      const currentUser = context.user;
+      const user = await User.findById(context.user.id);
 
-      const user = new User({ title, description, completed: false });
+      if (!user) throw new Error('User not found');
+
+      user.set({ deleted_at: new Date() });
       await user.save();
-      return user;
-    },
-    updateUser: async (
-      _: any,
-      {
-        id,
-        title,
-        description,
-        completed,
-      }: {
-        id: string;
-        title?: string;
-        description?: string;
-        completed?: boolean;
-      },
-      context: RequestContext,
-    ) => {
-      // Access the `user` property from the context object
-      const currentUser = context.user;
 
-      const user = await User.findByIdAndUpdate(
-        id,
-        { title, description, completed },
-        { new: true },
-      );
-      return user;
-    },
-    deleteUser: async (_: any, { id }: { id: string }, context: RequestContext) => {
-      // Access the `user` property from the context object
-      const currentUser = context.user;
-
-      const user = await User.findByIdAndDelete(id);
       return user;
     },
   },
