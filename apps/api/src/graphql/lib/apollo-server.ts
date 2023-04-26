@@ -1,4 +1,5 @@
 import { resolvers, typeDefs } from '@scrib/api/graphql';
+import { verify } from '@scrib/api/utils/jwt';
 import models from '@scrib/db/models';
 import { ApolloServer } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
@@ -14,17 +15,14 @@ const server = new ApolloServer({
       ...error,
     };
   },
-  context: async ({ req }) => {
+  context: ({ req }) => {
     if (req) {
-      const me = await getMe(req);
+      const user =
+        req.headers.authorization && verify(req.headers.authorization);
 
       return {
         models,
-        me,
-        secret: process.env.SECRET,
-        loaders: {
-          user: new DataLoader((keys) => loaders.user.batchUsers(keys, models)),
-        },
+        user,
       };
     }
   },

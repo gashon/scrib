@@ -1,6 +1,12 @@
-import User from './user';
+import { Document, Model } from 'mongoose';
 
-const models = {
+import User, { IUser } from './user';
+
+export type Models = {
+  User: Model<Document<string, object, IUser>, {}, {}, {}, any, any>;
+};
+
+const models: Models = {
   User,
 };
 
