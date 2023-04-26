@@ -93,7 +93,6 @@ importers:
 
   apps/web:
     specifiers:
-      '@apollo/client': ^3.7.12
       '@apollo/link-context': 2.0.0-beta.3
       '@next/bundle-analyzer': ^13.3.1
       '@scrib/eslint-config-custom': workspace:*
@@ -105,14 +104,18 @@ importers:
       next: latest
       react: ^18.2.0
       react-dom: ^18.2.0
+      react-relay: ^15.0.0
+      relay-compiler: ^15.0.0
+      relay-runtime: ^15.0.0
       typescript: ^4.5.3
     dependencies:
-      '@apollo/client': 3.7.12_biqbaboplfbrettd7655fr4n2y
       '@apollo/link-context': 2.0.0-beta.3_biqbaboplfbrettd7655fr4n2y
       '@scrib/ui': link:../../packages/ui
       next: 13.3.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      react-relay: 15.0.0_react@18.2.0
+      relay-runtime: 15.0.0
     devDependencies:
       '@next/bundle-analyzer': 13.3.1
       '@scrib/eslint-config-custom': link:../../packages/config/eslint-config-custom
@@ -120,6 +123,7 @@ importers:
       '@types/node': 17.0.45
       '@types/react': 18.0.38
       '@types/react-dom': 18.0.11
+      relay-compiler: 15.0.0
       typescript: 4.9.5
 
   packages/config/eslint-config-custom:
@@ -6398,6 +6402,21 @@ packages:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
     dev: false
 
+  /react-relay/15.0.0_react@18.2.0:
+    resolution: {integrity: sha512-KWdeMMKMJanOL9LsGZYkyAekayYIi+Y4mbDM8VYbHVPgTWJWAQP6yJKS+V4D17qIMo1L84QJQjGaQWEG139p9Q==}
+    peerDependencies:
+      react: ^16.9.0 || ^17 || ^18
+    dependencies:
+      '@babel/runtime': 7.21.0
+      fbjs: 3.0.4
+      invariant: 2.2.4
+      nullthrows: 1.1.1
+      react: 18.2.0
+      relay-runtime: 15.0.0
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
   /react-transition-group/4.4.5_react@17.0.2:
     resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
     peerDependencies:
@@ -6451,6 +6470,11 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /relay-compiler/15.0.0:
+    resolution: {integrity: sha512-19gIIdrVe/lk7Dkz/hqxpBd54bBDWAKG+kR5ael+xznJPdjlr/rlAmh5Tqi6Mgf/wiEQGdtKiZqeNdOW2/wVRw==}
+    hasBin: true
+    dev: true
+
   /relay-runtime/12.0.0:
     resolution: {integrity: sha512-QU6JKr1tMsry22DXNy9Whsq5rmvwr3LSZiiWV/9+DFpuTWvp+WFhobWMc8TC4OjKFfNhEZy7mOiqUAn5atQtug==}
     dependencies:
@@ -6459,6 +6483,16 @@ packages:
       invariant: 2.2.4
     transitivePeerDependencies:
       - encoding
+
+  /relay-runtime/15.0.0:
+    resolution: {integrity: sha512-7AXkXLQo6gpJNBhk4Kii5b+Yat62HSDD1TgJBi021iSjT1muI8iYd4UZG4f/If209LmaVjkZt2HTNAlk6xtslw==}
+    dependencies:
+      '@babel/runtime': 7.21.0
+      fbjs: 3.0.4
+      invariant: 2.2.4
+    transitivePeerDependencies:
+      - encoding
+    dev: false
 
   /remedial/1.0.8:
     resolution: {integrity: sha512-/62tYiOe6DzS5BqVsNpH/nkGlX45C/Sp6V+NtiN6JQNS1Viay7cWkazmRkrQrdFj2eshDe96SIQNIoMxqhzBOg==}

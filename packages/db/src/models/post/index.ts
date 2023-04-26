@@ -1,5 +1,4 @@
 import mongoose from '@scrib/db/mongo';
-import md5 from 'md5';
 import { Model } from 'mongoose';
 
 import { IPost, PostDocument } from './types';
@@ -30,6 +29,7 @@ const postSchema = new mongoose.Schema<IPost>(
       ref: 'User',
       type: mongoose.SchemaTypes.ObjectId,
       required: true,
+      autopopulate: true,
     },
     published: {
       type: Boolean,

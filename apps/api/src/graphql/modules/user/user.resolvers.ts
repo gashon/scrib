@@ -15,21 +15,25 @@ export const userResolvers = {
     },
   },
   Mutation: {
-    deleteUser: authMiddleware(
-      async (_: any, { id }: { id: string }, context: AuthenticatedContext) => {
-        if (id !== context.user.id)
-          throw new Error('You can only delete your own account');
-          
-        // Access the `user` property from the context object
-        const user = await User.findById(context.user.id);
+    /* authMiddleware( */
+    deleteUser: async (
+      _: any,
+      { id }: { id: string },
+      context: AuthenticatedContext,
+    ) => {
+      if (id !== context.user.id)
+        throw new Error('You can only delete your own account');
 
-        if (!user) throw new Error('User not found');
+      // Access the `user` property from the context object
+      const user = await User.findById(context.user.id);
 
-        user.set({ deleted_at: new Date() });
-        await user.save();
+      if (!user) throw new Error('User not found');
 
-        return user;
-      },
-    ),
+      user.set({ deleted_at: new Date() });
+      await user.save();
+
+      return user;
+    },
+    // ),
   },
 };
