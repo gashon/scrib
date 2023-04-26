@@ -1,14 +1,16 @@
 import { Document, Model } from 'mongoose';
 
-import User, { IUser } from './user';
+import Post, { PostDocument } from './post';
+import User, { UserDocument } from './user';
 
 export type Models = {
-  User: Model<Document<string, object, IUser>, {}, {}, {}, any, any>;
+  User: Model<UserDocument, {}, {}, {}, any, any>;
+  Post: Model<PostDocument, {}, {}, {}, any, any>;
 };
 
 const models: Models = {
   User,
+  Post,
 };
 
-export * from './user';
 export default models;

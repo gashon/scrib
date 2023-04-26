@@ -1,7 +1,8 @@
-import apolloServer from '@scrib/api/graphql/lib/apollo-server';
+import schema from '@scrib/api/graphql/schema';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
+import { createHandler } from 'graphql-http/lib/use/express';
 import morgan from 'morgan';
 // todo integrate
 import throng from 'throng';
@@ -28,11 +29,16 @@ app.use(
   }),
 );
 
+app.all(
+  '/graphql',
+  createHandler({
+    schema,
+    context: context as any,
+  }),
+);
+
 async function startServer() {
   // Add await server.start() before server.applyMiddleware
-  await apolloServer.start();
-  apolloServer.applyMiddleware({ app, path: '/graphql' });
-
   app.listen(port, () => console.log('Listening on port', port));
 }
 

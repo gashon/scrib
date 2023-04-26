@@ -10,4 +10,4 @@ export interface IUser extends Resource {
 
 export type UserCreateRequest = Partial<Pick<IUser, 'email'>>;
 
-export type UserDocument = mongoose.Document<string, object, IUser>;
+export type UserDocument = mongoose.Document<string, object, IUser> & IUser;
