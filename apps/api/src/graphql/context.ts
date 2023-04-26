@@ -18,7 +18,7 @@ export type Context = {
   req: RequestContext | AuthenticatedContext;
 };
 
-const context: Context = {
+export const context: Context = {
   db: {
     postRepository: new PostRepository(models as Models),
   },

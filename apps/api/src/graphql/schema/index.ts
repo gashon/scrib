@@ -1,8 +1,7 @@
+import { mutation, query } from '@scrib/api/graphql/schema/root';
 import { GraphQLSchema } from 'graphql';
-import mutation from './mutation';
-import query from './query';
 
-export default new GraphQLSchema({
+export const schema = new GraphQLSchema({
   mutation,
   query,
 });

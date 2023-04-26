@@ -1,4 +1,4 @@
-import schema from '@scrib/api/graphql/schema';
+import { context, schema } from '@scrib/api/graphql';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
@@ -38,7 +38,6 @@ app.all(
 );
 
 async function startServer() {
-  // Add await server.start() before server.applyMiddleware
   app.listen(port, () => console.log('Listening on port', port));
 }
 
