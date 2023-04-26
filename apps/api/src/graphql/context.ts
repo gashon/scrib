@@ -1,6 +1,7 @@
-import { MongoClient } from 'mongodb';
+import { JwtPayload } from '@scrib/api/utils/jwt';
+import { Models } from '@scrib/db/models';
 
 export interface RequestContext {
-  db: MongoClient;
-  user: { id: string; roles: string[] } | null;
+  db: Models;
+  user: JwtPayload | null;
 }

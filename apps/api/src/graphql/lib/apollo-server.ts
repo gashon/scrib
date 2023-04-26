@@ -1,4 +1,5 @@
 import { resolvers, typeDefs } from '@scrib/api/graphql';
+import { RequestContext } from '@scrib/api/graphql/context';
 import { verify } from '@scrib/api/utils/jwt';
 import models from '@scrib/db/models';
 import { ApolloServer } from 'apollo-server-express';
@@ -15,16 +16,13 @@ const server = new ApolloServer({
       ...error,
     };
   },
-  context: ({ req }) => {
-    if (req) {
-      const user =
-        req.headers.authorization && verify(req.headers.authorization);
+  context: ({ req }): RequestContext => {
+    const user = req.headers.authorization && verify(req.headers.authorization);
 
-      return {
-        models,
-        user,
-      };
-    }
+    return {
+      db: models,
+      user: user || null,
+    };
   },
 });
 
