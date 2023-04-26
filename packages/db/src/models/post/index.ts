@@ -31,6 +31,10 @@ const postSchema = new mongoose.Schema<IPost>(
       type: mongoose.SchemaTypes.ObjectId,
       required: true,
     },
+    published: {
+      type: Boolean,
+      default: false,
+    },
     deleted_at: {
       type: Date,
       default: null,
