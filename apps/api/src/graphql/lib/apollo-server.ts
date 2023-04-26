@@ -10,11 +10,7 @@ const server = new ApolloServer({
   introspection: true,
   typeDefs: schema,
   resolvers,
-  formatError: (error) => {
-    return {
-      ...error,
-    };
-  },
+  formatError: (error) => error,
   context: ({ req }): RequestContext => {
     const user = req.headers.authorization && verify(req.headers.authorization);
 

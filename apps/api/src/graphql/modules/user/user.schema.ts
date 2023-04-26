@@ -20,6 +20,5 @@ export const userTypeDefs = gql`
     name: String!
     email: String!
     avatar: String!
-    last_login: String
   }
 `;
