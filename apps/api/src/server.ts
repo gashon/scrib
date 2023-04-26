@@ -1,8 +1,8 @@
 import { context, schema } from '@scrib/api/graphql';
 import cookieParser from 'cookie-parser';
 import express from 'express';
+import { graphqlHTTP } from 'express-graphql';
 import rateLimit from 'express-rate-limit';
-import { createHandler } from 'graphql-http/lib/use/express';
 import morgan from 'morgan';
 // todo integrate
 import throng from 'throng';
@@ -31,9 +31,10 @@ app.use(
 
 app.all(
   '/graphql',
-  createHandler({
+  graphqlHTTP({
     schema,
     context: context as any,
+    graphiql: dev, // Enable GraphiQL only in development mode
   }),
 );
 
