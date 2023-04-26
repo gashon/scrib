@@ -17,3 +17,6 @@ const typeDefs = [rootTypeDefs, userTypeDefs];
 const resolvers = merge(userResolvers);
 
 export { typeDefs, resolvers };
+export * from './context';
+export * from './modules';
+export * from './middleware';

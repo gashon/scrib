@@ -49,6 +49,7 @@ importers:
       express-graphql: ^0.12.0
       express-rate-limit: ^6.7.0
       graphql: ^16.6.0
+      graphql-resolvers: ^0.4.2
       graphql-tools: ^8.3.20
       jsonwebtoken: ^9.0.0
       lodash: ^4.17.21
@@ -66,6 +67,7 @@ importers:
       express-graphql: 0.12.0_graphql@16.6.0
       express-rate-limit: 6.7.0_express@4.18.2
       graphql: 16.6.0
+      graphql-resolvers: 0.4.2
       graphql-tools: 8.3.20_graphql@16.6.0
       jsonwebtoken: 9.0.0
       lodash: 4.17.21
@@ -4603,6 +4605,14 @@ packages:
       - encoding
     dev: true
 
+  /graphql-resolvers/0.4.2:
+    resolution: {integrity: sha512-C+BEjS5BrV04I44iNtMDw7ZbmIlSBabkbt5KpF8Vg5wphsm2jDlKklU9DeX/nzs7NEt0tOoorbTmpQH0VyYBLA==}
+    dependencies:
+      '@babel/runtime': 7.21.0
+      deep-equal: 2.2.0
+      object-path: 0.11.8
+    dev: false
+
   /graphql-tag/2.12.6:
     resolution: {integrity: sha512-FdSNcu2QQcWnM2VNvSCCDCVS5PpPqpzgFT8+GXzqJuoDd0CBncxCY278u4mhRO7tMgo2JjgJA5aZ+nWSQ/Z+xg==}
     engines: {node: '>=10'}
@@ -5867,6 +5877,11 @@ packages:
   /object-keys/1.1.1:
     resolution: {integrity: sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==}
     engines: {node: '>= 0.4'}
+    dev: false
+
+  /object-path/0.11.8:
+    resolution: {integrity: sha512-YJjNZrlXJFM42wTBn6zgOJVar9KFJvzx6sTWDte8sWZF//cnjl0BxHNpfZx+ZffXX63A9q0b1zsFiBX4g4X5KA==}
+    engines: {node: '>= 10.12.0'}
     dev: false
 
   /object.assign/4.1.4:

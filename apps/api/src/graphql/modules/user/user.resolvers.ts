@@ -1,4 +1,4 @@
-import { RequestContext } from '@scrib/api/graphql/context';
+import { RequestContext, authMiddleware } from '@scrib/api/graphql';
 import User from '@scrib/db/models/user';
 
 export const userResolvers = {
@@ -11,22 +11,20 @@ export const userResolvers = {
     },
   },
   Mutation: {
-    deleteUser: async (
-      _: any,
-      { id }: { id: string },
-      context: RequestContext,
-    ) => {
-      if (!context.user)
-        throw new Error('You must be logged in to delete a user');
-      // Access the `user` property from the context object
-      const user = await User.findById(context.user.id);
+    deleteUser: authMiddleware(
+      async (_: any, { id }: { id: string }, context: RequestContext) => {
+        if (!context.user)
+          throw new Error('You must be logged in to delete a user');
+        // Access the `user` property from the context object
+        const user = await User.findById(context.user.id);
 
-      if (!user) throw new Error('User not found');
+        if (!user) throw new Error('User not found');
 
-      user.set({ deleted_at: new Date() });
-      await user.save();
+        user.set({ deleted_at: new Date() });
+        await user.save();
 
-      return user;
-    },
+        return user;
+      },
+    ),
   },
 };
