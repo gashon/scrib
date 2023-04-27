@@ -43,7 +43,7 @@ app.all(
 async function startServer() {
   // todo add connection to db
   await mongoose.connect(
-    process.env.MONGODB_URI || 'mongodb://localhost:27017',
+    process.env.MONGODB_URI || 'mongodb://localhost:27017/scrib',
   ); //env
   logger.info('Connected to MongoDB');
 

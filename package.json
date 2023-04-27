@@ -13,7 +13,7 @@
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
     "mongo:restart": "yarn mongo:stop && yarn mongo:start",
-    "mongo:start": "docker run --rm -p 27017:27017 --name scrib-mongo -v mongo_data:/data/db mongo > /dev/null",
+    "mongo:start": "docker run --rm -p 27017:27017 --name scrib-mongo -v mongo_data:/data/db -e MONGO_INITDB_DATABASE=scrib mongo > /dev/null",
     "mongo:stop": "docker stop scrib-mongo"
   },
   "devDependencies": {
