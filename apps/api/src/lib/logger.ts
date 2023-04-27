@@ -1,4 +1,4 @@
-import winston from "winston"
+import winston from 'winston';
 
 const customLevels = {
   error: 0,
@@ -13,14 +13,15 @@ const logger = winston.createLogger({
     winston.format.json()
   ),
   defaultMeta: { service: 'api' },
-  transports: [
-    new winston.transports.File({ filename: 'error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'combined.log' }),
-  ],
+  transports: [],
 });
 
-// If running in development mode, also log to the console
-if (process.env.NODE_ENV !== 'production') {
+// Log to a file if running in production mode
+if (process.env.NODE_ENV === 'production') {
+  logger.add(new winston.transports.File({ filename: 'error.log', level: 'error' }));
+  logger.add(new winston.transports.File({ filename: 'combined.log' }));
+} else {
+  // If running in development mode, log to the console
   logger.add(new winston.transports.Console({
     format: winston.format.combine(
       winston.format.colorize(),
