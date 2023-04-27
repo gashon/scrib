@@ -39,6 +39,7 @@ app.all(
 );
 
 async function startServer() {
+  // todo add connection to db
   app.listen(port, () => console.log('Listening on port', port));
 }
 

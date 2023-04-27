@@ -27,7 +27,8 @@
     "prettier-plugin-jsdoc": "^0.4.2",
     "prettier-plugin-packagejson": "^2.4.3",
     "prettier-plugin-tailwindcss": "^0.2.7",
-    "turbo": "latest"
+    "turbo": "latest",
+    "wait-on": "7.0.1"
   },
   "packageManager": "pnpm@7.15.0"
 }
