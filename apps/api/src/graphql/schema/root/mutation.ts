@@ -1,15 +1,9 @@
-import { GraphQLID, GraphQLNonNull, GraphQLObjectType } from 'graphql';
-
-//tmp
+import { createPost } from '@scrib/api/graphql/schema/mutation';
+import { GraphQLObjectType } from 'graphql';
 
 export const mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: (): any => ({
-    // todo
-    // tmp field for compilation
-    tmp: {
-      type: new GraphQLNonNull(GraphQLID),
-      description: 'Globally unique ID of the post',
-    },
+    createPost,
   }),
 });
