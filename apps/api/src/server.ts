@@ -1,4 +1,5 @@
 import { context, schema } from '@scrib/api/graphql';
+import logger from '@scrib/api/lib/logger';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
@@ -40,7 +41,7 @@ app.all(
 
 async function startServer() {
   // todo add connection to db
-  app.listen(port, () => console.log('Listening on port', port));
+  app.listen(port, () => logger.info(`API server listening on port ${port}`));
 }
 
 startServer();
