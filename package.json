@@ -7,17 +7,22 @@
   ],
   "scripts": {
     "apps:build": "turbo run build",
-    "apps:dev": "turbo run dev",
-    "apps:start": "turbo run start",
+    "apps:dev": "concurrently \"yarn run mongo:start\" \"wait-on tcp:localhost:27017 && cross-env FORCE_COLOR=1 turbo run dev --parallel\"",
     "apps:lint": "turbo run lint",
+    "apps:start": "cross-env turbo run start --parallel",
     "format:check": "prettier --check .",
-    "format:write": "prettier --write ."
+    "format:write": "prettier --write .",
+    "mongo:restart": "yarn mongo:stop && yarn mongo:start",
+    "mongo:start": "docker run --rm -p 27017:27017 --name scrib-mongo -v mongo_data:/data/db mongo > /dev/null",
+    "mongo:stop": "docker stop scrib-mongo"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
-    "@types/prettier": "^2.7.2",
-    "eslint": "^7.32.0",
     "@scrib/eslint-config-custom": "workspace:*",
+    "@types/prettier": "^2.7.2",
+    "concurrently": "8.0.1",
+    "cross-env": "7.0.3",
+    "eslint": "^7.32.0",
     "prettier": "^2.8.0",
     "prettier-plugin-jsdoc": "^0.4.2",
     "prettier-plugin-packagejson": "^2.4.3",
