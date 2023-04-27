@@ -1,5 +1,6 @@
 import { context, schema } from '@scrib/api/graphql';
 import logger from '@scrib/api/lib/logger';
+import mongoose from '@scrib/db/mongo';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
@@ -41,6 +42,11 @@ app.all(
 
 async function startServer() {
   // todo add connection to db
+  await mongoose.connect(
+    process.env.MONGODB_URI || 'mongodb://localhost:27017',
+  ); //env
+  logger.info('Connected to MongoDB');
+
   app.listen(port, () => logger.info(`API server listening on port ${port}`));
 }
 
