@@ -1,5 +1,6 @@
 import { Context } from '@scrib/api/graphql/context';
 import { postConnection } from '@scrib/api/graphql/schema/types/connections';
+import { OrderByInput } from '@scrib/api/graphql/schema/types/inputs';
 import { cursorToInt, nodesToConnection } from '@scrib/api/graphql/util';
 import { IPost } from '@scrib/db/models/post';
 import { GraphQLInt, GraphQLList, GraphQLString } from 'graphql';
@@ -26,8 +27,8 @@ export const posts = {
         'Returns the elements in the list that come after the specified cursor.',
     },
     orderBy: {
-      defaultValue: [['created_at', 'desc']],
-      type: new GraphQLList(new GraphQLList(GraphQLString)),
+      defaultValue: [{ field: 'createdAt', order: 'desc' }],
+      type: new GraphQLList(OrderByInput),
       description:
         'Sorts the elements of this list according to the given order.',
     },

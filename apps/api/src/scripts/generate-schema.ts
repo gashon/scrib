@@ -5,8 +5,9 @@ import path from 'path';
 
 import { schema } from '../graphql/schema';
 
-const outputFile = path.join(__dirname, '../graphql/schema/schema.graphql');
+console.log('Creating schema.graphql');
 
+const outputFile = path.join(__dirname, '../graphql/schema/schema.graphql');
 const schemaSDL = printSchema(schema);
 
 fs.writeFileSync(outputFile, schemaSDL);

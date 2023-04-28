@@ -1,7 +1,6 @@
 import { Context } from '@scrib/api/graphql/context';
 import { postConnection } from '@scrib/api/graphql/schema/types/connections';
-
-import '@scrib/api/graphql/schema/types/inputs';
+import { OrderByInput } from '@scrib/api/graphql/schema/types/inputs';
 import { nodesToConnection } from '@scrib/api/graphql/util';
 import { IUser } from '@scrib/db/models/user';
 import {
@@ -52,8 +51,8 @@ export const userType = new GraphQLObjectType({
           type: GraphQLString,
         },
         orderBy: {
-          defaultValue: [['created_at', 'desc']],
-          type: new GraphQLList(new GraphQLList(GraphQLString)),
+          defaultValue: [{ field: 'createdAt', order: 'desc' }],
+          type: new GraphQLList(OrderByInput),
           description: 'Ordering of the results.',
         },
       },

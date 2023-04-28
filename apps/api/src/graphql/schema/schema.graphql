@@ -11,7 +11,7 @@ type Query {
     after: String = "Y3Vyc29yMA=="
 
     """Sorts the elements of this list according to the given order."""
-    orderBy: [[String]] = [["created_at", "desc"]]
+    orderBy: [OrderByInput] = [{field: "createdAt"}]
 
     """Filter by the user who created   the post."""
     createdBy: String
@@ -75,6 +75,16 @@ type PageInfo {
   startCursor: String
 }
 
+input OrderByInput {
+  field: String!
+  direction: Direction!
+}
+
+enum Direction {
+  ASC
+  DESC
+}
+
 type User {
   """Globally unique ID of the post"""
   id: ID!
@@ -97,7 +107,7 @@ type User {
     after: String = "Y3Vyc29yMA=="
 
     """Ordering of the results."""
-    orderBy: [[String]] = [["created_at", "desc"]]
+    orderBy: [OrderByInput] = [{field: "createdAt"}]
   ): PostConnection
 }
 
