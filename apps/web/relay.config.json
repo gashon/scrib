@@ -1,0 +1,8 @@
+{
+  "src": "./src",
+  "schema": "../api/src/graphql/schema/schema.graphql",
+  "artifactDirectory": "./src/__generated__",
+  "customScalars": {},
+  "language": "typescript",
+  "exclude": ["**/node_modules/**", "**/__mocks__/**", "**/__generated__/**"]
+}
