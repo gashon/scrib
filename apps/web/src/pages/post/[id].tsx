@@ -1,30 +1,22 @@
 import { FC } from 'react';
-import { useLazyQuery } from 'react-relay';
+import { useQueryLoader } from 'react-relay';
+import { GET_AUTHOR_AND_POSTS_QUERY } from '@scrib/web/features/author';
 import { PostContainer } from '@scrib/web/features/post';
 import { useRouter } from 'next/router';
 import { graphql } from 'relay-runtime';
 
 export const PostPage: FC = () => {
   const router = useRouter();
-  const [getPost, { data, error, loading }] = useLazyQuery<any>(graphql`
-    query postQuery($id: ID!) {
-      post(id: $id) {
-        ...getPostFragment
-      }
-    }
-  `);
+  const { id } = router.query;
 
-  if (error) {
-    return <div>Error</div>;
-  }
+  // todo typesafety
+  const [queryRef, loadQuery, disposeQuery] = useQueryLoader<any>(
+    GET_AUTHOR_AND_POSTS_QUERY,
+  );
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!data) {
-    return <div>No data</div>;
-  }
+  // load the query
+  loadQuery({ id });
+  disposeQuery();
 
   return (
     <>
