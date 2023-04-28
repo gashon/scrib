@@ -1,8 +1,16 @@
 import { Context } from '@scrib/api/graphql/context';
-import { newPostType, postType } from '@scrib/api/graphql/schema/types';
-import { GraphQLNonNull } from 'graphql';
+import {
+  CreatePostArgs,
+  newPostType,
+  postType,
+} from '@scrib/api/graphql/schema/types';
+import { GraphQLFieldConfig, GraphQLNonNull } from 'graphql';
 
-export const createPost = {
+export const createPost: GraphQLFieldConfig<
+  undefined,
+  Context,
+  CreatePostArgs
+> = {
   type: postType,
   args: {
     input: {

@@ -1,18 +1,29 @@
-import { AuthenticatedContext, RequestContext } from '@scrib/api/graphql';
-import { ForbiddenError } from 'apollo-server-express';
-import { IFieldResolver, combineResolvers, skip } from 'graphql-resolvers';
+import { Context } from '@scrib/api/graphql';
+import { GraphQLFieldConfig, GraphQLFieldResolver } from 'graphql';
 
-type ResolverFn<TArgs, TResult> = (
-  parent: any,
-  args: TArgs,
-  context: AuthenticatedContext,
-) => TResult;
+export function authMiddleware<TSource, TContext, TArgs = any>(
+  resolver: GraphQLFieldResolver<TSource, TContext, TArgs>,
+): GraphQLFieldResolver<TSource, TContext, TArgs> {
+  return async (parent, args, context, info) => {
+    const ctx = context as Context;
+    if (!ctx.req.user?.id) {
+      throw new Error('Unauthorized'); // todo make this a custom error
+    }
+    return resolver(parent, args, context, info);
+  };
+}
 
-export const isAuthenticated = (_: any, __: any, { user }: RequestContext) =>
-  user ? skip : new ForbiddenError('Not authenticated as user.');
+export function authGuard<TSource, TContext, TArgs = any>(
+  fieldConfig: GraphQLFieldConfig<TSource, TContext, TArgs>,
+) {
+  if (!fieldConfig.resolve) {
+    throw new Error('Cannot apply authGuard to field without a resolver');
+  }
 
-export function authMiddleware<TArgs, TResult>(
-  resolver: ResolverFn<TArgs, TResult>,
-): IFieldResolver<any, AuthenticatedContext, TArgs, any> {
-  return combineResolvers(isAuthenticated, resolver);
+  const configWithMiddleware = {
+    ...fieldConfig,
+    resolve: authMiddleware(fieldConfig.resolve),
+  };
+
+  return configWithMiddleware;
 }

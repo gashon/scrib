@@ -36,7 +36,7 @@ app.all(
   graphqlHTTP({
     schema,
     context: context as any,
-    graphiql: dev, // Enable GraphiQL only in development mode
+    graphiql: dev,
   }),
 );
 

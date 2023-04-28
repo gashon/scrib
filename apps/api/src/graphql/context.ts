@@ -6,7 +6,7 @@ export type RequestContext = {
   user: JwtPayload | null;
 };
 
-export type AuthenticatedContext = RequestContext & {
+export type AuthenticatedRequestContext = RequestContext & {
   user: NonNullable<RequestContext['user']>;
 };
 export type RepositoriesContext = {
@@ -15,7 +15,7 @@ export type RepositoriesContext = {
 
 export type Context = {
   db: RepositoriesContext;
-  req: RequestContext | AuthenticatedContext;
+  req: RequestContext | AuthenticatedRequestContext;
 };
 
 export const context: Context = {

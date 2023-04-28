@@ -1,5 +1,12 @@
 import { GraphQLInputObjectType, GraphQLNonNull, GraphQLString } from 'graphql';
 
+export type CreatePostArgs = {
+  input: {
+    title: string;
+    content: string;
+  };
+};
+
 export const newPostType = new GraphQLInputObjectType({
   name: 'NewPost',
   fields: {
