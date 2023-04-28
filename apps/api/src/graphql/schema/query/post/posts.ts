@@ -33,9 +33,13 @@ export const posts = {
       description: 'Filter by the user who created the post.',
     },
   },
-  resolve: async (_: any, args: PostsQueryArgs, context: Context) => {
-    const { first, after, orderBy, createdBy } = args;
+  resolve: async (
+    _: any,
+    { first, after, orderBy, createdBy }: PostsQueryArgs,
+    context: Context,
+  ) => {
     const afterInt = cursorToInt(after);
+    console.log('GOT', afterInt, first, after, orderBy, createdBy);
 
     const [posts, postsCount] = await Promise.all([
       context.db.postRepository.paginate({
@@ -47,11 +51,10 @@ export const posts = {
         orderBy,
       }),
       context.db.postRepository.count({
-        params: {
-          created_by: createdBy,
-        },
+        created_by: createdBy,
       }),
     ]);
+    console.log('posts', posts);
 
     const connection = nodesToConnection(posts, postsCount, afterInt);
     return connection;

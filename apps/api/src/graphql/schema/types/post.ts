@@ -36,5 +36,10 @@ export const postType = new GraphQLObjectType({
       description: 'Number of likes of the post',
       resolve: (obj: IPost) => obj.likes,
     },
+    createdBy: {
+      type: new GraphQLNonNull(GraphQLID),
+      description: 'User who created the post',
+      resolve: (obj: IPost) => obj.created_by.toString(),
+    },
   }),
 });
