@@ -39,7 +39,6 @@ export const posts = {
     context: Context,
   ) => {
     const afterInt = cursorToInt(after);
-    console.log('GOT', afterInt, first, after, orderBy, createdBy);
 
     const [posts, postsCount] = await Promise.all([
       context.db.postRepository.paginate({
