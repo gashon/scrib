@@ -1,0 +1,114 @@
+type Query {
+  post(
+    """Globally unique ID of the post"""
+    id: ID!
+  ): Post
+  posts(
+    """Returns the first n elements from the list."""
+    first: Int = 10
+
+    """Returns the elements in the list that come after the specified cursor."""
+    after: String = "Y3Vyc29yMA=="
+
+    """Sorts the elements of this list according to the given order."""
+    orderBy: [[String]] = [["created_at", "desc"]]
+
+    """Filter by the user who created   the post."""
+    createdBy: String
+  ): PostConnection
+  user(
+    """Globally unique ID of the user"""
+    id: ID!
+  ): User
+}
+
+type Post {
+  """Globally unique ID of the post"""
+  id: ID!
+
+  """Title of the post"""
+  title: String!
+
+  """Content of the post"""
+  content: String!
+
+  """Number of views of the post"""
+  views: Int!
+
+  """Number of likes of the post"""
+  likes: Int!
+
+  """User who created the post"""
+  createdBy: ID!
+}
+
+type PostConnection {
+  """Identifies the total count of items in the connection."""
+  totalCount: Int!
+
+  """A list of edges."""
+  edges: [PostEdge]
+  pageInfo: PageInfo!
+}
+
+"""List of edges."""
+type PostEdge {
+  """The item at the end of the edge."""
+  node: Post
+
+  """A cursor for pagination."""
+  cursor: String
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """The item at the end of the edge."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+type User {
+  """Globally unique ID of the post"""
+  id: ID!
+
+  """The name of the post."""
+  name: String
+
+  """The email of the post."""
+  email: String
+
+  """The avatar of the post."""
+  avatar: String
+  posts(
+    """Limits the number of results returned in the page. Defaults to 10."""
+    first: Int = 10
+
+    """
+    The cursor value of an item returned in previous page. An alternative to in integer offset.
+    """
+    after: String = "Y3Vyc29yMA=="
+
+    """Ordering of the results."""
+    orderBy: [[String]] = [["created_at", "desc"]]
+  ): PostConnection
+}
+
+type Mutation {
+  createPost(input: NewPost!): Post
+}
+
+input NewPost {
+  """Title of the post"""
+  title: String!
+
+  """Content of the post"""
+  content: String!
+}

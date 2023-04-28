@@ -1,5 +1,5 @@
 import { Context } from '@scrib/api/graphql/context';
-import { postConnection } from '@scrib/api/graphql/schema/types';
+import { postConnection } from '@scrib/api/graphql/schema/types/connections';
 import { cursorToInt, nodesToConnection } from '@scrib/api/graphql/util';
 import { IPost } from '@scrib/db/models/post';
 import { GraphQLInt, GraphQLList, GraphQLString } from 'graphql';

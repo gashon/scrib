@@ -1,5 +1,7 @@
 import { Context } from '@scrib/api/graphql/context';
 import { postConnection } from '@scrib/api/graphql/schema/types/connections';
+
+import '@scrib/api/graphql/schema/types/inputs';
 import { nodesToConnection } from '@scrib/api/graphql/util';
 import { IUser } from '@scrib/db/models/user';
 import {
@@ -31,7 +33,7 @@ export const userType = new GraphQLObjectType({
     },
     avatar: {
       type: GraphQLString,
-      description: 'The password of the post.',
+      description: 'The avatar of the post.',
       resolve: (obj: IUser) => obj.avatar,
     },
     posts: {
@@ -51,13 +53,8 @@ export const userType = new GraphQLObjectType({
         },
         orderBy: {
           defaultValue: [['created_at', 'desc']],
-          description: 'Ordering of the results.',
           type: new GraphQLList(new GraphQLList(GraphQLString)),
-        },
-        query: {
-          defaultValue: {},
-          description: 'Query to filter results.',
-          type: GraphQLString,
+          description: 'Ordering of the results.',
         },
       },
       resolve: async (
@@ -71,7 +68,6 @@ export const userType = new GraphQLObjectType({
           context.db.postRepository.paginate({
             params: {
               created_by: authorId,
-              ...query,
             },
             first,
             after,
