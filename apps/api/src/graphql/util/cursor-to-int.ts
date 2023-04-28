@@ -1,4 +1,4 @@
-export const cursorToInt = (cursor: string | undefined) => {
+export const cursorToInt = (cursor: string | undefined): number => {
   if (!cursor) {
     return 0;
   }
