@@ -1,4 +1,5 @@
-import { pageInfo, postEdge } from '@scrib/api/graphql/schema/types';
+import { postEdge } from '@scrib/api/graphql/schema/types/edges/post-edge';
+import { pageInfo } from '@scrib/api/graphql/schema/types/page-info';
 import {
   GraphQLInt,
   GraphQLList,
