@@ -50,9 +50,9 @@ export const userType = new GraphQLObjectType({
           type: GraphQLString,
         },
         orderBy: {
-          defaultValue: ['created_at', 'desc'],
+          defaultValue: [['created_at', 'desc']],
           description: 'Ordering of the results.',
-          type: new GraphQLList(GraphQLString),
+          type: new GraphQLList(new GraphQLList(GraphQLString)),
         },
         query: {
           defaultValue: {},

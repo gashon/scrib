@@ -26,14 +26,14 @@ export const posts = {
         'Returns the elements in the list that come after the specified cursor.',
     },
     orderBy: {
-      defaultValue: ['created_at', 'desc'],
-      type: new GraphQLList(GraphQLString),
+      defaultValue: [['created_at', 'desc']],
+      type: new GraphQLList(new GraphQLList(GraphQLString)),
       description:
         'Sorts the elements of this list according to the given order.',
     },
     createdBy: {
       type: GraphQLString!,
-      description: 'Filter by the user who created the post.',
+      description: 'Filter by the user who created   the post.',
     },
   },
   resolve: async (
