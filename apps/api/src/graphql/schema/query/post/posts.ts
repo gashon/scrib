@@ -53,7 +53,6 @@ export const posts = {
         created_by: createdBy,
       }),
     ]);
-    console.log('posts', posts);
 
     const connection = nodesToConnection(posts, postsCount, afterInt);
     return connection;
