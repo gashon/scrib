@@ -43,7 +43,8 @@ const postSchema = new mongoose.Schema<IPost>(
   { timestamps: { updatedAt: 'updated_at', createdAt: 'created_at' } },
 );
 
-postSchema.index({ email: 1 }, { unique: true });
+postSchema.index({ created_by: 1 }, { unique: false });
+postSchema.index({ title: 1 }, { unique: false });
 
 export * from './types';
 export default (mongoose.models.Post as Model<PostDocument>) ||
