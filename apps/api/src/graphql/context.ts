@@ -1,4 +1,4 @@
-import { PostRepository } from '@scrib/api/repository';
+import { PostRepository, UserRepository } from '@scrib/api/repository';
 import { JwtPayload } from '@scrib/api/utils/jwt';
 import models, { Models } from '@scrib/db/models';
 
@@ -11,6 +11,7 @@ export type AuthenticatedRequestContext = RequestContext & {
 };
 export type RepositoriesContext = {
   postRepository: PostRepository;
+  userRepository: UserRepository;
 };
 
 export type Context = {
@@ -21,6 +22,7 @@ export type Context = {
 export const context: Context = {
   db: {
     postRepository: new PostRepository(models as Models),
+    userRepository: new UserRepository(models as Models),
   },
   req: {
     user: null,

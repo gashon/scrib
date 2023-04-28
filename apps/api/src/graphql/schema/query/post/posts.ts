@@ -16,14 +16,17 @@ export const posts = {
   args: {
     first: {
       type: GraphQLInt,
+      defaultValue: 10,
       description: 'Returns the first n elements from the list.',
     },
     after: {
       type: GraphQLString,
+      defaultValue: 'Y3Vyc29yMA==', // base64encode('cursor0')
       description:
         'Returns the elements in the list that come after the specified cursor.',
     },
     orderBy: {
+      defaultValue: ['created_at', 'desc'],
       type: new GraphQLList(GraphQLString),
       description:
         'Sorts the elements of this list according to the given order.',

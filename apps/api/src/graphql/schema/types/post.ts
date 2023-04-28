@@ -1,4 +1,3 @@
-import { Context } from '@scrib/api/graphql/context';
 import { IPost } from '@scrib/db/models/post';
 import {
   GraphQLID,

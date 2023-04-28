@@ -1,4 +1,4 @@
-import { post, posts } from '@scrib/api/graphql/schema/query';
+import { post, posts, user } from '@scrib/api/graphql/schema/query';
 import { GraphQLObjectType } from 'graphql';
 
 export const query = new GraphQLObjectType({
@@ -6,5 +6,6 @@ export const query = new GraphQLObjectType({
   fields: (): any => ({
     post,
     posts,
+    user,
   }),
 });
