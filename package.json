@@ -18,7 +18,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "pnpm run graphql:schema && git add schema.graphql"
+      "pre-push": "(cd apps/api && pnpm run graphql:schema) && git add apps/api/src/graphql/schema/schema.graphql"
     }
   },
   "devDependencies": {
