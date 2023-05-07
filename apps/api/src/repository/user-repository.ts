@@ -32,7 +32,7 @@ export class UserRepository {
     params: mongoose.FilterQuery<IUser>;
     first: number | undefined;
     after: number | undefined;
-    orderBy: [keyof IUser, 'asc' | 'desc'][] | undefined;
+    orderBy: OrderBy<IUser>[] | undefined;
   }): Promise<UserDocument[]> {
     const query = this.userModel.find(params);
     if (first) {
@@ -42,7 +42,7 @@ export class UserRepository {
       query.skip(after);
     }
     if (orderBy) {
-      orderBy.forEach(([field, order]) => {
+      orderBy.forEach(({ field, order }) => {
         query.sort({ [field]: order });
       });
     }

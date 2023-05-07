@@ -32,17 +32,19 @@ export class PostRepository {
     params: mongoose.FilterQuery<IPost>;
     first: number | undefined;
     after: number | undefined;
-    orderBy: [keyof IPost, 'asc' | 'desc'][] | undefined;
+    orderBy: OrderBy<IPost>[] | undefined;
   }): Promise<PostDocument[]> {
     const query = this.postModel.find(params);
-    if (first) {
+    console.log('FINDING POSTS');
+    if (first !== undefined) {
       query.limit(first);
     }
-    if (after) {
+    if (after !== undefined) {
+      console.log('SKIPPING', after);
       query.skip(after);
     }
-    if (orderBy) {
-      orderBy.forEach(([field, order]) => {
+    if (orderBy !== undefined) {
+      orderBy.forEach(({ field, order }) => {
         query.sort({ [field]: order });
       });
     }

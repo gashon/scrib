@@ -1,4 +1,3 @@
-// AuthorInfo.tsx
 import React, { FC } from 'react';
 import { useFragment } from 'react-relay';
 import { authorInfo$key } from '@scrib/web/__generated__/authorInfo.graphql';

@@ -6,3 +6,8 @@ interface PostRepository {
   updateById(id: string, params: IPost): Promise<PostDocument | null>;
   deleteById(id: string): Promise<PostDocument | null>;
 }
+
+type OrderBy<T> = {
+  field: keyof T;
+  order: 'asc' | 'desc';
+};

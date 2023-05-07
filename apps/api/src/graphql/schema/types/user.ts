@@ -1,7 +1,7 @@
 import { Context } from '@scrib/api/graphql/context';
 import { postConnection } from '@scrib/api/graphql/schema/types/connections';
 import { OrderByInput } from '@scrib/api/graphql/schema/types/inputs';
-import { nodesToConnection } from '@scrib/api/graphql/util';
+import { cursorToInt, nodesToConnection } from '@scrib/api/graphql/util';
 import { IUser } from '@scrib/db/models/user';
 import {
   GraphQLID,
@@ -57,19 +57,21 @@ export const userType = new GraphQLObjectType({
         },
       },
       resolve: async (
-        obj: IUser,
+        user: IUser,
         { first, after, query, orderBy }: any,
         context: Context,
       ) => {
-        const authorId = obj._id.toString();
+        const authorId = user._id.toString();
+        const afterInt = cursorToInt(after);
 
+        console.log('GOT', afterInt);
         const [posts, totalCount] = await Promise.all([
           context.db.postRepository.paginate({
             params: {
               created_by: authorId,
             },
+            after: afterInt,
             first,
-            after,
             orderBy,
           }),
           context.db.postRepository.count({
@@ -77,6 +79,7 @@ export const userType = new GraphQLObjectType({
           }),
         ]);
 
+        console.log('gto', posts, totalCount);
         const connection = nodesToConnection(posts, totalCount, after);
         return connection;
       },
