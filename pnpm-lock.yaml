@@ -10,6 +10,7 @@ importers:
       concurrently: 8.0.1
       cross-env: 7.0.3
       eslint: ^7.32.0
+      husky: ^8.0.3
       prettier: ^2.8.0
       prettier-plugin-jsdoc: ^0.4.2
       prettier-plugin-packagejson: ^2.4.3
@@ -23,6 +24,7 @@ importers:
       concurrently: 8.0.1
       cross-env: 7.0.3
       eslint: 7.32.0
+      husky: 8.0.3
       prettier: 2.8.8
       prettier-plugin-jsdoc: 0.4.2_prettier@2.8.8
       prettier-plugin-packagejson: 2.4.3_prettier@2.8.8
@@ -3142,6 +3144,12 @@ packages:
     resolution: {integrity: sha512-oUExvfNckrpTpDazph7kNG8sQi5au3BeTo0idaZFXEhTaJKu7GNJCLHI0rYY2wljm548MSTM+Ljj/c6anqu2zQ==}
     engines: {node: '>= 0.4.0'}
     dev: false
+
+  /husky/8.0.3:
+    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
 
   /iconv-lite/0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
