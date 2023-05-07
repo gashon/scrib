@@ -36,11 +36,15 @@ importers:
       '@scrib/eslint-config-custom': workspace:*
       '@scrib/tsconfig': workspace:*
       '@types/cookie-parser': ^1.4.3
+      '@types/cors': ^2.8.13
       '@types/express': ^4.17.17
       '@types/jsonwebtoken': ^9.0.1
       '@types/lodash': ^4.14.194
       '@types/morgan': ^1.9.4
       '@types/node': ^17.0.12
+      '@types/passport': ^1.0.12
+      '@types/passport-github2': ^1.2.5
+      '@types/passport-google-oauth20': ^2.0.11
       '@types/throng': ^5.0.4
       cookie-parser: ^1.4.6
       cors: ^2.8.5
@@ -54,7 +58,9 @@ importers:
       jsonwebtoken: ^9.0.0
       lodash: ^4.17.21
       morgan: ^1.10.0
+      passport: ^0.6.0
       passport-github2: ^0.1.12
+      passport-google-oauth20: ^2.0.0
       throng: ^5.0.0
       tsconfig-paths: ^4.2.0
       typescript: ^4.5.3
@@ -73,18 +79,24 @@ importers:
       jsonwebtoken: 9.0.0
       lodash: 4.17.21
       morgan: 1.10.0
+      passport: 0.6.0
       passport-github2: 0.1.12
+      passport-google-oauth20: 2.0.0
       throng: 5.0.0
       winston: 3.8.2
     devDependencies:
       '@scrib/eslint-config-custom': link:../../packages/config/eslint-config-custom
       '@scrib/tsconfig': link:../../packages/config/tsconfig
       '@types/cookie-parser': 1.4.3
+      '@types/cors': 2.8.13
       '@types/express': 4.17.17
       '@types/jsonwebtoken': 9.0.1
       '@types/lodash': 4.14.194
       '@types/morgan': 1.9.4
       '@types/node': 17.0.45
+      '@types/passport': 1.0.12
+      '@types/passport-github2': 1.2.5
+      '@types/passport-google-oauth20': 2.0.11
       '@types/throng': 5.0.4
       tsconfig-paths: 4.2.0
       typescript: 4.9.5
@@ -1210,6 +1222,12 @@ packages:
       '@types/express': 4.17.17
     dev: true
 
+  /@types/cors/2.8.13:
+    resolution: {integrity: sha512-RG8AStHlUiV5ysZQKq97copd2UmVYw3/pRMLefISZ3S1hK104Cwm7iLQ3fTKx+lsUH2CE8FlLaYeEA2LSeqYUA==}
+    dependencies:
+      '@types/node': 18.16.1
+    dev: true
+
   /@types/debug/4.1.7:
     resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
     dependencies:
@@ -1282,11 +1300,46 @@ packages:
 
   /@types/node/18.16.1:
     resolution: {integrity: sha512-DZxSZWXxFfOlx7k7Rv4LAyiMroaxa3Ly/7OOzZO8cBNho0YzAi4qlbrx8W27JGqG57IgR/6J7r+nOJWw6kcvZA==}
-    dev: false
+
+  /@types/oauth/0.9.1:
+    resolution: {integrity: sha512-a1iY62/a3yhZ7qH7cNUsxoI3U/0Fe9+RnuFrpTKr+0WVOzbKlSLojShCKe20aOD1Sppv+i8Zlq0pLDuTJnwS4A==}
+    dependencies:
+      '@types/node': 18.16.1
+    dev: true
 
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
     dev: false
+
+  /@types/passport-github2/1.2.5:
+    resolution: {integrity: sha512-+WLyrd8JPsCxroK34EjegR0j3FMxp6wqB9cw/sRCFkWT9qic1dymAn021gr336EpyjzdhjUd2KKrqyxvdFSvOA==}
+    dependencies:
+      '@types/express': 4.17.17
+      '@types/passport': 1.0.12
+      '@types/passport-oauth2': 1.4.12
+    dev: true
+
+  /@types/passport-google-oauth20/2.0.11:
+    resolution: {integrity: sha512-9XMT1GfwhZL7UQEiCepLef55RNPHkbrCtsU7rsWPTEOsmu5qVIW8nSemtB4p+P24CuOhA+IKkv8LsPThYghGww==}
+    dependencies:
+      '@types/express': 4.17.17
+      '@types/passport': 1.0.12
+      '@types/passport-oauth2': 1.4.12
+    dev: true
+
+  /@types/passport-oauth2/1.4.12:
+    resolution: {integrity: sha512-RZg6cYTyEGinrZn/7REYQds6zrTxoBorX1/fdaz5UHzkG8xdFE7QQxkJagCr2ETzGII58FAFDmnmbTUVMrltNA==}
+    dependencies:
+      '@types/express': 4.17.17
+      '@types/oauth': 0.9.1
+      '@types/passport': 1.0.12
+    dev: true
+
+  /@types/passport/1.0.12:
+    resolution: {integrity: sha512-QFdJ2TiAEoXfEQSNDISJR1Tm51I78CymqcBa8imbjo6dNNu+l2huDxxbDEIoFIwOSKMkOfHEikyDuZ38WwWsmw==}
+    dependencies:
+      '@types/express': 4.17.17
+    dev: true
 
   /@types/prettier/2.7.2:
     resolution: {integrity: sha512-KufADq8uQqo1pYKVIYzfKbJfBAc0sOeXqGbFaSpv8MRmC/zXgowNZmFcbngndGk922QDmOASEXUZCaY48gs4cg==}
@@ -4106,6 +4159,13 @@ packages:
       passport-oauth2: 1.7.0
     dev: false
 
+  /passport-google-oauth20/2.0.0:
+    resolution: {integrity: sha512-KSk6IJ15RoxuGq7D1UKK/8qKhNfzbLeLrG3gkLZ7p4A6DBCcv7xpyQwuXtWdpyR0+E0mwkpjY1VfPOhxQrKzdQ==}
+    engines: {node: '>= 0.4.0'}
+    dependencies:
+      passport-oauth2: 1.7.0
+    dev: false
+
   /passport-oauth2/1.7.0:
     resolution: {integrity: sha512-j2gf34szdTF2Onw3+76alNnaAExlUmHvkc7cL+cmaS5NzHzDP/BvFHJruueQ9XAeNOdpI+CH+PWid8RA7KCwAQ==}
     engines: {node: '>= 0.4.0'}
@@ -4120,6 +4180,15 @@ packages:
   /passport-strategy/1.0.0:
     resolution: {integrity: sha512-CB97UUvDKJde2V0KDWWB3lyf6PC3FaZP7YxZ2G8OAtn9p4HI9j9JLP9qjOGZFvyl8uwNT8qM+hGnz/n16NI7oA==}
     engines: {node: '>= 0.4.0'}
+    dev: false
+
+  /passport/0.6.0:
+    resolution: {integrity: sha512-0fe+p3ZnrWRW74fe8+SvCyf4a3Pb2/h7gFkQ8yTJpAO50gDzlfjZUZTO1k5Eg9kUct22OxHLqDZoKUWRHOh9ug==}
+    engines: {node: '>= 0.4.0'}
+    dependencies:
+      passport-strategy: 1.0.0
+      pause: 0.0.1
+      utils-merge: 1.0.1
     dev: false
 
   /path-is-absolute/1.0.1:
@@ -4141,6 +4210,10 @@ packages:
   /path-type/4.0.0:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
     engines: {node: '>=8'}
+
+  /pause/0.0.1:
+    resolution: {integrity: sha512-KG8UEiEVkR3wGEb4m5yZkVCzigAD+cVEJck2CzYZO37ZGJfctvVptVO192MwrtPhzONn6go8ylnOdMhKqi4nfg==}
+    dev: false
 
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
