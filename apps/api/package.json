@@ -15,15 +15,18 @@
   "dependencies": {
     "@scrib/db": "^0.0.0",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "esbuild": "^0.17.18",
     "esbuild-register": "^3.4.2",
     "express": "^4.18.2",
     "express-graphql": "^0.12.0",
     "express-rate-limit": "^6.7.0",
     "graphql": "^16.6.0",
+    "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.21",
     "morgan": "^1.10.0",
+    "passport-github2": "^0.1.12",
     "throng": "^5.0.0",
     "winston": "^3.8.2"
   },
