@@ -13,7 +13,7 @@ export interface JwtPayload {
  * @param expiresIn Expiration time for the token in seconds.
  * @returns The JWT token as a string.
  */
-export function sign(payload: JwtPayload, expiresIn: number = 3600): string {
+export function sign(payload: JwtPayload, expiresIn: number = 2592000): string {
   return jwt.sign(payload, SECRET_KEY, { expiresIn });
 }
 

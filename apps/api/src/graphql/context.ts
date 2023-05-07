@@ -6,6 +6,7 @@ import { IncomingHttpHeaders } from 'http';
 export type RequestContext = {
   user: JwtPayload | null;
   headers: IncomingHttpHeaders;
+  cookies: Record<string, string>;
 };
 
 export type AuthenticatedRequestContext = RequestContext & {
@@ -29,5 +30,6 @@ export const context: Context = {
   req: {
     user: null,
     headers: {},
+    cookies: {},
   },
 };

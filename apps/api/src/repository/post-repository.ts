@@ -35,12 +35,10 @@ export class PostRepository {
     orderBy: OrderBy<IPost>[] | undefined;
   }): Promise<PostDocument[]> {
     const query = this.postModel.find(params);
-    console.log('FINDING POSTS');
     if (first !== undefined) {
       query.limit(first);
     }
     if (after !== undefined) {
-      console.log('SKIPPING', after);
       query.skip(after);
     }
     if (orderBy !== undefined) {

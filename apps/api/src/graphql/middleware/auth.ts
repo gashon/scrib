@@ -1,5 +1,5 @@
 import { Context } from '@scrib/api/graphql';
-import { verify } from '@scrib/api/utils/jwt';
+import { sign, verify } from '@scrib/api/utils/jwt';
 import { GraphQLFieldConfig, GraphQLFieldResolver } from 'graphql';
 
 export function authMiddleware<TSource, TContext, TArgs = any>(
@@ -15,6 +15,7 @@ export function authMiddleware<TSource, TContext, TArgs = any>(
 
     const decoded = verify(token);
     if (!decoded) {
+      // todo check if token is expired and throw a different error / refresh
       throw new Error('Unauthorized'); // todo make this a custom error
     }
 

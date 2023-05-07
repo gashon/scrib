@@ -40,6 +40,8 @@ app.all(
       req: {
         ...context.req,
         headers: req.headers,
+        // @ts-ignore todo fix in express.d.ts
+        cookies: req.cookies,
       },
     } as Context,
     graphiql: dev,
