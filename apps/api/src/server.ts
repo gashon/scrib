@@ -1,4 +1,4 @@
-import { context, schema } from '@scrib/api/graphql';
+import { Context, context, schema } from '@scrib/api/graphql';
 import logger from '@scrib/api/lib/logger';
 import mongoose from '@scrib/db/mongo';
 import cookieParser from 'cookie-parser';
@@ -33,11 +33,17 @@ app.use(
 
 app.all(
   '/graphql',
-  graphqlHTTP({
+  graphqlHTTP((req) => ({
     schema,
-    context: context as any,
+    context: {
+      ...context,
+      req: {
+        ...context.req,
+        headers: req.headers,
+      },
+    } as Context,
     graphiql: dev,
-  }),
+  })),
 );
 
 async function startServer() {

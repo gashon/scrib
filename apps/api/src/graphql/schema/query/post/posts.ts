@@ -8,7 +8,7 @@ import { GraphQLInt, GraphQLList, GraphQLString } from 'graphql';
 type PostsQueryArgs = {
   first?: number;
   after?: string;
-  orderBy?: [keyof IPost, 'asc' | 'desc'][];
+  orderBy?: OrderBy<IPost>[];
   createdBy: string;
 };
 

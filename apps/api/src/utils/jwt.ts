@@ -4,7 +4,6 @@ const SECRET_KEY = 'd3b0e0ca3e61ff2c68a8d0edc69551b0'; //env
 
 export interface JwtPayload {
   id: string;
-  exp?: number;
 }
 
 /**

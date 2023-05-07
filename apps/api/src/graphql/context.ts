@@ -1,9 +1,11 @@
 import { PostRepository, UserRepository } from '@scrib/api/repository';
 import { JwtPayload } from '@scrib/api/utils/jwt';
 import models, { Models } from '@scrib/db/models';
+import { IncomingHttpHeaders } from 'http';
 
 export type RequestContext = {
   user: JwtPayload | null;
+  headers: IncomingHttpHeaders;
 };
 
 export type AuthenticatedRequestContext = RequestContext & {
@@ -26,5 +28,6 @@ export const context: Context = {
   },
   req: {
     user: null,
+    headers: {},
   },
 };

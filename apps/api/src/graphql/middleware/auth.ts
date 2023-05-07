@@ -1,4 +1,5 @@
 import { Context } from '@scrib/api/graphql';
+import { verify } from '@scrib/api/utils/jwt';
 import { GraphQLFieldConfig, GraphQLFieldResolver } from 'graphql';
 
 export function authMiddleware<TSource, TContext, TArgs = any>(
@@ -6,9 +7,18 @@ export function authMiddleware<TSource, TContext, TArgs = any>(
 ): GraphQLFieldResolver<TSource, TContext, TArgs> {
   return async (parent, args, context, info) => {
     const ctx = context as Context;
-    if (!ctx.req.user?.id) {
+
+    const token = ctx.req.headers.authorization?.split(' ')[1];
+    if (!token) {
       throw new Error('Unauthorized'); // todo make this a custom error
     }
+
+    const decoded = verify(token);
+    if (!decoded) {
+      throw new Error('Unauthorized'); // todo make this a custom error
+    }
+
+    ctx.req.user = decoded;
     return resolver(parent, args, context, info);
   };
 }
