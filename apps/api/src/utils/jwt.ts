@@ -33,3 +33,12 @@ export function verify(token: string): JwtPayload | null {
     return null;
   }
 }
+
+export function createLoginLink(token: string, redirect: string): URL {
+  const loginLink = new URL(`${process.env.DASHBOARD_BASE_URL}/auth/login`);
+
+  loginLink.searchParams.append('jwt_token', encodeURIComponent(token));
+  loginLink.searchParams.append('redirect', encodeURIComponent(redirect));
+
+  return loginLink;
+}

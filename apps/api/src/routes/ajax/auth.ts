@@ -6,7 +6,7 @@ import Token from '@nifty/server-lib/models/token';
 import RefreshToken from '@nifty/server-lib/models/refresh-token';
 import User, { IUser } from '@nifty/server-lib/models/user';
 
-import passport from '@/lib/passport';
+import passport from '@scrib/api/lib/passport';
 import createLoginLink from '@/util/create-login-link'
 import auth from '@/middlewares/auth';
 import oauthLogin from '@/middlewares/oauth-login';
@@ -105,8 +105,7 @@ router.get('/logout', async (req, res, next) => {
       }
     }, { deleted_at: new Date() });
 
-    res.clearCookie('access_token');
-    res.clearCookie('refresh_token');
+    res.clearCookie('jwt-token');
 
     res.sendStatus(200);
   } catch (err) {
