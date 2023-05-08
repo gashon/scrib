@@ -1,11 +1,17 @@
 import logger from '@scrib/api/lib/logger';
-import jwt from 'jsonwebtoken';
+import jwt, { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 
 const SECRET_KEY = 'd3b0e0ca3e61ff2c68a8d0edc69551b0'; //env
 
 export interface JwtPayload {
   id: string;
 }
+
+export type DecodedToken =
+  | JwtPayload
+  | TokenExpiredError
+  | JsonWebTokenError
+  | null;
 
 /**
  * Sign a JWT token with a given payload.
@@ -43,14 +49,20 @@ export function createLoginLink(token: string, redirect: string): URL {
   return loginLink;
 }
 
-export function getUserFromToken(token?: string): JwtPayload | null {
+export function decodeToken(token?: string): DecodedToken {
   try {
     if (token) {
       const decodedPayload = jwt.verify(token, SECRET_KEY) as JwtPayload;
       return decodedPayload;
     }
+
     return null;
-  } catch (error) {
+  } catch (error: any) {
+    if (error instanceof TokenExpiredError) {
+      logger.error(`Token Expired: ${JSON.stringify(error)}`);
+      return error;
+    }
+
     logger.error(`Invalid Token: ${JSON.stringify(error)}`);
     return null;
   }
