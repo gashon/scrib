@@ -190,18 +190,32 @@ importers:
     specifiers:
       '@emotion/react': ^11.10.6
       '@emotion/styled': ^11.10.6
+      '@headlessui/react': ^1.7.14
+      '@headlessui/tailwindcss': 0.1.2
+      '@hookform/resolvers': ^3.1.0
       '@mui/material': ^5.12.1
       '@scrib/eslint-config-custom': workspace:*
       '@scrib/tsconfig': workspace:*
       '@types/react': ^17.0.37
       '@types/react-dom': ^17.0.11
+      clsx: ^1.2.1
       eslint: ^7.32.0
+      intersection-observer: ^0.12.2
       react: ^17.0.2
+      react-hook-form: ^7.43.9
+      slsx: ^0.0.3
       typescript: ^4.5.2
     dependencies:
       '@emotion/react': 11.10.6_c3qmy7gv5lbarsbv5sa5jz2oke
       '@emotion/styled': 11.10.6_nkylnud3pypzhz7cu2nz4io324
+      '@headlessui/react': 1.7.14_react@17.0.2
+      '@headlessui/tailwindcss': 0.1.2
+      '@hookform/resolvers': 3.1.0_react-hook-form@7.43.9
       '@mui/material': 5.12.2_jmy3m6kq7uvihx5wo2vzxem5dq
+      clsx: 1.2.1
+      intersection-observer: 0.12.2
+      react-hook-form: 7.43.9_react@17.0.2
+      slsx: 0.0.3
     devDependencies:
       '@scrib/eslint-config-custom': link:../config/eslint-config-custom
       '@scrib/tsconfig': link:../config/tsconfig
@@ -830,6 +844,32 @@ packages:
     dependencies:
       '@hapi/hoek': 9.3.0
     dev: true
+
+  /@headlessui/react/1.7.14_react@17.0.2:
+    resolution: {integrity: sha512-znzdq9PG8rkwcu9oQ2FwIy0ZFtP9Z7ycS+BAqJ3R5EIqC/0bJGvhT7193rFf+45i9nnPsYvCQVW4V/bB9Xc+gA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: ^16 || ^17 || ^18
+      react-dom: ^16 || ^17 || ^18
+    dependencies:
+      client-only: 0.0.1
+      react: 17.0.2
+    dev: false
+
+  /@headlessui/tailwindcss/0.1.2:
+    resolution: {integrity: sha512-AQNESz+f1grCxifrocOE6hDMDFqhqY0g3xrSGOS0ocGkmVkssaBzXaAPAPNSs/nHmr4ZUhfl5THQpYrvaouWlQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      tailwindcss: ^3.0
+    dev: false
+
+  /@hookform/resolvers/3.1.0_react-hook-form@7.43.9:
+    resolution: {integrity: sha512-z0A8K+Nxq+f83Whm/ajlwE6VtQlp/yPHZnXw7XWVPIGm1Vx0QV8KThU3BpbBRfAZ7/dYqCKKBNnQh85BkmBKkA==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
+    dependencies:
+      react-hook-form: 7.43.9_react@17.0.2
+    dev: false
 
   /@humanwhocodes/config-array/0.5.0:
     resolution: {integrity: sha512-FagtKFz74XrTl7y6HCzQpwDfXP0yhxe9lHLD1UZxjvZIcbyRz8zTFF/yYNfSfzU414eDwZ1SrO0Qvtyf+wFMQg==}
@@ -3232,6 +3272,10 @@ packages:
       side-channel: 1.0.4
     dev: false
 
+  /intersection-observer/0.12.2:
+    resolution: {integrity: sha512-7m1vEcPCxXYI8HqnL8CKI6siDyD+eIWSwgB3DZA+ZTogxk9I4CDnj4wilt9x/+/QbHI4YG5YZNmC6458/e9Ktg==}
+    dev: false
+
   /invariant/2.2.4:
     resolution: {integrity: sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==}
     dependencies:
@@ -4472,6 +4516,15 @@ packages:
       scheduler: 0.23.0
     dev: false
 
+  /react-hook-form/7.43.9_react@17.0.2:
+    resolution: {integrity: sha512-AUDN3Pz2NSeoxQ7Hs6OhQhDr6gtF9YRuutGDwPQqhSUAHJSgGl2VeY3qN19MG0SucpjgDiuMJ4iC5T5uB+eaNQ==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 17.0.2
+    dev: false
+
   /react-icons/4.8.0_react@18.2.0:
     resolution: {integrity: sha512-N6+kOLcihDiAnj5Czu637waJqSnwlMNROzVZMhfX68V/9bu9qHaMIJC4UdozWoOk57gahFCNHwVvWzm0MTzRjg==}
     peerDependencies:
@@ -4819,6 +4872,10 @@ packages:
       astral-regex: 2.0.0
       is-fullwidth-code-point: 3.0.0
     dev: true
+
+  /slsx/0.0.3:
+    resolution: {integrity: sha512-WlgsZWRJuSp8WJEBiDKt44ueZjRemtVQTI2mZcHx+RB3+GbZLF4gO1RuhitjvpomuzsaHZVTUfQytO05L338oA==}
+    dev: false
 
   /smart-buffer/4.2.0:
     resolution: {integrity: sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==}

@@ -1,5 +1,11 @@
 {
   "extends": "@scrib/tsconfig/react-library.json",
   "include": ["."],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@scrib/ui/*": ["./src/*"]
+    }
+  },
   "exclude": ["dist", "build", "node_modules"]
 }

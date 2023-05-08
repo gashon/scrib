@@ -1,5 +1,5 @@
 import { FC, useCallback } from 'react';
-import { Button } from '@scrib/ui';
+import { Button } from '@scrib/ui/components';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 

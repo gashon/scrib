@@ -1,6 +1,6 @@
 import { FC, useCallback } from 'react';
 import { FaGithub } from 'react-icons/fa';
-import { Button } from '@scrib/ui';
+import { Button } from '@scrib/ui/components';
 
 export const GithubLogin: FC = () => {
   const onGithubLogin = useCallback(() => {

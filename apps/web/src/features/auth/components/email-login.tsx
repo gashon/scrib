@@ -1,6 +1,6 @@
 import { FC, useCallback, useState } from 'react';
 import { FiArrowRight } from 'react-icons/fi';
-import { Button, Form, InputField } from '@scrib/ui';
+import { Button, Form, InputField } from '@scrib/ui/components';
 import {
   LoginFormData,
   LoginFormSchema,
