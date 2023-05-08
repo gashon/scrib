@@ -1,3 +1,4 @@
+import { CustomError } from '@scrib/api/exceptions';
 import { Context, context, schema } from '@scrib/api/graphql';
 import logger from '@scrib/api/lib/logger';
 import { jwtMiddleware } from '@scrib/api/routes/middleware/auth';
@@ -42,6 +43,17 @@ app.all('/graphql', jwtMiddleware, (req, res) => {
         user: req.locals.user,
       },
     } as Context,
+    formatError: (error) => {
+      if (error instanceof CustomError) {
+        res.status(error.statusCode);
+      }
+
+      return {
+        message: error.message,
+        locations: error.locations,
+        path: error.path,
+      };
+    },
     graphiql: dev,
   })(req, res);
 });
