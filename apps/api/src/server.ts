@@ -1,5 +1,6 @@
 import { Context, context, schema } from '@scrib/api/graphql';
 import logger from '@scrib/api/lib/logger';
+import { jwtMiddleware } from '@scrib/api/routes/middleware/auth';
 import mongoose from '@scrib/db/mongo';
 import cookieParser from 'cookie-parser';
 import express from 'express';
@@ -31,22 +32,19 @@ app.use(
   }),
 );
 
-app.all(
-  '/graphql',
-  graphqlHTTP((req) => ({
+app.all('/graphql', jwtMiddleware, (req, res) => {
+  graphqlHTTP({
     schema,
     context: {
       ...context,
       req: {
         ...context.req,
-        headers: req.headers,
-        // @ts-ignore todo fix in express.d.ts
-        cookies: req.cookies,
+        user: req.user,
       },
     } as Context,
     graphiql: dev,
-  })),
-);
+  })(req, res);
+});
 
 async function startServer() {
   await mongoose.connect(

@@ -1,5 +1,4 @@
 import {
-  AuthProvider,
   EmailLogin,
   GithubLogin,
   GoogleLogin,
@@ -11,7 +10,7 @@ export default function Login() {
       <div className="flex flex-col items-center">
         {/* <Brand size={50} /> */}
         <h1 className="text-primary mt-3 text-center text-2xl font-extrabold md:text-3xl">
-          Welcome to Niftie!
+          Post
         </h1>
         <p className="text-tertiary max-w-sm pt-2 text-center text-sm md:text-base">
           Enter your email address or use one of the social media options to log
