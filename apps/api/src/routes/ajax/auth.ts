@@ -1,6 +1,11 @@
+import {
+  AUTH_COOKIE_NAME,
+  AUTH_REFRESH_COOKIE_NAME,
+} from '@scrib/api/constants';
 import passport from '@scrib/api/lib/passport';
+import { jwtMiddleware } from '@scrib/api/routes/middleware/auth';
 import { oauthLogin } from '@scrib/api/routes/middleware/oauth-login';
-import { createLoginLink, sign, verify } from '@scrib/api/utils/jwt';
+import { createLoginLink, decodeToken, sign } from '@scrib/api/utils/jwt';
 import User from '@scrib/db/models/user';
 import express, { NextFunction, Request, Response } from 'express';
 import status from 'http-status';
@@ -71,31 +76,20 @@ router.get(
   oauthLogin('google'),
 );
 
-router.get('/user', async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const token = req.headers.authorization?.split(' ')[1];
-    if (!token) {
-      throw new Error('Unauthorized'); // todo make this a custom error
-    }
-
-    const decoded = verify(token);
-    if (!decoded) {
-      throw new Error('Unauthorized'); // todo make this a custom error
-    }
-
-    const user = await User.findById(decoded.id);
-
-    res.json({ data: user });
-  } catch (err) {
-    next(err);
-  }
-});
+router.get(
+  '/user',
+  jwtMiddleware,
+  async (req: Request, res: Response, next: NextFunction) => {
+    res.json({ data: req.locals.user });
+  },
+);
 
 router.get(
   '/logout',
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      // todo blacklist token
+      res.clearCookie(AUTH_COOKIE_NAME);
+      res.clearCookie(AUTH_REFRESH_COOKIE_NAME);
 
       res.sendStatus(200);
     } catch (err) {

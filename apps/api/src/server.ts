@@ -39,7 +39,7 @@ app.all('/graphql', jwtMiddleware, (req, res) => {
       ...context,
       req: {
         ...context.req,
-        user: req.user,
+        user: req.locals.user,
       },
     } as Context,
     graphiql: dev,

@@ -28,7 +28,7 @@ const isTokenValid = (decoded: DecodedToken): boolean => {
   return true;
 };
 
-// attaches user to req.user
+// attaches user to req.locals.user
 export function jwtMiddleware(req: Request, res: Response, next: NextFunction) {
   const token = req.cookies[AUTH_COOKIE_NAME];
   const decoded: DecodedToken = decodeToken(token);
@@ -55,12 +55,12 @@ export function jwtMiddleware(req: Request, res: Response, next: NextFunction) {
       httpOnly: true,
       maxAge: 2592000000,
     });
-    req.user = refreshPayload;
+    req.locals.user = refreshPayload;
     next();
   }
 
   if (!isTokenValid(decoded)) throw new Error('Invalid token');
 
-  req.user = decoded as JwtPayload;
+  req.locals.user = decoded as JwtPayload;
   next();
 }

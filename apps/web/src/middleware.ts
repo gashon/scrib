@@ -1,13 +1,18 @@
+import {
+  AUTH_COOKIE_NAME,
+  AUTH_REFRESH_COOKIE_NAME,
+} from '@scrib/api/constants';
 import { NextMiddleware, NextResponse } from 'next/server';
 
 const middleware: NextMiddleware = async function middleware(req) {
   try {
-    const jwtToken = req.nextUrl.searchParams.get('jwt_token');
+    const token = req.cookies[AUTH_COOKIE_NAME];
+    const refreshToken = req.cookies[AUTH_REFRESH_COOKIE_NAME];
 
-    // If there is no authorization token, continue
-    if (!jwtToken) return NextResponse.next();
+    if (!token || !refreshToken) {
+      return NextResponse.next();
+    }
 
-    // Set redirect
     const redirect = decodeURIComponent(
       req.nextUrl.searchParams.get('redirect') || '/dashboard',
     );
@@ -18,12 +23,16 @@ const middleware: NextMiddleware = async function middleware(req) {
     const res = NextResponse.redirect(url);
 
     // Set the authorization token
-    if (jwtToken)
-      res.cookies.set('jwt_token', jwtToken, {
-        maxAge: 60 * 60 * 24 * 365 * 10, // cookie expiration handled on login and UNAUTHORIZED
-        path: '/',
-        httpOnly: false, // used by the client to check if the user is logged in
-      });
+    res.cookies.set(AUTH_COOKIE_NAME, token, {
+      maxAge: 60 * 60 * 24 * 365 * 10, // cookie expiration handled on login and UNAUTHORIZED
+      path: '/',
+      httpOnly: false, // used by the client to check if the user is logged in
+    });
+    res.cookies.set(AUTH_REFRESH_COOKIE_NAME, refreshToken, {
+      maxAge: 60 * 60 * 24 * 365 * 10, // cookie expiration handled on login and UNAUTHORIZED
+      path: '/',
+      httpOnly: true,
+    });
 
     return res;
   } catch (err) {
@@ -34,7 +43,7 @@ const middleware: NextMiddleware = async function middleware(req) {
 };
 
 export const config = {
-  matcher: ['/auth/login', '/auth', '/'],
+  matcher: ['/auth/login', '/auth'],
 };
 
 export default middleware;

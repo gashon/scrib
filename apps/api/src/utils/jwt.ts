@@ -1,3 +1,7 @@
+import {
+  AUTH_COOKIE_NAME,
+  AUTH_REFRESH_COOKIE_NAME,
+} from '@scrib/api/constants';
 import logger from '@scrib/api/lib/logger';
 import jwt, { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 
@@ -20,7 +24,10 @@ export type DecodedToken =
  * @param expiresIn Expiration time for the token in seconds.
  * @returns The JWT token as a string.
  */
-export function sign(payload: JwtPayload, expiresIn: number = 2592000): string {
+export function sign(
+  payload: JwtPayload,
+  expiresIn: number | string = 2592000, // 30 days
+): string {
   return jwt.sign(payload, SECRET_KEY, { expiresIn });
 }
 
@@ -40,10 +47,22 @@ export function verify(token: string): JwtPayload | null {
   }
 }
 
-export function createLoginLink(token: string, redirect: string): URL {
+export function createLoginLink({
+  token,
+  refreshToken,
+  redirect,
+}: {
+  token: string;
+  refreshToken: string;
+  redirect: string;
+}): URL {
   const loginLink = new URL(`${process.env.DASHBOARD_BASE_URL}/auth/login`);
 
-  loginLink.searchParams.append('jwt_token', encodeURIComponent(token));
+  loginLink.searchParams.append(AUTH_COOKIE_NAME, encodeURIComponent(token));
+  loginLink.searchParams.append(
+    AUTH_REFRESH_COOKIE_NAME,
+    encodeURIComponent(token),
+  );
   loginLink.searchParams.append('redirect', encodeURIComponent(redirect));
 
   return loginLink;

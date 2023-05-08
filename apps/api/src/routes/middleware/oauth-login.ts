@@ -10,14 +10,20 @@ export function oauthLogin(strategy: string) {
       if (!user)
         return res.redirect(`${process.env.DASHBOARD_BASE_URL}/auth/login`);
 
-      const token = sign({
+      const tokenPayload = {
         id: user._id.toString(),
-      });
-
-      const loginLink = createLoginLink(
-        token,
-        state.redirect?.toString() || '/dashboard',
+      };
+      const token = sign(tokenPayload);
+      const refreshToken = sign(
+        tokenPayload,
+        60 * 60 * 24 * 30 * 6, // 6 months todo shorten!!
       );
+
+      const loginLink = createLoginLink({
+        token,
+        refreshToken,
+        redirect: state.redirect?.toString() || '/dashboard',
+      });
 
       res.redirect(loginLink.toString());
     } catch (err) {
