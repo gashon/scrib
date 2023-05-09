@@ -17,7 +17,7 @@ const middleware: NextMiddleware = async function middleware(req) {
       req.nextUrl.searchParams.get('redirect') || '/dashboard',
     );
     // Construct the URL
-    const url = new URL(`${process.env.WEB_BASE_URL}${redirect}`);
+    const url = new URL(`${process.env.NEXT_PUBLIC_WEB_BASE_URL}${redirect}`);
 
     // Create the response object
     const res = NextResponse.redirect(url);
@@ -37,7 +37,7 @@ const middleware: NextMiddleware = async function middleware(req) {
     return res;
   } catch (err) {
     return NextResponse.redirect(
-      `${process.env.WEB_BASE_URL}/auth/login`,
+      `${process.env.NEXT_PUBLIC_WEB_BASE_URL}/auth/login`,
     );
   }
 };

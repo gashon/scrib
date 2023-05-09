@@ -14,11 +14,15 @@ module.exports = withBundleAnalyzer({
   poweredByHeader: false,
   eslint: { ignoreDuringBuilds: true },
   async rewrites() {
-    const HOST = 'http://localhost:7000'; //env
+    const HOST = process.env.API_BASE_URL ?? 'http://localhost:7000'; //env
     return [
       {
         source: '/ajax/:path*',
         destination: `${HOST}/ajax/:path*`,
+      },
+      {
+        source: '/graphql',
+        destination: `${HOST}/graphql`,
       },
       {
         source: '/api/:path*',

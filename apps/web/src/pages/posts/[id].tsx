@@ -1,26 +1,26 @@
 import { FC } from 'react';
-import { useQueryLoader } from 'react-relay';
-import { GET_AUTHOR_AND_POSTS_QUERY } from '@scrib/web/features/author';
+import { useLazyLoadQuery } from 'react-relay';
+import { GET_POST_QUERY } from '@scrib/web/features/author';
 import { PostContainer } from '@scrib/web/features/post';
-import { useRouter } from 'next/router';
-import { graphql } from 'relay-runtime';
 
-export const PostPage: FC = () => {
-  const router = useRouter();
-  const { id } = router.query;
-
-  // todo typesafety
-  const [queryRef, loadQuery, disposeQuery] = useQueryLoader<any>(
-    GET_AUTHOR_AND_POSTS_QUERY,
-  );
-
-  // load the query
-  loadQuery({ id });
-  disposeQuery();
+const PostPage: FC<{ postId: string }> = ({ postId }) => {
+  const query = useLazyLoadQuery(GET_POST_QUERY, {
+    id: postId,
+  });
 
   return (
     <>
-      <PostContainer />
+      <PostContainer query={query.post} />
     </>
   );
 };
+
+export async function getServerSideProps({ params }) {
+  return {
+    props: {
+      postId: params.id,
+    },
+  };
+}
+
+export default PostPage;
