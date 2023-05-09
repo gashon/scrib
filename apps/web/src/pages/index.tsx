@@ -1,4 +1,4 @@
-import { Button } from '@scrib/ui';
+import { Button } from '@scrib/ui/components';
 
 export default function Web() {
   return (

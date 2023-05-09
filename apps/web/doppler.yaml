@@ -1,0 +1,3 @@
+setup:
+  project: scrib-web
+  config: dev

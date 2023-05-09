@@ -8,7 +8,7 @@ export function oauthLogin(strategy: string) {
       const state = req.query.state && JSON.parse(req.query.state.toString());
       const user = req.user as IUser;
       if (!user)
-        return res.redirect(`${process.env.DASHBOARD_BASE_URL}/auth/login`);
+        return res.redirect(`${process.env.WEB_BASE_URL}/auth/login`);
 
       const tokenPayload = {
         id: user._id.toString(),

@@ -5,8 +5,7 @@ import {
 import logger from '@scrib/api/lib/logger';
 import jwt, { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 
-const SECRET_KEY = 'd3b0e0ca3e61ff2c68a8d0edc69551b0'; //env
-
+const SECRET_KEY = process.env.JWT_SECRET_KEY!;
 export interface JwtPayload {
   id: string;
 }
@@ -56,7 +55,7 @@ export function createLoginLink({
   refreshToken: string;
   redirect: string;
 }): URL {
-  const loginLink = new URL(`${process.env.DASHBOARD_BASE_URL}/auth/login`);
+  const loginLink = new URL(`${process.env.WEB_BASE_URL}/auth/login`);
 
   loginLink.searchParams.append(AUTH_COOKIE_NAME, encodeURIComponent(token));
   loginLink.searchParams.append(

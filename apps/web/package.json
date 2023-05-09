@@ -5,7 +5,7 @@
   "scripts": {
     "build": "next build",
     "build:analyze": "ANALYZE=true next build",
-    "dev": "next dev",
+    "dev": "doppler run -- next dev",
     "lint": "next lint",
     "relay": "relay-compiler ./relay.config.json",
     "start": "next start"

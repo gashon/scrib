@@ -49,7 +49,7 @@ router.get(
   passport.authenticate('github', {
     // todo export to middleware and share in both routes
     session: false,
-    failureRedirect: `${process.env.DASHBOARD_BASE_URL}/auth/login`,
+    failureRedirect: `${process.env.WEB_BASE_URL}/auth/login`,
   }),
   oauthLogin('github'),
 );
@@ -71,7 +71,7 @@ router.get(
   },
   passport.authenticate('google', {
     session: false,
-    failureRedirect: `${process.env.DASHBOARD_BASE_URL}/auth/login`,
+    failureRedirect: `${process.env.WEB_BASE_URL}/auth/login`,
   }),
   oauthLogin('google'),
 );

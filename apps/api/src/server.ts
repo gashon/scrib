@@ -59,9 +59,7 @@ app.all('/graphql', jwtMiddleware, (req, res) => {
 });
 
 async function startServer() {
-  await mongoose.connect(
-    process.env.MONGODB_URI || 'mongodb://localhost:27017/scrib',
-  ); //env
+  await mongoose.connect(process.env.MONGODB_URI!);
   logger.info('Connected to MongoDB');
 
   app.listen(port, () => logger.info(`API server listening on port ${port}`));
