@@ -32,6 +32,7 @@ const isTokenValid = (decoded: DecodedToken): boolean => {
 export function jwtMiddleware(req: Request, res: Response, next: NextFunction) {
   const token = req.cookies[AUTH_COOKIE_NAME];
   const decoded: DecodedToken = decodeToken(token);
+  req.locals = { user: null };
 
   const isExpired = isTokenExpired(decoded);
   // refresh logic
