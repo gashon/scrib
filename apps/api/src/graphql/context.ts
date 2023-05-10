@@ -17,6 +17,10 @@ export type RepositoriesContext = {
   userRepository: UserRepository;
 };
 
+export type AuthenticatedContext = Context & {
+  req: RequestContext & AuthenticatedRequestContext;
+};
+
 export type Context = {
   db: RepositoriesContext;
   req: RequestContext | AuthenticatedRequestContext;

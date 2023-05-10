@@ -1,4 +1,4 @@
-import { Context } from '@scrib/api/graphql/context';
+import { AuthenticatedContext } from '@scrib/api/graphql/context';
 import {
   CreatePostArgs,
   newPostType,
@@ -8,7 +8,7 @@ import { GraphQLFieldConfig, GraphQLNonNull } from 'graphql';
 
 export const createPost: GraphQLFieldConfig<
   undefined,
-  Context,
+  AuthenticatedContext,
   CreatePostArgs
 > = {
   type: postType,
@@ -17,9 +17,8 @@ export const createPost: GraphQLFieldConfig<
       type: new GraphQLNonNull(newPostType),
     },
   },
-  resolve: async (_: any, args: any, context: Context) => {
-    // todo turn into auth route
-    const created_by = '507f1f77bcf86cd799439011';
-    return context.db.postRepository.create({ ...args.input, created_by });
+  resolve: async (_: any, args: any, ctx: AuthenticatedContext) => {
+    const created_by = ctx.req.user.id;
+    return ctx.db.postRepository.create({ ...args.input, created_by });
   },
 };

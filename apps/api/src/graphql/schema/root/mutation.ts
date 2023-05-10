@@ -5,6 +5,6 @@ import { GraphQLObjectType } from 'graphql';
 export const mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: (): any => ({
-    createPost: createPost,
+    createPost: authGuard(createPost),
   }),
 });
