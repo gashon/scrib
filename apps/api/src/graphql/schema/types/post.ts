@@ -38,7 +38,9 @@ export const postType = new GraphQLObjectType({
     createdBy: {
       type: new GraphQLNonNull(GraphQLID),
       description: 'User who created the post',
-      resolve: (obj: IPost) => obj.created_by.toString(),
+      resolve: (obj: IPost) => {
+        return obj.created_by._id.toString();
+      },
     },
   }),
 });

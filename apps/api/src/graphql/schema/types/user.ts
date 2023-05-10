@@ -64,7 +64,6 @@ export const userType = new GraphQLObjectType({
         const authorId = user._id.toString();
         const afterInt = cursorToInt(after);
 
-        console.log('GOT', afterInt);
         const [posts, totalCount] = await Promise.all([
           context.db.postRepository.paginate({
             params: {
@@ -79,7 +78,6 @@ export const userType = new GraphQLObjectType({
           }),
         ]);
 
-        console.log('gto', posts, totalCount);
         const connection = nodesToConnection(posts, totalCount, after);
         return connection;
       },
