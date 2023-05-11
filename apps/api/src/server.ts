@@ -8,6 +8,7 @@ import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import rateLimit from 'express-rate-limit';
 import morgan from 'morgan';
+import router from "@scrib/api/routes"
 // todo integrate
 import throng from 'throng';
 
@@ -32,6 +33,8 @@ app.use(
       'Too many requests from this IP, please try again after 15 minutes',
   }),
 );
+
+app.use(router);
 
 app.all('/graphql', jwtMiddleware, (req, res) => {
   graphqlHTTP({
