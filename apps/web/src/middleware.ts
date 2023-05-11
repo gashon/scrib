@@ -5,11 +5,9 @@ import {
 import { NextMiddleware, NextResponse } from 'next/server';
 
 const middleware: NextMiddleware = async function middleware(req) {
-  console.log("hitting middleware")
   try {
     const token = req.nextUrl.searchParams.get(AUTH_COOKIE_NAME);
     const refreshToken = req.nextUrl.searchParams.get(AUTH_REFRESH_COOKIE_NAME);
-    console.log("hitting middleware", token, refreshToken)
 
     if (!token || !refreshToken) {
       return NextResponse.next();
