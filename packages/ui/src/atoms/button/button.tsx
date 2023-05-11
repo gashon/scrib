@@ -55,7 +55,9 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = ({
     })}
     {...rest}
   >
-    {loading ? <Spinner className="mr-1" size={20} /> : icon}
+    <div className="mr-1">
+    {loading ? <Spinner  size={20} /> : icon}
+    </div>
     {children}
   </button>
 );
