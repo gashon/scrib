@@ -4,6 +4,7 @@ import { RelayEnvironmentProvider } from 'react-relay';
 // import { HelmetProvider } from 'react-helmet-async';
 import type { AppProps } from 'next/app';
 import relayEnvironment from '@scrib/web/lib/relay-environment';
+import "@scrib/web/styles/globals.css"
 
 const logError = (error: Error, info: { componentStack: string }) => {
   // todo send error to sentry
