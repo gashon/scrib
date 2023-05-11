@@ -94,7 +94,6 @@ export const {
   DialogContentText,
   CardMedia,
   SpeedDial,
-  Button,
   Link,
   OutlinedInput,
   AccordionActions,

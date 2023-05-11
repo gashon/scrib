@@ -7,5 +7,9 @@ export const GithubLogin: FC = () => {
     window.location.href = '/ajax/auth/login/github';
   }, []);
 
-  return <Button onClick={onGithubLogin}>Continue with Github</Button>;
+  return (
+    <Button onClick={onGithubLogin} icon={<FaGithub size={20} />}>
+      Continue with Github
+    </Button>
+  );
 };

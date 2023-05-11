@@ -17,14 +17,14 @@ export const GoogleLogin: FC = () => {
   return (
     <Button
       onClick={onGoogleLogin}
-      // icon={
-      //   <Image
-      //     src="/Google__G__Logo.svg"
-      //     alt="Google logo"
-      //     width={20}
-      //     height={20}
-      //   />
-      // }
+      icon={
+        <Image
+          src="/Google__G__Logo.svg"
+          alt="Google logo"
+          width={20}
+          height={20}
+        />
+      }
     >
       Continue with Google
     </Button>

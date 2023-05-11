@@ -1,15 +1,12 @@
 import { FC, useCallback, useState } from 'react';
 import { FiArrowRight } from 'react-icons/fi';
-import { Button, Form, InputField } from '@scrib/ui/components';
-import {
-  LoginFormData,
-  LoginFormSchema,
-  emailLogin,
-  getUser,
-  signOut,
-} from '@scrib/web/features/auth';
+import { Button } from '@scrib/ui/atoms';
+import { Form, InputField } from '@scrib/ui/form';
 import { useRouter } from 'next/router';
 import * as z from 'zod';
+
+import { useAuth } from '../hooks';
+import { LoginFormData, LoginFormSchema } from '../types';
 
 export enum SentStatus {
   NotSent,
@@ -21,18 +18,11 @@ export const EmailLogin: FC = () => {
   const router = useRouter();
   const [sentStatus, setSentStatus] = useState<SentStatus>(SentStatus.NotSent);
 
-  const onMagicLinkLogin = useCallback(
-    async (values: z.infer<typeof LoginFormSchema>) => {
-      return emailLogin({ email: values.email }, router.query);
-    },
-    [router.query],
-  );
-
   const onEmailLogin = useCallback(
     async (values: z.infer<typeof LoginFormSchema>) => {
-      const { status } = await onMagicLinkLogin(values);
-      if (status !== 200) setSentStatus(SentStatus.Error);
-      else setSentStatus(SentStatus.Sent);
+      // const { status } = await onMagicLinkLogin(values);
+      // if (status !== 200) setSentStatus(SentStatus.Error);
+      // else setSentStatus(SentStatus.Sent);
     },
     [router.query, setSentStatus],
   );

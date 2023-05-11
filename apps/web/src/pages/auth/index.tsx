@@ -1,8 +1,4 @@
-import {
-  EmailLogin,
-  GithubLogin,
-  GoogleLogin,
-} from '@scrib/web/features/auth';
+import { EmailLogin, GithubLogin, GoogleLogin } from '@scrib/web/features/auth';
 
 export default function Login() {
   return (
