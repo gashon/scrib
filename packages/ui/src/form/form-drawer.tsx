@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Button, Drawer, DrawerProps } from '@scrib/ui/components';
 
 import { useDisclosure } from '../hooks/use-disclosure';
+
+import { Button } from '../atoms/button';
+import { Drawer, DrawerProps } from '../atoms/drawer';
 
 type FormDrawerProps = {
   isDone: boolean;
