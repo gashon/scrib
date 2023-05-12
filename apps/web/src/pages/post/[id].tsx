@@ -16,8 +16,8 @@ export default function Post({ post }: Props) {
 
   const handleSave = () => {
     const variables = {
-      id: '<post_id>', // Replace with the actual post ID
-      title: '<post_title>', // Replace with the actual post title
+      id: post._id,
+      title: post.title,
       content: content,
     };
 
@@ -45,7 +45,6 @@ export default function Post({ post }: Props) {
             onSave={handleSave}
             placeholder="Write something awesome..."
             onChange={(getValue) => {
-              console.log(getValue());
               setContent(getValue());
             }}
           />

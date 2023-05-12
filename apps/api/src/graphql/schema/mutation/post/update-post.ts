@@ -5,6 +5,7 @@ import {
   postType,
 } from '@scrib/api/graphql/schema/types';
 import { GraphQLFieldConfig, GraphQLNonNull } from 'graphql';
+import mongoose from 'mongoose';
 
 export const updatePost: GraphQLFieldConfig<
   undefined,
@@ -21,16 +22,18 @@ export const updatePost: GraphQLFieldConfig<
     const createdBy = ctx.req.user.id;
     const { id, ...rest } = args.input;
 
-    const post = await ctx.db.postRepository.findOrCreate(
-      {
-        id,
-        created_by: createdBy,
-      },
-      rest
-    );
+    const post = await ctx.db.postRepository.findOne({
+      _id: id,
+      created_by: createdBy,
+    });
+
+    if (!post) {
+      throw new Error('Post not found');
+    }
 
     post.set(rest);
+    await post.save();
 
-    return post.save();
+    return post;
   },
 };
