@@ -7,7 +7,7 @@
     "build:analyze": "ANALYZE=true next build",
     "dev": "doppler run -- next dev",
     "lint": "next lint",
-    "relay": "relay-compiler ./relay.config.json",
+    "build:graphql": "relay-compiler ./relay.config.json",
     "start": "next start"
   },
   "overrides": {

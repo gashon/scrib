@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "doppler run -- nodemon src/server.ts",
-    "graphql:schema": "npx ts-node src/scripts/generate-schema",
+    "build:graphql": "npx ts-node src/scripts/generate-schema",
     "lint": "eslint . --ext .ts",
     "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"

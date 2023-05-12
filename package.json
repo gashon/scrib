@@ -10,6 +10,7 @@
     "apps:dev": "concurrently \"yarn run mongo:start\" \"wait-on tcp:localhost:27017 && cross-env FORCE_COLOR=1 turbo run dev --parallel\"",
     "apps:lint": "turbo run lint",
     "apps:start": "cross-env turbo run start --parallel",
+    "build:graphql": "turbo run build:graphql --parallel",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
     "mongo:restart": "yarn mongo:stop && yarn mongo:start",
