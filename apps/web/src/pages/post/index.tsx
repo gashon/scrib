@@ -1,3 +1,4 @@
+import React from 'react';
 import Editor from '@scrib/editor/src';
 
 export default function Post() {
@@ -6,7 +7,12 @@ export default function Post() {
       <div className="w-full h-full flex flex-col">
         <h1>Post</h1>
         <div className="w-10/12">
-          <Editor defaultValue="Hello world!" />
+          <Editor
+            defaultValue="Hello world!"
+            onChange={(getValue) => {
+              console.log(getValue());
+            }}
+          />
         </div>
       </div>
     </div>
