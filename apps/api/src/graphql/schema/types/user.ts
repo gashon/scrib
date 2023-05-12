@@ -51,7 +51,7 @@ export const userType = new GraphQLObjectType({
           type: GraphQLString,
         },
         orderBy: {
-          defaultValue: [{ field: 'createdAt', order: 'desc' }],
+          defaultValue: [{ field: 'created_at', direction: 'desc' }],
           type: new GraphQLList(OrderByInput),
           description: 'Ordering of the results.',
         },
@@ -59,7 +59,7 @@ export const userType = new GraphQLObjectType({
       resolve: async (
         user: IUser,
         { first, after, query, orderBy }: any,
-        context: Context,
+        context: Context
       ) => {
         const authorId = user._id.toString();
         const afterInt = cursorToInt(after);

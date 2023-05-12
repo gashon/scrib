@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<9dd0115b6372a3e289f9a8207f16c98a>>
+ * @generated SignedSource<<cbfbf65827abe408a1a96f3bf90348b6>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -41,7 +41,19 @@ v1 = [
     "variableName": "id"
   }
 ],
-v2 = {
+v2 = [
+  {
+    "kind": "Literal",
+    "name": "orderBy",
+    "value": [
+      {
+        "direction": "ASC",
+        "field": "created_at"
+      }
+    ]
+  }
+],
+v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -70,7 +82,7 @@ return {
           },
           {
             "alias": null,
-            "args": null,
+            "args": (v2/*: any*/),
             "concreteType": "PostConnection",
             "kind": "LinkedField",
             "name": "posts",
@@ -82,7 +94,7 @@ return {
                 "name": "authorPosts"
               }
             ],
-            "storageKey": null
+            "storageKey": "posts(orderBy:[{\"direction\":\"ASC\",\"field\":\"created_at\"}])"
           }
         ],
         "storageKey": null
@@ -105,7 +117,7 @@ return {
         "name": "user",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
+          (v3/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -122,7 +134,7 @@ return {
           },
           {
             "alias": null,
-            "args": null,
+            "args": (v2/*: any*/),
             "concreteType": "PostConnection",
             "kind": "LinkedField",
             "name": "posts",
@@ -144,7 +156,7 @@ return {
                     "name": "node",
                     "plural": false,
                     "selections": [
-                      (v2/*: any*/),
+                      (v3/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -158,6 +170,13 @@ return {
                         "kind": "ScalarField",
                         "name": "content",
                         "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "createdAt",
+                        "storageKey": null
                       }
                     ],
                     "storageKey": null
@@ -166,7 +185,7 @@ return {
                 "storageKey": null
               }
             ],
-            "storageKey": null
+            "storageKey": "posts(orderBy:[{\"direction\":\"ASC\",\"field\":\"created_at\"}])"
           }
         ],
         "storageKey": null
@@ -174,16 +193,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "5f97016620c8c0f149626fcc0588f647",
+    "cacheID": "a8fd0e3052be2f7624066e88bd34ed72",
     "id": null,
     "metadata": {},
     "name": "getAuthorAndPostsQuery",
     "operationKind": "query",
-    "text": "query getAuthorAndPostsQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    ...authorInfo\n    posts {\n      ...authorPosts\n    }\n    id\n  }\n}\n\nfragment authorInfo on User {\n  id\n  name\n  email\n}\n\nfragment authorPosts on PostConnection {\n  edges {\n    node {\n      id\n      title\n      content\n    }\n  }\n}\n"
+    "text": "query getAuthorAndPostsQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    ...authorInfo\n    posts(orderBy: [{field: \"created_at\", direction: ASC}]) {\n      ...authorPosts\n    }\n    id\n  }\n}\n\nfragment authorInfo on User {\n  id\n  name\n  email\n}\n\nfragment authorPosts on PostConnection {\n  edges {\n    node {\n      id\n      title\n      content\n      createdAt\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "acdef54c62575481eca91663aa86a70e";
+(node as any).hash = "564d5e05b467ff79192accceeb14d2b0";
 
 export default node;

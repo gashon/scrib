@@ -16,9 +16,8 @@ export const AuthorInfo: FC<AuthorInfoProps> = ({ user }) => {
         email
       }
     `,
-    user,
+    user
   );
-
   return (
     <div>
       <h2>{data.name}</h2>

@@ -38,6 +38,9 @@ type Post {
   """Number of likes of the post"""
   likes: Int!
 
+  """Date when the post was created"""
+  createdAt: String!
+
   """User who created the post"""
   createdBy: ID!
 }
@@ -107,7 +110,7 @@ type User {
     after: String = "Y3Vyc29yMA=="
 
     """Ordering of the results."""
-    orderBy: [OrderByInput] = [{field: "createdAt"}]
+    orderBy: [OrderByInput] = [{field: "created_at", direction: DESC}]
   ): PostConnection
 }
 
