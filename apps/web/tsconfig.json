@@ -6,7 +6,8 @@
       "@scrib/web/*": ["src/*"],
       "@scrib/api/*": ["../api/src/*"],
       "@scrib/db/*": ["../../packages/db/src/*"],
-      "@scrib/ui/*": ["../../packages/ui/src/*"]
+      "@scrib/ui/*": ["../../packages/ui/src/*"],
+      "@scrib/editor/*": ["../../packages/editor/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
