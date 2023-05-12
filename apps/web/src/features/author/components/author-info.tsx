@@ -11,18 +11,17 @@ export const AuthorInfo: FC<AuthorInfoProps> = ({ user }) => {
   const data = useFragment(
     graphql`
       fragment authorInfo on User {
-        firstName
-        lastName
+        fullName
         id
         email
       }
     `,
     user
   );
+
   return (
-    <div>
-      <h2>{data.name}</h2>
-      <p>Email: {data.email}</p>
+    <div className="w-full py-8 ">
+      {data.fullName && <h2 className="text-3xl underline">{data.fullName}</h2>}
     </div>
   );
 };

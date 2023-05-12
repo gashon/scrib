@@ -11,18 +11,23 @@ const googleStrategy = new GoogleStrategy(
     userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo',
   },
   async (accessToken, refreshToken, profile, cb) => {
+    const firstName = profile.name?.givenName;
+    const lastName = profile.name?.familyName;
+
     const user: IUser = await User.findOneAndUpdate(
       { email: profile._json.email },
       {
         avatar: profile._json.picture,
         last_login: Date.now(),
         verified: true,
+        ...(firstName && { first_name: firstName }),
+        ...(lastName && { last_name: lastName }),
       },
-      { upsert: true, new: true, setDefaultsOnInsert: true },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
     );
 
     return cb(null, user);
-  },
+  }
 );
 
 const githubStrategy = new GitHubStrategy(
@@ -45,11 +50,11 @@ const githubStrategy = new GitHubStrategy(
         last_login: Date.now(),
         verified: true,
       },
-      { upsert: true, new: true, setDefaultsOnInsert: true },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
     );
 
     return cb(null, user);
-  },
+  }
 );
 
 passport.use('github', githubStrategy);

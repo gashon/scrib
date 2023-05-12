@@ -28,11 +28,8 @@ export const AuthorPosts: FC<AuthorPostsProps> = ({ posts }) => {
     posts
   );
 
-  console.log('posts', data);
-
   return (
     <div className="w-full">
-      <h3>Posts:</h3>
       <ul className="w-full">
         {data.edges.map(({ node }) => {
           const shortContent = node.content.slice(0, CONTENT_PREVIEW_LENGTH);

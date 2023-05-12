@@ -98,6 +98,9 @@ type User {
   """The last name of the user."""
   lastName: String
 
+  """The full name of the user."""
+  fullName: String
+
   """The email of the user."""
   email: String
 
