@@ -1,4 +1,9 @@
-import { GraphQLInputObjectType, GraphQLNonNull, GraphQLString } from 'graphql';
+import {
+  GraphQLID,
+  GraphQLInputObjectType,
+  GraphQLNonNull,
+  GraphQLString,
+} from 'graphql';
 
 export type UpdatePostArgs = {
   input: {
@@ -12,7 +17,7 @@ export const updatePostType = new GraphQLInputObjectType({
   name: 'UpdatePost',
   fields: {
     id: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: new GraphQLNonNull(GraphQLID),
       description: 'Id of the post',
     },
     title: {

@@ -126,7 +126,7 @@ input NewPost {
 
 input UpdatePost {
   """Id of the post"""
-  id: String!
+  id: ID!
 
   """Title of the post"""
   title: String!
