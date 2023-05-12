@@ -4,6 +4,7 @@ import express from 'express';
 import helmet from 'helmet';
 
 import ajax from './ajax';
+import v1 from './v1';
 
 const router: express.Router = express.Router();
 
@@ -14,5 +15,6 @@ router.use(cors());
 router.use(cookieParser());
 
 router.use('/ajax', ajax);
+router.use('/api/v1', v1);
 
 export default router;
