@@ -113,9 +113,21 @@ type User {
 
 type Mutation {
   createPost(input: NewPost!): Post
+  updatePost(input: UpdatePost!): Post
 }
 
 input NewPost {
+  """Title of the post"""
+  title: String!
+
+  """Content of the post"""
+  content: String!
+}
+
+input UpdatePost {
+  """Id of the post"""
+  id: String!
+
   """Title of the post"""
   title: String!
 

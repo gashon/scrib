@@ -10,9 +10,6 @@
       "cache": false,
       "persistent": true
     },
-    "build:graphql": {
-      "cache": false
-    },
     "start": {
       "cache": false,
       "persistent": true

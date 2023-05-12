@@ -1,7 +1,7 @@
 import { AuthenticatedContext } from '@scrib/api/graphql/context';
 import {
   UpdatePostArgs,
-  newPostType,
+  updatePostType,
   postType,
 } from '@scrib/api/graphql/schema/types';
 import { GraphQLFieldConfig, GraphQLNonNull } from 'graphql';
@@ -14,7 +14,7 @@ export const updatePost: GraphQLFieldConfig<
   type: postType,
   args: {
     input: {
-      type: new GraphQLNonNull(newPostType),
+      type: new GraphQLNonNull(updatePostType),
     },
   },
   resolve: async (_: any, args: any, ctx: AuthenticatedContext) => {

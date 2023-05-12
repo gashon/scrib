@@ -5,6 +5,10 @@ import { cursorToInt, nodesToConnection } from '@scrib/api/graphql/util';
 import { IPost } from '@scrib/db/models/post';
 import { GraphQLInt, GraphQLList, GraphQLString } from 'graphql';
 
+type OrderBy<T> = {
+  field: keyof T;
+  order: 'asc' | 'desc';
+};
 type PostsQueryArgs = {
   first?: number;
   after?: string;
@@ -40,7 +44,7 @@ export const posts = {
   resolve: async (
     _: any,
     { first, after, orderBy, createdBy }: PostsQueryArgs,
-    context: Context,
+    context: Context
   ) => {
     const afterInt = cursorToInt(after);
 

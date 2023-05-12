@@ -10,7 +10,7 @@
     "apps:dev": "concurrently \"yarn run mongo:start\" \"wait-on tcp:localhost:27017 && cross-env FORCE_COLOR=1 turbo run dev --parallel\"",
     "apps:lint": "turbo run lint",
     "apps:start": "cross-env turbo run start --parallel",
-    "build:graphql": "turbo run build:graphql --parallel",
+    "build:graphql": "(cd apps/api && pnpm run build:graphql) && (cd apps/web && pnpm run build:graphql)",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
     "mongo:restart": "yarn mongo:stop && yarn mongo:start",
@@ -19,7 +19,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "(cd apps/api && pnpm run graphql:schema) && git add apps/api/src/graphql/schema/schema.graphql"
+      "pre-push": "(cd apps/api && pnpm run build:graphql) && git add apps/api/src/graphql/schema/schema.graphql"
     }
   },
   "devDependencies": {
