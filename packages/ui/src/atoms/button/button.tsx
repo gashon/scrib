@@ -1,9 +1,21 @@
 import { cva, VariantProps } from 'class-variance-authority';
-import { ButtonHTMLAttributes, DetailedHTMLProps, FC, PropsWithChildren, ReactNode } from 'react';
+import {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  FC,
+  PropsWithChildren,
+  ReactNode,
+} from 'react';
 import { Spinner } from '../spinner';
 
 const styles = cva(
-  ['flex', 'items-center', 'justify-center', 'font-semibold', 'transition-colors'],
+  [
+    'flex',
+    'items-center',
+    'justify-center',
+    'font-semibold',
+    'transition-colors',
+  ],
   {
     variants: {
       size: {
@@ -28,7 +40,7 @@ const styles = cva(
 
 type ButtonProps = Pick<
   DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
-  'onClick' | 'type' | 'disabled'
+  'onClick' | 'type' | 'disabled' | 'className'
 > &
   VariantProps<typeof styles> & {
     icon?: ReactNode;
@@ -44,20 +56,19 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = ({
   disabled,
   variant,
   loading,
+  className,
   ...rest
 }) => (
   <button
     disabled={disabled || loading}
-    className={styles({
+    className={`${styles({
       size,
       variant: disabled ? 'disabled' : variant,
       shape,
-    })}
+    })} ${className}`}
     {...rest}
   >
-    <div className="mr-1">
-    {loading ? <Spinner  size={20} /> : icon}
-    </div>
+    <div className="mr-1">{loading ? <Spinner size={20} /> : icon}</div>
     {children}
   </button>
 );

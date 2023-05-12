@@ -2,6 +2,7 @@ import { components } from './proxy';
 
 export * from './form';
 export * from './atoms';
+export * from './molecules';
 export const {
   RadioGroup,
   ImageListItemBar,
