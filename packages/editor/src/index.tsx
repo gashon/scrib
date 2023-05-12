@@ -290,6 +290,8 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
   }
 
   init() {
+    if (this.view) return;
+
     this.extensions = this.createExtensions();
     this.nodes = this.createNodes();
     this.marks = this.createMarks();
@@ -526,10 +528,6 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
   createView() {
     if (!this.element) {
       throw new Error('createView called before ref available');
-    }
-
-    if (this.view) {
-      return;
     }
 
     const isEditingCheckbox = (tr) => {
