@@ -18,7 +18,7 @@ export class PostRepository {
   }
 
   public async find(
-    params: mongoose.FilterQuery<IPost>,
+    params: mongoose.FilterQuery<IPost>
   ): Promise<PostDocument[]> {
     return this.postModel.find(params);
   }
@@ -54,16 +54,27 @@ export class PostRepository {
   }
 
   public async findOne(
-    params: mongoose.FilterQuery<IPost>,
+    params: mongoose.FilterQuery<IPost>
   ): Promise<PostDocument | null> {
     return this.postModel.findOne(params);
   }
 
   public async updateById(
     id: string,
-    params: IPost,
+    params: IPost
   ): Promise<PostDocument | null> {
     return this.postModel.findByIdAndUpdate(id, params, { new: true });
+  }
+
+  public async findOrCreate(
+    params: mongoose.FilterQuery<IPost>,
+    paramsToCreate: IPost
+  ): Promise<PostDocument> {
+    const post = await this.postModel.findOne(params);
+    if (post) {
+      return post;
+    }
+    return this.postModel.create(paramsToCreate);
   }
 
   public async deleteById(id: string): Promise<PostDocument | null> {
@@ -72,7 +83,7 @@ export class PostRepository {
       {
         deleted_at: new Date(),
       },
-      { new: true },
+      { new: true }
     );
   }
 }
