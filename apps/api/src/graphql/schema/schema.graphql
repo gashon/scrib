@@ -89,16 +89,19 @@ enum Direction {
 }
 
 type User {
-  """Globally unique ID of the post"""
+  """Globally unique ID of the user"""
   id: ID!
 
-  """The name of the post."""
-  name: String
+  """The first name of the user."""
+  firstName: String
 
-  """The email of the post."""
+  """The last name of the user."""
+  lastName: String
+
+  """The email of the user."""
   email: String
 
-  """The avatar of the post."""
+  """The avatar of the user."""
   avatar: String
   posts(
     """Limits the number of results returned in the page. Defaults to 10."""

@@ -2,7 +2,8 @@ import mongoose from '@scrib/db/mongo';
 import { Resource } from '@scrib/db/util';
 
 export interface IUser extends Resource {
-  name: string;
+  first_name: string;
+  last_name: string;
   email: string;
   avatar: string;
   last_login?: Date | number;

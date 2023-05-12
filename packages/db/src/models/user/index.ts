@@ -6,12 +6,15 @@ import { IUser, UserDocument } from './types';
 
 const userSchema = new mongoose.Schema<IUser>(
   {
-    name: {
+    first_name: {
       type: String,
       trim: true,
-      default(this: IUser) {
-        return this.email;
-      },
+      required: false,
+    },
+    last_name: {
+      type: String,
+      trim: true,
+      required: false,
     },
     email: {
       type: String,
@@ -39,7 +42,7 @@ const userSchema = new mongoose.Schema<IUser>(
       default: null,
     },
   },
-  { timestamps: { updatedAt: 'updated_at', createdAt: 'created_at' } },
+  { timestamps: { updatedAt: 'updated_at', createdAt: 'created_at' } }
 );
 
 userSchema.index({ email: 1 }, { unique: true });

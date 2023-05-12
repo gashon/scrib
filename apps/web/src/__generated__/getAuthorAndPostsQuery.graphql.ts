@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<cbfbf65827abe408a1a96f3bf90348b6>>
+ * @generated SignedSource<<8bd83d88e6d1c38c089c98ad78ea9315>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -47,7 +47,7 @@ v2 = [
     "name": "orderBy",
     "value": [
       {
-        "direction": "ASC",
+        "direction": "DESC",
         "field": "created_at"
       }
     ]
@@ -94,7 +94,7 @@ return {
                 "name": "authorPosts"
               }
             ],
-            "storageKey": "posts(orderBy:[{\"direction\":\"ASC\",\"field\":\"created_at\"}])"
+            "storageKey": "posts(orderBy:[{\"direction\":\"DESC\",\"field\":\"created_at\"}])"
           }
         ],
         "storageKey": null
@@ -117,14 +117,21 @@ return {
         "name": "user",
         "plural": false,
         "selections": [
-          (v3/*: any*/),
           {
             "alias": null,
             "args": null,
             "kind": "ScalarField",
-            "name": "name",
+            "name": "firstName",
             "storageKey": null
           },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "lastName",
+            "storageKey": null
+          },
+          (v3/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -185,7 +192,7 @@ return {
                 "storageKey": null
               }
             ],
-            "storageKey": "posts(orderBy:[{\"direction\":\"ASC\",\"field\":\"created_at\"}])"
+            "storageKey": "posts(orderBy:[{\"direction\":\"DESC\",\"field\":\"created_at\"}])"
           }
         ],
         "storageKey": null
@@ -193,16 +200,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "a8fd0e3052be2f7624066e88bd34ed72",
+    "cacheID": "57f98a7d8ff46fe171ac39432358a612",
     "id": null,
     "metadata": {},
     "name": "getAuthorAndPostsQuery",
     "operationKind": "query",
-    "text": "query getAuthorAndPostsQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    ...authorInfo\n    posts(orderBy: [{field: \"created_at\", direction: ASC}]) {\n      ...authorPosts\n    }\n    id\n  }\n}\n\nfragment authorInfo on User {\n  id\n  name\n  email\n}\n\nfragment authorPosts on PostConnection {\n  edges {\n    node {\n      id\n      title\n      content\n      createdAt\n    }\n  }\n}\n"
+    "text": "query getAuthorAndPostsQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    ...authorInfo\n    posts(orderBy: [{field: \"created_at\", direction: DESC}]) {\n      ...authorPosts\n    }\n    id\n  }\n}\n\nfragment authorInfo on User {\n  firstName\n  lastName\n  id\n  email\n}\n\nfragment authorPosts on PostConnection {\n  edges {\n    node {\n      id\n      title\n      content\n      createdAt\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "564d5e05b467ff79192accceeb14d2b0";
+(node as any).hash = "46ecc84b7229f9c0e3c29507305cbba5";
 
 export default node;

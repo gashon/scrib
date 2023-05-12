@@ -17,22 +17,27 @@ export const userType = new GraphQLObjectType({
   fields: (): any => ({
     id: {
       type: new GraphQLNonNull(GraphQLID),
-      description: 'Globally unique ID of the post',
+      description: 'Globally unique ID of the user',
       resolve: (obj: IUser) => obj._id.toString(),
     },
-    name: {
+    firstName: {
       type: GraphQLString,
-      description: 'The name of the post.',
-      resolve: (obj: IUser) => obj.name,
+      description: 'The first name of the user.',
+      resolve: (obj: IUser) => obj.first_name,
+    },
+    lastName: {
+      type: GraphQLString,
+      description: 'The last name of the user.',
+      resolve: (obj: IUser) => obj.last_name,
     },
     email: {
       type: GraphQLString,
-      description: 'The email of the post.',
+      description: 'The email of the user.',
       resolve: (obj: IUser) => obj.email,
     },
     avatar: {
       type: GraphQLString,
-      description: 'The avatar of the post.',
+      description: 'The avatar of the user.',
       resolve: (obj: IUser) => obj.avatar,
     },
     posts: {

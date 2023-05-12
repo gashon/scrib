@@ -11,8 +11,9 @@ export const AuthorInfo: FC<AuthorInfoProps> = ({ user }) => {
   const data = useFragment(
     graphql`
       fragment authorInfo on User {
+        firstName
+        lastName
         id
-        name
         email
       }
     `,
