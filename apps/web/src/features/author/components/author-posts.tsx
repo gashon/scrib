@@ -44,17 +44,18 @@ export const AuthorPosts: FC<AuthorPostsProps> = ({ posts }) => {
           );
           const hasMoreContent = node?.content?.length > CONTENT_PREVIEW_LENGTH;
 
+          const isDraft = node.status === 'draft';
           return (
-            <Link href={`/posts/${node.id}`}>
+            <Link
+              href={isDraft ? `/posts/edit/${node.id}` : `/posts/${node.id}`}
+            >
               <li
                 key={node.id}
                 className="min-w-52 px-8 py-2 my-8 border-black border-b"
               >
                 <div className="flex justify-between">
                   <h3 className="text-2xl">{node.title}</h3>
-                  {node.status === 'draft' && (
-                    <p className="text-red-500">Draft</p>
-                  )}
+                  {isDraft && <p className="text-red-500">Draft</p>}
                 </div>
                 <div className="opacity-50 flex justify-between">
                   <p>
