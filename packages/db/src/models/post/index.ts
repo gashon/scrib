@@ -31,9 +31,10 @@ const postSchema = new mongoose.Schema<IPost>(
       required: true,
       autopopulate: true,
     },
-    published: {
-      type: Boolean,
-      default: false,
+    status: {
+      type: String,
+      enum: ['draft', 'published'],
+      default: 'draft',
     },
     deleted_at: {
       type: Date,
