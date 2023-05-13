@@ -16,6 +16,7 @@ const postSchema = new mongoose.Schema<IPost>(
       required: false,
       trim: true,
       maxlength: 1000,
+      default: '',
     },
     views: {
       type: Number,

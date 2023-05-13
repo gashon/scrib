@@ -73,11 +73,13 @@ export const userType = new GraphQLObjectType({
       ) => {
         const authorId = user._id.toString();
         const afterInt = cursorToInt(after);
+        const isAuthor = context.req.user?.id === authorId;
 
         const [posts, totalCount] = await Promise.all([
           context.db.postRepository.paginate({
             params: {
               created_by: authorId,
+              status: isAuthor ? { $in: ['draft', 'published'] } : 'published',
             },
             after: afterInt,
             first,

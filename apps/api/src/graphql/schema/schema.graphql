@@ -13,7 +13,7 @@ type Query {
     """Sorts the elements of this list according to the given order."""
     orderBy: [OrderByInput] = [{field: "createdAt"}]
 
-    """Filter by the user who created   the post."""
+    """Filter by the user who created the post."""
     createdBy: String
   ): PostConnection
   user(
@@ -28,6 +28,9 @@ type Post {
 
   """Title of the post"""
   title: String!
+
+  """Status of the post"""
+  status: String!
 
   """Content of the post"""
   content: String!

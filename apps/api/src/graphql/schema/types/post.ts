@@ -20,6 +20,11 @@ export const postType = new GraphQLObjectType({
       description: 'Title of the post',
       resolve: (obj: IPost) => obj.title,
     },
+    status: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'Status of the post',
+      resolve: (obj: IPost) => obj.status,
+    },
     content: {
       type: new GraphQLNonNull(GraphQLString),
       description: 'Content of the post',

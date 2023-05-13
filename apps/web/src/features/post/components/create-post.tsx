@@ -13,7 +13,7 @@ export const CreatePostButton: FC = () => {
 
   const onSubmit = async () => {
     const variables = {
-      title: 'Draft Post',
+      title: 'Title: Draft Post',
     };
     commitCreatePost({
       variables,

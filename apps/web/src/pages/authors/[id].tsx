@@ -24,7 +24,7 @@ export default function AuthorPage({ authorId }: Props) {
         <div className="w-full flex flex-row">
           <AuthorInfo user={query.user} authorSlug={authorId} />
         </div>
-        <AuthorPosts posts={query.user.posts} />{' '}
+        <AuthorPosts posts={query.user.posts} />
       </div>
     </div>
   );
