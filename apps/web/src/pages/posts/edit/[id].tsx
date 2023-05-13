@@ -8,7 +8,11 @@ import {
   errorNotification,
   successNotification,
 } from '@scrib/web/lib/notification';
-import type { updatePostMutation } from '@scrib/web/__generated__/updatePostMutation.graphql';
+import type {
+  updatePostMutation,
+  updatePostMutation$variables,
+} from '@scrib/web/__generated__/updatePostMutation.graphql';
+import { Button } from '@scrib/ui/atoms';
 
 type Props = {
   post: Partial<IPost>;
@@ -23,15 +27,19 @@ export default function Post({ post: loadedPost }: Props) {
 
   const [commitUpdatePost] = useMutation<updatePostMutation>(UPDATE_POST);
 
-  const handleChange = (key: keyof IPost, value: string) => {
+  const handleChange = (
+    key: keyof updatePostMutation$variables,
+    value: string
+  ) => {
     setPost((p) => ({ ...p, [key]: value, saved: false }));
   };
 
-  const handleSave = () => {
+  const handleSave = (status?: IPost['status']) => {
     const variables = {
       id: loadedPost._id,
       title: post.title,
       content: post.content,
+      status: status || post.status,
     };
 
     commitUpdatePost({
@@ -48,13 +56,17 @@ export default function Post({ post: loadedPost }: Props) {
   };
 
   return (
-    <div className="w-screen h-min-screen flex p-10 justify-center">
-      <div className="w-full h-full flex flex-col w-3/4">
+    <div className="w-screen min-h-screen flex p-36 justify-center">
+      <div className="w-3/4 h-auto flex flex-col" style={{ height: '100%' }}>
         {/* <h1 className="text-3xl mb-10 underline font-bold">Post</h1> */}
-        <main className="">
+        <main
+          style={{
+            minHeight: '70vh',
+          }}
+        >
           <input
             id="post-title"
-            className="w-full mb-10 text-3xl font-bold"
+            className="w-full mb-10 text-3xl font-bold underline"
             onChange={(e) => handleChange('title', e.target.value)}
             value={post.title}
             style={{ outline: 'none', boxShadow: 'none' }}
@@ -63,23 +75,28 @@ export default function Post({ post: loadedPost }: Props) {
 
           <Editor
             defaultValue={post.content}
-            onSave={handleSave}
+            onSave={() => handleSave()}
             placeholder="Write something awesome..."
             onChange={(getValue) => {
               handleChange('content', getValue());
             }}
           />
         </main>
-
-        <div className="absolute bottom-5 right-5">
-          {post.saved ? (
-            <p className="opacity-75">Saved</p>
-          ) : (
-            <button className="underline" onClick={handleSave}>
-              Unsaved
-            </button>
-          )}
+        <div className="h-full flex content-end justify-end">
+          <Button onClick={() => handleSave('published')}>
+            {post.status === 'published' ? 'Republish' : 'Publish'}
+          </Button>
         </div>
+      </div>
+
+      <div className="absolute bottom-5 right-5">
+        {post.saved ? (
+          <p className="opacity-75">Saved</p>
+        ) : (
+          <button className="underline" onClick={() => handleSave()}>
+            Unsaved
+          </button>
+        )}
       </div>
     </div>
   );
