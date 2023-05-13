@@ -128,9 +128,6 @@ type Mutation {
 input NewPost {
   """Title of the post"""
   title: String!
-
-  """Content of the post"""
-  content: String!
 }
 
 input UpdatePost {

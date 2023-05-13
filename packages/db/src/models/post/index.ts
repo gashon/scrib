@@ -13,7 +13,7 @@ const postSchema = new mongoose.Schema<IPost>(
     },
     content: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
       maxlength: 1000,
     },
@@ -40,7 +40,7 @@ const postSchema = new mongoose.Schema<IPost>(
       default: null,
     },
   },
-  { timestamps: { updatedAt: 'updated_at', createdAt: 'created_at' } },
+  { timestamps: { updatedAt: 'updated_at', createdAt: 'created_at' } }
 );
 
 postSchema.index({ created_by: 1 }, { unique: false });

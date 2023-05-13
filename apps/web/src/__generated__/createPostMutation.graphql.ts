@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<b121b9e7959a97b9b9b89ddb37fc1818>>
+ * @generated SignedSource<<53d424eaafc40c111097a035944aa8cf>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,7 +10,6 @@
 
 import { ConcreteRequest, Mutation } from 'relay-runtime';
 export type createPostMutation$variables = {
-  content: string;
   title: string;
 };
 export type createPostMutation$data = {
@@ -25,27 +24,19 @@ export type createPostMutation = {
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "content"
-},
-v1 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "title"
-},
-v2 = [
+var v0 = [
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "title"
+  }
+],
+v1 = [
   {
     "alias": null,
     "args": [
       {
         "fields": [
-          {
-            "kind": "Variable",
-            "name": "content",
-            "variableName": "content"
-          },
           {
             "kind": "Variable",
             "name": "title",
@@ -81,38 +72,32 @@ v2 = [
 ];
 return {
   "fragment": {
-    "argumentDefinitions": [
-      (v0/*: any*/),
-      (v1/*: any*/)
-    ],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
     "name": "createPostMutation",
-    "selections": (v2/*: any*/),
+    "selections": (v1/*: any*/),
     "type": "Mutation",
     "abstractKey": null
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [
-      (v1/*: any*/),
-      (v0/*: any*/)
-    ],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "createPostMutation",
-    "selections": (v2/*: any*/)
+    "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "a260e0edf2759d621dab90b9c8fb1a64",
+    "cacheID": "20cfdf5d967be3269e21414cf5c065d4",
     "id": null,
     "metadata": {},
     "name": "createPostMutation",
     "operationKind": "mutation",
-    "text": "mutation createPostMutation(\n  $title: String!\n  $content: String!\n) {\n  createPost(input: {title: $title, content: $content}) {\n    id\n    title\n  }\n}\n"
+    "text": "mutation createPostMutation(\n  $title: String!\n) {\n  createPost(input: {title: $title}) {\n    id\n    title\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "2350f39fb045309ca45e1dc46bc2321b";
+(node as any).hash = "6c9ed7a9a30273eb905659fbd7dd6443";
 
 export default node;

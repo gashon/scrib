@@ -1,7 +1,5 @@
 import React from 'react';
 import Editor from '@scrib/editor/src';
-import { useMutation } from 'react-relay';
-import { UPDATE_POST } from '@scrib/web/features/post';
 import { getPost } from '@scrib/web/features/post';
 import { IPost } from '@scrib/db/models/post';
 

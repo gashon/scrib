@@ -126,6 +126,7 @@ importers:
       next: latest
       react: ^18.2.0
       react-dom: ^18.2.0
+      react-hook-form: ^7.43.9
       react-icons: ^4.8.0
       react-query: ^3.39.3
       react-relay: ^15.0.0
@@ -149,6 +150,7 @@ importers:
       next: 13.4.2_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      react-hook-form: 7.43.9_react@18.2.0
       react-icons: 4.8.0_react@18.2.0
       react-query: 3.39.3_biqbaboplfbrettd7655fr4n2y
       react-relay: 15.0.0_react@18.2.0

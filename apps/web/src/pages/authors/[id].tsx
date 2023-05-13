@@ -4,16 +4,19 @@ import {
   AuthorPosts,
   GET_AUTHOR_AND_POSTS_QUERY,
 } from '@scrib/web/features/author';
+import { getAuthorAndPostsQuery } from '@scrib/web/__generated__/GetAuthorAndPostsQuery.graphql';
 
 type Props = {
   authorId: string;
 };
 
 export default function AuthorPage({ authorId }: Props) {
-  // todo typesafety
-  const query = useLazyLoadQuery<any>(GET_AUTHOR_AND_POSTS_QUERY, {
-    id: authorId,
-  });
+  const query = useLazyLoadQuery<getAuthorAndPostsQuery>(
+    GET_AUTHOR_AND_POSTS_QUERY,
+    {
+      id: authorId,
+    }
+  );
 
   return (
     <div className="w-screen h-min-screen flex justify-center">

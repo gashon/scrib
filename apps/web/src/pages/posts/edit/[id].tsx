@@ -12,7 +12,7 @@ type Props = {
 export default function Post({ post }: Props) {
   const [content, setContent] = React.useState(post.content);
 
-  const [commitUpdatePost, isUpdating] = useMutation(UPDATE_POST);
+  const [commitUpdatePost] = useMutation(UPDATE_POST);
 
   const handleSave = () => {
     const variables = {
