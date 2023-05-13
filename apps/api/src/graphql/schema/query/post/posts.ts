@@ -48,10 +48,17 @@ export const posts = {
   ) => {
     const afterInt = cursorToInt(after);
 
+    const isAuthor = context.req.user?.id === createdBy;
+
     const [posts, postsCount] = await Promise.all([
       context.db.postRepository.paginate({
         params: {
           created_by: createdBy,
+          status: isAuthor
+            ? {
+                $in: ['draft', 'published'],
+              }
+            : 'published',
         },
         first,
         after: afterInt,
