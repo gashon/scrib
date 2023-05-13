@@ -38,7 +38,7 @@ export const posts = {
     },
     createdBy: {
       type: GraphQLString!,
-      description: 'Filter by the user who created   the post.',
+      description: 'Filter by the user who created the post.',
     },
   },
   resolve: async (
@@ -47,7 +47,6 @@ export const posts = {
     context: Context
   ) => {
     const afterInt = cursorToInt(after);
-
     const isAuthor = context.req.user?.id === createdBy;
 
     const [posts, postsCount] = await Promise.all([
