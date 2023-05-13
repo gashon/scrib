@@ -4,10 +4,9 @@ import {
   AuthorPosts,
   GET_AUTHOR_AND_POSTS_QUERY,
 } from '@scrib/web/features/author';
-import { Button } from '@scrib/ui/atoms';
 
 type Props = {
-  authorId: string
+  authorId: string;
 };
 
 export default function AuthorPage({ authorId }: Props) {
@@ -20,8 +19,7 @@ export default function AuthorPage({ authorId }: Props) {
     <div className="w-screen h-min-screen flex justify-center">
       <div className="flex flex-col w-3/4">
         <div className="w-full flex flex-row">
-          <AuthorInfo user={query.user} />
-          <Button className="h-min w-max">Create Post</Button>
+          <AuthorInfo user={query.user} authorSlug={authorId} />
         </div>
         <AuthorPosts posts={query.user.posts} />{' '}
       </div>
