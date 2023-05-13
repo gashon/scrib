@@ -131,7 +131,6 @@ export const {
   transitions,
   StyledEngineProvider,
   AccordionSummary,
-  Modal,
   StepIcon,
   InputLabel,
   useAutocomplete,
