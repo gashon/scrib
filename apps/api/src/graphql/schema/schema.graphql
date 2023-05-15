@@ -129,6 +129,7 @@ type User {
 type Mutation {
   createPost(input: NewPost!): Post
   updatePost(input: UpdatePost!): Post
+  deletePost(input: DeletePost!): Post
 }
 
 input NewPost {
@@ -148,4 +149,9 @@ input UpdatePost {
 
   """Status of the post"""
   status: String!
+}
+
+input DeletePost {
+  """id of the post"""
+  id: ID!
 }

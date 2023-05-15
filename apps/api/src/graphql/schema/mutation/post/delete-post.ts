@@ -19,16 +19,11 @@ export const deletePost: GraphQLFieldConfig<
   },
   resolve: async (_: any, args: any, ctx: AuthenticatedContext) => {
     const deletedBy = ctx.req.user.id;
-
     const post = await ctx.db.postRepository.findById(args.input.id);
 
-    if (!post) {
-      throw new Error('Post not found');
-    }
-
-    if (post.created_by.toString() !== deletedBy) {
+    if (!post) throw new Error('Post not found');
+    if (post.created_by.toString() !== deletedBy)
       throw new Error('You are not authorized to delete this post');
-    }
 
     return ctx.db.postRepository.deleteById(args.input.id);
   },
