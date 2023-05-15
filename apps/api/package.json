@@ -5,7 +5,7 @@
   "main": "src/server.ts",
   "types": "src/server.ts",
   "scripts": {
-    "build": "tsc -p tsconfig.json && pnpm run build:graphql",
+    "build": "./node_modules/.bin/tsc -p tsconfig.json && pnpm run build:graphql",
     "dev": "doppler run -- nodemon src/server.ts",
     "build:graphql": "ts-node src/scripts/generate-schema",
     "lint": "eslint . --ext .ts",
