@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "next build && pnpm run build:graphql",
     "build:analyze": "ANALYZE=true next build",
     "dev": "doppler run -- next dev",
     "lint": "next lint",
     "build:graphql": "relay-compiler ./relay.config.json",
-    "start": "doppler run -- next start"
+    "start": "../../scripts/doppler_run.sh DOPPLER_WEB_TOKEN 'next start'"
   },
   "overrides": {
     "prosemirror-tables": "^1.1.1"
