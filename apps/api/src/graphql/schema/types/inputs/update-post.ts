@@ -28,5 +28,9 @@ export const updatePostType = new GraphQLInputObjectType({
       type: new GraphQLNonNull(GraphQLString),
       description: 'Content of the post',
     },
+    status: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'Status of the post',
+    },
   },
 });

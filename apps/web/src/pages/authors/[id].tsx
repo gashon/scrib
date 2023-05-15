@@ -15,7 +15,8 @@ export default function AuthorPage({ authorId }: Props) {
     GET_AUTHOR_AND_POSTS_QUERY,
     {
       id: authorId,
-    }
+    },
+    { fetchPolicy: 'store-or-network' }
   );
 
   return (

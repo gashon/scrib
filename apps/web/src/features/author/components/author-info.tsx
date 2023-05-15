@@ -22,6 +22,8 @@ export const AuthorInfo: FC<AuthorInfoProps> = ({ user, authorSlug }) => {
     user
   );
 
+  if (!data) return null;
+
   return (
     <div className="flex justify-between items-center w-full py-8">
       {data.fullName && <h2 className="text-3xl underline">{data.fullName}</h2>}

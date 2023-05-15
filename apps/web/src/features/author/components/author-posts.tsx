@@ -12,6 +12,7 @@ interface AuthorPostsProps {
 }
 
 export const AuthorPosts: FC<AuthorPostsProps> = ({ posts }) => {
+  const [isMounted, setIsMounted] = React.useState<boolean>(false);
   const data = useFragment(
     graphql`
       fragment authorPosts on PostConnection {
@@ -29,46 +30,48 @@ export const AuthorPosts: FC<AuthorPostsProps> = ({ posts }) => {
     posts
   );
 
-  return (
-    <div className="w-full">
-      <ul className="w-full">
-        {data.edges.length === 0 && (
-          <li className="w-full">
-            <h3 className="text-lg opacity-75">No posts yet</h3>
-          </li>
-        )}
-        {data.edges.map(({ node }) => {
-          const shortContent = (node?.content ?? '').slice(
-            0,
-            CONTENT_PREVIEW_LENGTH
-          );
-          const hasMoreContent = node?.content?.length > CONTENT_PREVIEW_LENGTH;
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-          const isDraft = node.status === 'draft';
-          return (
-            <Link
-              href={isDraft ? `/posts/edit/${node.id}` : `/posts/${node.id}`}
+  if (!data || !isMounted) return null;
+
+  return (
+    <ul className="w-full">
+      {data.edges.length === 0 && (
+        <li className="w-full">
+          <h3 className="text-lg opacity-75">No posts yet</h3>
+        </li>
+      )}
+      {data.edges.map(({ node }) => {
+        const shortContent = (node?.content ?? '').slice(
+          0,
+          CONTENT_PREVIEW_LENGTH
+        );
+        const hasMoreContent = node?.content?.length > CONTENT_PREVIEW_LENGTH;
+        const isDraft = node.status === 'draft';
+
+        return (
+          <Link href={isDraft ? `/posts/edit/${node.id}` : `/posts/${node.id}`}>
+            <li
+              key={node.id}
+              className="min-w-52 px-8 py-2 my-8 border-black border-b"
             >
-              <li
-                key={node.id}
-                className="min-w-52 px-8 py-2 my-8 border-black border-b"
-              >
-                <div className="flex justify-between">
-                  <h3 className="text-2xl">{node.title}</h3>
-                  {isDraft && <p className="text-red-500">Draft</p>}
-                </div>
-                <div className="opacity-50 flex justify-between">
-                  <p>
-                    {shortContent}
-                    {hasMoreContent && '...'}
-                  </p>
-                  <p>{dayjs(node.createdAt).format('MMMM D, YYYY')}</p>
-                </div>
-              </li>
-            </Link>
-          );
-        })}
-      </ul>
-    </div>
+              <div className="flex justify-between">
+                <h3 className="text-2xl">{node.title}</h3>
+                {isDraft && <p className="text-red-500">Draft</p>}
+              </div>
+              <div className="opacity-50 flex justify-between">
+                <p>
+                  {shortContent}
+                  {hasMoreContent && '...'}
+                </p>
+                <p>{dayjs(node.createdAt).format('MMMM D, YYYY')}</p>
+              </div>
+            </li>
+          </Link>
+        );
+      })}
+    </ul>
   );
 };

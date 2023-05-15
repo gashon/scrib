@@ -142,4 +142,7 @@ input UpdatePost {
 
   """Content of the post"""
   content: String!
+
+  """Status of the post"""
+  status: String!
 }
