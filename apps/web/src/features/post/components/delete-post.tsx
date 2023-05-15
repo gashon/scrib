@@ -1,6 +1,5 @@
-import React, { FC } from 'react';
+import { FC, MouseEvent } from 'react';
 import { useMutation } from 'react-relay';
-import { Button } from '@scrib/ui/components';
 import { DELETE_POST } from '@scrib/web/features/post';
 import {
   errorNotification,
@@ -11,13 +10,16 @@ import { AiOutlineDelete, AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 type DeletePostProps = {
   id: string;
+  onClick?: (event: MouseEvent) => void;
 };
 
-export const DeletePostButton: FC<DeletePostProps> = ({ id }) => {
+export const DeletePostButton: FC<DeletePostProps> = ({ id, onClick }) => {
   const [commitDeletePost, isLoading] =
     useMutation<deletePostMutation>(DELETE_POST);
 
-  const onSubmit = async () => {
+  const onSubmit = async (e: MouseEvent) => {
+    if (onClick) onClick(e);
+
     const variables = {
       id,
     };
@@ -40,9 +42,9 @@ export const DeletePostButton: FC<DeletePostProps> = ({ id }) => {
       {isLoading ? (
         <AiOutlineLoading3Quarters className="animate-spin" />
       ) : (
-        <div onClick={onSubmit} className="cursor-pointer hover:scale-125">
+        <button onClick={onSubmit} className="hover:scale-125">
           <AiOutlineDelete />
-        </div>
+        </button>
       )}
     </>
   );

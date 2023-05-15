@@ -11,7 +11,7 @@ type Query {
     after: String = "Y3Vyc29yMA=="
 
     """Sorts the elements of this list according to the given order."""
-    orderBy: [OrderByInput] = [{field: "createdAt"}]
+    orderBy: [OrderByInput] = [{field: "createdAt", order: DESC}]
 
     """Filter by the user who created the post."""
     createdBy: String
@@ -86,7 +86,7 @@ type PageInfo {
 
 input OrderByInput {
   field: String!
-  direction: Direction!
+  order: Direction!
 }
 
 enum Direction {
@@ -122,7 +122,7 @@ type User {
     after: String = "Y3Vyc29yMA=="
 
     """Ordering of the results."""
-    orderBy: [OrderByInput] = [{field: "created_at", direction: DESC}]
+    orderBy: [OrderByInput] = [{field: "created_at"}]
   ): PostConnection
 }
 

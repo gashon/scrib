@@ -81,7 +81,7 @@ export const userType = new GraphQLObjectType({
               created_by: authorId,
               status: isAuthor ? { $in: ['draft', 'published'] } : 'published',
               deleted_at: {
-                $ne: null,
+                $eq: null,
               },
             },
             after: afterInt,

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<6fb3e624a9fff7d233d39b3b52c5fb86>>
+ * @generated SignedSource<<7b997760d394d64577899f8a4c7d6b28>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -47,8 +47,8 @@ v2 = [
     "name": "orderBy",
     "value": [
       {
-        "direction": "DESC",
-        "field": "created_at"
+        "field": "created_at",
+        "order": "DESC"
       }
     ]
   }
@@ -94,7 +94,7 @@ return {
                 "name": "authorPosts"
               }
             ],
-            "storageKey": "posts(orderBy:[{\"direction\":\"DESC\",\"field\":\"created_at\"}])"
+            "storageKey": "posts(orderBy:[{\"field\":\"created_at\",\"order\":\"DESC\"}])"
           }
         ],
         "storageKey": null
@@ -199,7 +199,7 @@ return {
                 "storageKey": null
               }
             ],
-            "storageKey": "posts(orderBy:[{\"direction\":\"DESC\",\"field\":\"created_at\"}])"
+            "storageKey": "posts(orderBy:[{\"field\":\"created_at\",\"order\":\"DESC\"}])"
           }
         ],
         "storageKey": null
@@ -207,16 +207,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "2aa8dd61baa37202d9045f978b801074",
+    "cacheID": "83f281281fb7d995d57dda005c60f22d",
     "id": null,
     "metadata": {},
     "name": "getAuthorAndPostsQuery",
     "operationKind": "query",
-    "text": "query getAuthorAndPostsQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    ...authorInfo\n    posts(orderBy: [{field: \"created_at\", direction: DESC}]) {\n      ...authorPosts\n    }\n    id\n  }\n}\n\nfragment authorInfo on User {\n  fullName\n  id\n  email\n}\n\nfragment authorPosts on PostConnection {\n  edges {\n    node {\n      id\n      title\n      content\n      createdAt\n      status\n      isAuthor\n    }\n  }\n}\n"
+    "text": "query getAuthorAndPostsQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    ...authorInfo\n    posts(orderBy: [{field: \"created_at\", order: DESC}]) {\n      ...authorPosts\n    }\n    id\n  }\n}\n\nfragment authorInfo on User {\n  fullName\n  id\n  email\n}\n\nfragment authorPosts on PostConnection {\n  edges {\n    node {\n      id\n      title\n      content\n      createdAt\n      status\n      isAuthor\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "46ecc84b7229f9c0e3c29507305cbba5";
+(node as any).hash = "a3257e6a273379fe65e225a8aeb3c744";
 
 export default node;
