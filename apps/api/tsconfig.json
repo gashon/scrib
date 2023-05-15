@@ -6,7 +6,9 @@
       "@scrib/api/*": ["./src/*"],
       "@scrib/db/*": ["../../packages/db/src/*"]
     },
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "rootDir": "./src",
+    "outDir": "./dist"
   },
   "include": ["src/**/*", "src/types/**/*.d.ts"],
   "exclude": ["node_modules"],
