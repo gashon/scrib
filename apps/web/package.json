@@ -8,7 +8,7 @@
     "dev": "doppler run -- next dev",
     "lint": "next lint",
     "build:graphql": "relay-compiler ./relay.config.json",
-    "start": "next start"
+    "start": "doppler run -- next start"
   },
   "overrides": {
     "prosemirror-tables": "^1.1.1"
