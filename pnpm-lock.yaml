@@ -202,6 +202,7 @@ importers:
       md5: ^2.3.0
       mongoose: ^7.0.5
       mongoose-autopopulate: ^0.17.1
+      tsc: ^2.0.4
     dependencies:
       md5: 2.3.0
       mongoose: 7.1.1
@@ -211,6 +212,7 @@ importers:
       '@scrib/tsconfig': link:../config/tsconfig
       '@types/md5': 2.3.2
       eslint: 7.32.0
+      tsc: 2.0.4
 
   packages/editor:
     specifiers:
