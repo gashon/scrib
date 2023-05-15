@@ -9,41 +9,51 @@ import { createLoginLink, decodeToken, sign } from '@scrib/api/utils/jwt';
 import User from '@scrib/db/models/user';
 import express, { NextFunction, Request, Response } from 'express';
 import status from 'http-status';
-
 const router: express.Router = express.Router();
 
 // Incomplete route!**
-router.post('/login/email', async (req, res, next) => {
-  try {
-    let user = await User.findOne({ email: req.body.email });
-    if (!user) user = await User.create({ email: req.body.email });
+router.post(
+  '/login/email',
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      let user = await User.findOne({ email: req.body.email });
+      if (!user) user = await User.create({ email: req.body.email });
 
-    const token = sign({ id: user._id.toString() });
+      const token = sign({ id: user._id.toString() });
+      const refreshToken = sign({ id: user._id.toString() }, '7d');
 
-    const loginLink = createLoginLink(token, '/dashboard');
+      const loginLink = createLoginLink({
+        token,
+        refreshToken,
+        redirect: req.body.redirect,
+      });
 
-    // todo send email
-    console.log(loginLink.toString());
+      // todo send email
+      console.log(loginLink.toString());
 
-    res.sendStatus(status.OK);
-  } catch (err) {
-    next(err);
+      res.sendStatus(status.OK);
+    } catch (err) {
+      next(err);
+    }
   }
-});
+);
 
-router.get('/login/github', (req, res, next) => {
-  passport.authenticate('github', {
-    scope: ['user:email'],
-    session: false,
-    state: JSON.stringify({
-      redirect: req.query.redirect?.toString(),
-    }),
-  })(req, res, next);
-});
+router.get(
+  '/login/github',
+  (req: Request, res: Response, next: NextFunction) => {
+    passport.authenticate('github', {
+      scope: ['user:email'],
+      session: false,
+      state: JSON.stringify({
+        redirect: req.query.redirect?.toString(),
+      }),
+    })(req, res, next);
+  }
+);
 
 router.get(
   '/login/github/callback',
-  (req, res, next) => {
+  (req: Request, res: Response, next: NextFunction) => {
     next();
   },
   passport.authenticate('github', {
@@ -51,29 +61,29 @@ router.get(
     session: false,
     failureRedirect: `${process.env.WEB_BASE_URL}/auth/login`,
   }),
-  oauthLogin('github'),
+  oauthLogin('github')
 );
 
-router.get('/login/google', (req, res, next) => {
-  passport.authenticate('google', {
-    scope: ['email', 'profile'],
-    session: false,
-    state: JSON.stringify({
-      redirect: req.query.redirect?.toString(),
-    }),
-  })(req, res, next);
-});
+router.get(
+  '/login/google',
+  (req: Request, res: Response, next: NextFunction) => {
+    passport.authenticate('google', {
+      scope: ['email', 'profile'],
+      session: false,
+      state: JSON.stringify({
+        redirect: req.query.redirect?.toString(),
+      }),
+    })(req, res, next);
+  }
+);
 
 router.get(
   '/login/google/callback',
-  (req, res, next) => {
-    next();
-  },
   passport.authenticate('google', {
     session: false,
     failureRedirect: `${process.env.WEB_BASE_URL}/auth/login`,
   }),
-  oauthLogin('google'),
+  oauthLogin('google')
 );
 
 router.get(
@@ -81,12 +91,12 @@ router.get(
   jwtMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {
     res.json({ data: req.locals.user });
-  },
+  }
 );
 
 router.get(
   '/logout',
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       res.clearCookie(AUTH_COOKIE_NAME);
       res.clearCookie(AUTH_REFRESH_COOKIE_NAME);
@@ -95,7 +105,7 @@ router.get(
     } catch (err) {
       next(err);
     }
-  },
+  }
 );
 
 export default router;

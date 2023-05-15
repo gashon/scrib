@@ -1,10 +1,14 @@
 import { JwtPayload, getUserFromToken } from '@scrib/api/utils/jwt';
-import { Request } from 'express';
+import { Request, Express } from 'express';
 
-declare module 'express' {
-  interface Request {
-    locals: {
-      user: JwtPayload | null;
-    };
+interface ExtendedLocals {
+  user?: JwtPayload | null;
+}
+
+declare global {
+  namespace Express {
+    interface Request {
+      locals: ExtendedLocals & Express.Request['locals'];
+    }
   }
 }

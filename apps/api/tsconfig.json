@@ -5,8 +5,10 @@
     "paths": {
       "@scrib/api/*": ["./src/*"],
       "@scrib/db/*": ["../../packages/db/src/*"]
-    }
+    },
+    "esModuleInterop": true
   },
-  "include": ["src/**/*", "codegen.ts"],
-  "exclude": ["node_modules"]
+  "include": ["src/**/*", "src/types/**/*.d.ts"],
+  "exclude": ["node_modules"],
+  "types": ["node", "jest", "express"]
 }

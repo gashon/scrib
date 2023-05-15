@@ -4,10 +4,10 @@ import { GraphQLFieldConfig, GraphQLFieldResolver } from 'graphql';
 import status from 'http-status';
 
 export function authMiddleware<TSource, TContext, TArgs = any>(
-  resolver: GraphQLFieldResolver<TSource, TContext, TArgs>,
+  resolver: GraphQLFieldResolver<TSource, TContext, TArgs>
 ): GraphQLFieldResolver<TSource, TContext, TArgs> {
   return async (parent, args, context, info) => {
-    const ctx = context as Context;
+    const ctx = context as unknown as Context;
 
     if (!ctx.req.user) {
       throw new CustomError('Unauthorized', status.UNAUTHORIZED);
@@ -18,7 +18,7 @@ export function authMiddleware<TSource, TContext, TArgs = any>(
 }
 
 export function authGuard<TSource, TContext, TArgs = any>(
-  fieldConfig: GraphQLFieldConfig<TSource, TContext, TArgs>,
+  fieldConfig: GraphQLFieldConfig<TSource, TContext, TArgs>
 ) {
   if (!fieldConfig.resolve) {
     throw new Error('authGuard requires a resolve function');

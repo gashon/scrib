@@ -8,7 +8,7 @@ import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import rateLimit from 'express-rate-limit';
 import morgan from 'morgan';
-import router from "@scrib/api/routes"
+import router from '@scrib/api/routes';
 // todo integrate
 import throng from 'throng';
 
@@ -31,7 +31,7 @@ app.use(
     max: dev ? Number.MAX_SAFE_INTEGER : 100, // limit each IP to x requests per windowMs
     message:
       'Too many requests from this IP, please try again after 15 minutes',
-  }),
+  })
 );
 
 app.use(router);

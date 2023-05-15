@@ -1,7 +1,11 @@
 import User, { IUser } from '@scrib/db/models/user';
 import passport from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import {
+  Strategy as GoogleStrategy,
+  Profile,
+  VerifyCallback,
+} from 'passport-google-oauth20';
 
 const googleStrategy = new GoogleStrategy(
   {
@@ -10,7 +14,12 @@ const googleStrategy = new GoogleStrategy(
     callbackURL: `${process.env.API_BASE_URL}/ajax/auth/login/google/callback`,
     userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo',
   },
-  async (accessToken, refreshToken, profile, cb) => {
+  async (
+    accessToken: string,
+    refreshToken: string,
+    profile: Profile,
+    cb: VerifyCallback
+  ) => {
     const firstName = profile.name?.givenName;
     const lastName = profile.name?.familyName;
 
@@ -37,7 +46,7 @@ const githubStrategy = new GitHubStrategy(
     callbackURL: `${process.env.API_BASE_URL}/ajax/auth/login/github/callback`,
     scope: ['user:email', 'read:user'],
   },
-  async (accessToken, refreshToken, profile, cb) => {
+  async (accessToken: string, refreshToken: string, profile: any, cb: any) => {
     const email =
       profile.emails?.find((e: any) => e.primary?.value) ||
       profile.emails?.[0]?.value;
