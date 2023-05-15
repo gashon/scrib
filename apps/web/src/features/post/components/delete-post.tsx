@@ -25,7 +25,9 @@ export const DeletePostButton: FC<DeletePostProps> = ({ id }) => {
       variables,
       onCompleted: (response, errors) => {
         if (errors) {
-          errorNotification(errors);
+          for (const { message } of errors) {
+            errorNotification(message);
+          }
         } else {
           successNotification('Post deleted');
         }

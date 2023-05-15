@@ -9,7 +9,7 @@ type PostItemProps = {
   node: PostNode;
 };
 
-const CONTENT_PREVIEW_LENGTH = 10;
+const CONTENT_PREVIEW_LENGTH = 50;
 
 export const PostItem: FC<PostItemProps> = ({ node }) => {
   const content = stripMarkdown(node?.content ?? '');
