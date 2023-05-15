@@ -66,6 +66,7 @@ importers:
       passport-github2: ^0.1.12
       passport-google-oauth20: ^2.0.0
       throng: ^5.0.0
+      tsc: ^2.0.4
       tsconfig-paths: ^4.2.0
       typescript: ^4.5.3
       winston: ^3.8.2
@@ -104,6 +105,7 @@ importers:
       '@types/passport-github2': 1.2.5
       '@types/passport-google-oauth20': 2.0.11
       '@types/throng': 5.0.4
+      tsc: 2.0.4
       tsconfig-paths: 4.2.0
       typescript: 4.9.5
 
@@ -15263,6 +15265,11 @@ packages:
       string-argv: 0.1.2
       strip-ansi: 6.0.1
       typescript: 4.1.6
+    dev: true
+
+  /tsc/2.0.4:
+    resolution: {integrity: sha512-fzoSieZI5KKJVBYGvwbVZs/J5za84f2lSTLPYf6AGiIf43tZ3GNrI1QzTLcjtyDDP4aLxd46RTZq1nQxe7+k5Q==}
+    hasBin: true
     dev: true
 
   /tsconfig-paths/3.14.2:
