@@ -9,7 +9,7 @@
     "dev": "doppler run -- nodemon src/server.ts",
     "build:graphql": "npx ts-node src/scripts/generate-schema",
     "lint": "eslint . --ext .ts",
-    "start": "node dist/server.js",
+    "start": "ts-node -P tsconfig.json src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
