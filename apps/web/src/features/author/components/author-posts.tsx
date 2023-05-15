@@ -24,6 +24,7 @@ export const AuthorPosts: FC<AuthorPostsProps> = ({ posts }) => {
             content
             createdAt
             status
+            isAuthor
           }
         }
       }
@@ -49,7 +50,6 @@ export const AuthorPosts: FC<AuthorPostsProps> = ({ posts }) => {
         const shortContent = (content ?? '').slice(0, CONTENT_PREVIEW_LENGTH);
         const hasMoreContent = content?.length > CONTENT_PREVIEW_LENGTH;
         const isDraft = node.status === 'draft';
-
         return (
           <Link href={isDraft ? `/posts/edit/${node.id}` : `/posts/${node.id}`}>
             <li
@@ -59,6 +59,11 @@ export const AuthorPosts: FC<AuthorPostsProps> = ({ posts }) => {
               <div className="flex justify-between">
                 <h3 className="text-2xl">{node.title}</h3>
                 {isDraft && <p className="text-red-500">Draft</p>}
+                {node.isAuthor && (
+                  <div className="cursor-pointer hover:underline">
+                    <Link href={`/posts/edit/${node.id}`}>Edit</Link>
+                  </div>
+                )}
               </div>
               <div className="opacity-50 flex justify-between">
                 <p>

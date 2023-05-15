@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<15af80cb019009df4800729bf74fab59>>
+ * @generated SignedSource<<c6b375a3b7dc2decf4e1deced3ed8d5d>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -16,6 +16,7 @@ export type authorPosts$data = {
       readonly content: string;
       readonly createdAt: string;
       readonly id: string;
+      readonly isAuthor: boolean;
       readonly status: string;
       readonly title: string;
     } | null;
@@ -83,6 +84,13 @@ const node: ReaderFragment = {
               "kind": "ScalarField",
               "name": "status",
               "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "isAuthor",
+              "storageKey": null
             }
           ],
           "storageKey": null
@@ -95,6 +103,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "96586b0d7235683562098f3741ad5ecd";
+(node as any).hash = "d5fb373821f53837e127dffcb0e78f57";
 
 export default node;

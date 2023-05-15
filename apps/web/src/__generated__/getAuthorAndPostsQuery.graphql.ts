@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<cbfabec8c1c08b8e05deacf81c2174ee>>
+ * @generated SignedSource<<6fb3e624a9fff7d233d39b3b52c5fb86>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -184,6 +184,13 @@ return {
                         "kind": "ScalarField",
                         "name": "status",
                         "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "isAuthor",
+                        "storageKey": null
                       }
                     ],
                     "storageKey": null
@@ -200,12 +207,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "860a96459ec0d08fd9f6283805f55838",
+    "cacheID": "2aa8dd61baa37202d9045f978b801074",
     "id": null,
     "metadata": {},
     "name": "getAuthorAndPostsQuery",
     "operationKind": "query",
-    "text": "query getAuthorAndPostsQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    ...authorInfo\n    posts(orderBy: [{field: \"created_at\", direction: DESC}]) {\n      ...authorPosts\n    }\n    id\n  }\n}\n\nfragment authorInfo on User {\n  fullName\n  id\n  email\n}\n\nfragment authorPosts on PostConnection {\n  edges {\n    node {\n      id\n      title\n      content\n      createdAt\n      status\n    }\n  }\n}\n"
+    "text": "query getAuthorAndPostsQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    ...authorInfo\n    posts(orderBy: [{field: \"created_at\", direction: DESC}]) {\n      ...authorPosts\n    }\n    id\n  }\n}\n\nfragment authorInfo on User {\n  fullName\n  id\n  email\n}\n\nfragment authorPosts on PostConnection {\n  edges {\n    node {\n      id\n      title\n      content\n      createdAt\n      status\n      isAuthor\n    }\n  }\n}\n"
   }
 };
 })();

@@ -1,11 +1,13 @@
 import { IPost } from '@scrib/db/models/post';
 import {
+  GraphQLBoolean,
   GraphQLID,
   GraphQLInt,
   GraphQLNonNull,
   GraphQLObjectType,
   GraphQLString,
 } from 'graphql';
+import { Context } from '@scrib/api/graphql/context';
 
 export const postType = new GraphQLObjectType({
   name: 'Post',
@@ -50,6 +52,16 @@ export const postType = new GraphQLObjectType({
       description: 'User who created the post',
       resolve: (obj: IPost) => {
         return obj.created_by._id.toString();
+      },
+    },
+    isAuthor: {
+      type: new GraphQLNonNull(GraphQLBoolean),
+      description: 'Whether the current user is the author of the post',
+      resolve: (obj: IPost, __: any, context: Context) => {
+        return (
+          !!context.req.user?.id &&
+          obj.created_by._id.toString() === context.req.user?.id
+        );
       },
     },
   }),

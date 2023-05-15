@@ -46,6 +46,9 @@ type Post {
 
   """User who created the post"""
   createdBy: ID!
+
+  """Whether the current user is the author of the post"""
+  isAuthor: Boolean!
 }
 
 type PostConnection {
