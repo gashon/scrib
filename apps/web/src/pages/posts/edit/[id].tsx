@@ -58,7 +58,12 @@ export default function Post({ post: loadedPost }: Props) {
   return (
     <div className="w-screen min-h-screen flex p-36 justify-center">
       <div className="w-3/4 h-auto flex flex-col" style={{ height: '100%' }}>
-        {/* <h1 className="text-3xl mb-10 underline font-bold">Post</h1> */}
+        <div className="absolute top-5 right-5">
+          <Button onClick={() => handleSave('published')}>
+            {post.status === 'published' ? 'Republish' : 'Publish'}
+          </Button>
+        </div>
+
         <main
           style={{
             minHeight: '70vh',
@@ -82,11 +87,6 @@ export default function Post({ post: loadedPost }: Props) {
             }}
           />
         </main>
-        <div className="h-full flex content-end justify-end">
-          <Button onClick={() => handleSave('published')}>
-            {post.status === 'published' ? 'Republish' : 'Publish'}
-          </Button>
-        </div>
       </div>
 
       <div className="absolute bottom-5 right-5">
