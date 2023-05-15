@@ -5,9 +5,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = withBundleAnalyzer({
   reactStrictMode: true,
-  experimental: {
-    transpilePackages: ['@scrib/config/tsconfig', '@scrib/ui'],
-  },
+  transpilePackages: ['@scrib/config/tsconfig', '@scrib/ui'],
   typescript: {
     ignoreBuildErrors: true,
   },

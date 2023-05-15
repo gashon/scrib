@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "npx tsc -P tsconfig.json",
+    "build": "tsc -P tsconfig.json",
     "lint": "eslint \"**/*.ts*\""
   },
   "dependencies": {
