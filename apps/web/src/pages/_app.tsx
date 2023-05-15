@@ -1,7 +1,7 @@
 import React from 'react';
 import { RelayEnvironmentProvider } from 'react-relay';
-// import { ErrorBoundary } from 'react-error-boundary';
-// import { HelmetProvider } from 'react-helmet-async';
+import { ErrorBoundary } from 'react-error-boundary';
+import { HelmetProvider } from 'react-helmet-async';
 import type { AppProps } from 'next/app';
 import relayEnvironment from '@scrib/web/lib/relay-environment';
 import { ToastContainer } from 'react-toastify';
@@ -15,17 +15,18 @@ const logError = (error: Error, info: { componentStack: string }) => {
   console.error('Info', info);
 };
 
+// todo implement fallback component
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      {/* <ErrorBoundary FallbackComponent={<>App Error</>} onError={logError}> */}
-      {/* <HelmetProvider> */}
-      <ToastContainer />
-      <RelayEnvironmentProvider environment={relayEnvironment}>
-        <Component {...pageProps} />
-      </RelayEnvironmentProvider>
-      {/* </HelmetProvider> */}
-      {/* </ErrorBoundary> */}
+      <ErrorBoundary fallback={<>App Error</>} onError={logError}>
+        <HelmetProvider>
+          <ToastContainer />
+          <RelayEnvironmentProvider environment={relayEnvironment}>
+            <Component {...pageProps} />
+          </RelayEnvironmentProvider>
+        </HelmetProvider>
+      </ErrorBoundary>
     </>
   );
 }
