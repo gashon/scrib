@@ -3,6 +3,7 @@ import { useFragment } from 'react-relay';
 import { authorPosts$key } from '@scrib/web/__generated__/authorPosts.graphql';
 import { graphql } from 'relay-runtime';
 import Link from 'next/link';
+import { stripMarkdown } from '@scrib/web/utils';
 
 import dayjs from 'dayjs';
 
@@ -44,11 +45,9 @@ export const AuthorPosts: FC<AuthorPostsProps> = ({ posts }) => {
         </li>
       )}
       {data.edges.map(({ node }) => {
-        const shortContent = (node?.content ?? '').slice(
-          0,
-          CONTENT_PREVIEW_LENGTH
-        );
-        const hasMoreContent = node?.content?.length > CONTENT_PREVIEW_LENGTH;
+        const content = stripMarkdown(node?.content ?? '');
+        const shortContent = (content ?? '').slice(0, CONTENT_PREVIEW_LENGTH);
+        const hasMoreContent = content?.length > CONTENT_PREVIEW_LENGTH;
         const isDraft = node.status === 'draft';
 
         return (

@@ -4,7 +4,7 @@ import {
   AuthorPosts,
   GET_AUTHOR_AND_POSTS_QUERY,
 } from '@scrib/web/features/author';
-import { getAuthorAndPostsQuery } from '@scrib/web/__generated__/GetAuthorAndPostsQuery.graphql';
+import type { getAuthorAndPostsQuery } from '@scrib/web/__generated__/GetAuthorAndPostsQuery.graphql';
 
 type Props = {
   authorId: string;
