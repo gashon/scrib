@@ -7,13 +7,13 @@
   ],
   "scripts": {
     "apps:build": "turbo run build",
-    "apps:dev": "concurrently \"yarn run mongo:start\" \"wait-on tcp:localhost:27017 && cross-env FORCE_COLOR=1 turbo run dev --parallel\"",
+    "apps:dev": "concurrently \"pnpm run mongo:start\" \"wait-on tcp:localhost:27017 && cross-env FORCE_COLOR=1 turbo run dev --parallel\"",
     "apps:lint": "turbo run lint",
     "apps:start": "cross-env turbo run start --parallel",
     "build:graphql": "(cd apps/api && pnpm run build:graphql) && (cd apps/web && pnpm run build:graphql)",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
-    "mongo:restart": "yarn mongo:stop && yarn mongo:start",
+    "mongo:restart": "pnpm mongo:stop && pnpm mongo:start",
     "mongo:start": "docker run --rm -p 27017:27017 --name scrib-mongo -v mongo_data:/data/db -e MONGO_INITDB_DATABASE=scrib mongo > /dev/null",
     "mongo:stop": "docker stop scrib-mongo"
   },
