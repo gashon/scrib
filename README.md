@@ -1,4 +1,4 @@
-# Scrib - An Open Source Blogging Application
+# Scrib - Blogging Application
 
 Scrib is a modern, easy-to-use, performant, and scalable blogging application. This application was built with modern web technologies including Node.js, Express, MongoDB, GraphQL, React, and TypeScript.
 
