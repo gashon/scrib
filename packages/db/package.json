@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -P tsconfig.json",
+    "build": "./node_modules/.bin/tsc -P tsconfig.json",
     "lint": "eslint \"**/*.ts*\""
   },
   "dependencies": {
