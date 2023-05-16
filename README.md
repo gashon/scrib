@@ -1,81 +1,36 @@
-# Turborepo starter
+# Scrib - An Open Source Blogging Application
 
-This is an official starter Turborepo.
+Scrib is a modern, easy-to-use, performant, and scalable blogging application. This application was built with modern web technologies including Node.js, Express, MongoDB, GraphQL, React, and TypeScript.
 
-## Using this example
+## Project Structure
 
-Run the following command:
+This project is organized as a monorepo using pnpm for package management. The application is divided into three main parts:
 
-```sh
-npx create-turbo@latest
-```
+1. `apps/api`: This is the backend of the application. It includes the API endpoints, database models, GraphQL schema, and utility functions.
+2. `apps/web`: This is the frontend of the application. It includes the React components, hooks, pages, and GraphQL queries/mutations.
+3. `packages`: This directory contains shared code and configurations between the backend and the frontend. It includes UI components (`packages/ui`), configuration files (`packages/config`), and database utilities (`packages/db`).
 
-## What's inside?
+## Available Scripts
 
-This Turborepo includes the following packages/apps:
+In the project directory, you can run:
 
-### Apps and Packages
+- `pnpm start`: Starts the application
+- `pnpm apps:build`: Builds the application
+- `pnpm apps:dev`: Starts the application in development mode
+- `pnpm apps:lint`: Runs the linter
+- `pnpm build:graphql`: Generates the GraphQL schema
+- `pnpm format:check`: Checks the formatting of the code
+- `pnpm format:write`: Formats the code
+- `pnpm mongo:restart`: Restarts the MongoDB Docker container
+- `pnpm mongo:start`: Starts the MongoDB Docker container
+- `pnpm mongo:stop`: Stops the MongoDB Docker container
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+## Development Instructions
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+1. Clone the repository.
+2. Install dependencies using `pnpm install`.
+3. Start the development server using `pnpm apps:dev`.
 
-### Utilities
+## License
 
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+This project is licensed under the [MIT License](./LICENSE).
