@@ -7,7 +7,7 @@ export default function Web() {
       <section className="fixed w-full">
         <div className="z-20 flex flex-row justify-end items-center w-full h-16 px-4">
           <Link href="/auth">
-            <div className="border-black border rounded px-4 py-2">
+            <div className="border-black border-b px-4 py-2">
               Register/Login
             </div>
           </Link>

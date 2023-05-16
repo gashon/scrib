@@ -58,11 +58,11 @@ export default function Post({ post: loadedPost }: Props) {
   return (
     <div className="w-screen min-h-screen flex p-36 justify-center">
       <div className="w-3/4 h-auto flex flex-col" style={{ height: '100%' }}>
-        <div className="absolute top-5 right-5">
-          <Button onClick={() => handleSave('published')}>
-            {post.status === 'published' ? 'Republish' : 'Publish'}
-          </Button>
-        </div>
+        {post.status !== 'published' && (
+          <div className="absolute top-5 right-5">
+            <Button onClick={() => handleSave('published')}>Publish</Button>
+          </div>
+        )}
 
         <main
           style={{
