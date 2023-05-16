@@ -12,7 +12,8 @@ type PostItemProps = {
 const CONTENT_PREVIEW_LENGTH = 50;
 
 export const PostItem: FC<PostItemProps> = ({ node }) => {
-  const content = stripMarkdown(node?.content ?? '');
+  const firstLine = node?.content?.split('\n')[0];
+  const content = stripMarkdown(firstLine ?? '');
   const shortContent = (content ?? '').slice(0, CONTENT_PREVIEW_LENGTH);
   const hasMoreContent = content?.length > CONTENT_PREVIEW_LENGTH;
   const isDraft = node.status === 'draft';
