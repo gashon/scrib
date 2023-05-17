@@ -6,13 +6,21 @@ services:
       context: .
       dockerfile: Dockerfile
       target: api
+      args:
+        - DOPPLER_API_TOKEN=${DOPPLER_API_TOKEN}
     ports:
       - '7000:7000'
+    environment:
+      - DOPPLER_API_TOKEN=${DOPPLER_API_TOKEN}
 
   web:
     build:
       context: .
       dockerfile: Dockerfile
       target: web
+      args:
+        - DOPPLER_WEB_TOKEN=${DOPPLER_WEB_TOKEN}
     ports:
       - '3000:3000'
+    environment:
+      - DOPPLER_WEB_TOKEN=${DOPPLER_WEB_TOKEN}

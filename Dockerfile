@@ -29,8 +29,8 @@ COPY apps/api/ ./apps/api/
 COPY packages/db/ ./packages/db/
 
 FROM dependencies as web-dependencies
-ARG DOPPLER_CLIENT_TOKEN
-ENV DOPPLER_CLIENT_TOKEN=$DOPPLER_CLIENT_TOKEN
+ARG DOPPLER_WEB_TOKEN
+ENV DOPPLER_WEB_TOKEN=$DOPPLER_WEB_TOKEN
 COPY packages/ui/package.json ./packages/ui/
 COPY packages/db/package.json ./packages/db/
 COPY packages/editor/package.json ./packages/editor/
