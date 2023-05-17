@@ -7,6 +7,7 @@ import {
 } from '@scrib/web/lib/notification';
 import type { deletePostMutation } from '@scrib/web/__generated__/createPostMutation.graphql';
 import { AiOutlineDelete, AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { Modal, Button } from '@scrib/ui/components';
 
 type DeletePostProps = {
   id: string;
@@ -42,9 +43,24 @@ export const DeletePostButton: FC<DeletePostProps> = ({ id, onClick }) => {
       {isLoading ? (
         <AiOutlineLoading3Quarters className="animate-spin" />
       ) : (
-        <button onClick={onSubmit} className="hover:scale-125">
-          <AiOutlineDelete />
-        </button>
+        <Modal
+          triggerButton={
+            <button className="hover:scale-125">
+              <AiOutlineDelete />
+            </button>
+          }
+          submitButton={
+            <Button loading={isLoading} className="" onClick={onSubmit}>
+              Delete Post
+            </Button>
+          }
+          title="Delete Post"
+          ariaLabelledBy="create-post-modal-title"
+          ariaDescribedBy="create-post-modal-description"
+          modalClassName="w-fit h-48"
+        >
+          <p className="text-xl">Are you sure you want to delete this post?</p>
+        </Modal>
       )}
     </>
   );

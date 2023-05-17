@@ -15,6 +15,7 @@ type Props = {
   ariaLabelledBy: string;
   ariaDescribedBy: string;
   title: string;
+  modalClassName?: string;
 };
 
 export const Modal: FC<PropsWithChildren<Props>> = ({
@@ -24,6 +25,7 @@ export const Modal: FC<PropsWithChildren<Props>> = ({
   ariaLabelledBy,
   ariaDescribedBy,
   title,
+  modalClassName,
 }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = useCallback(() => setOpen(true), []);
@@ -50,7 +52,9 @@ export const Modal: FC<PropsWithChildren<Props>> = ({
           justifyContent: 'center',
         }}
       >
-        <div className="bg-white rounded w-3/4 p-4 relative">
+        <div
+          className={`bg-white rounded w-3/4 p-4 relative ${modalClassName}`}
+        >
           <div className="w-full flex justify-between">
             <h3 className="text-3xl">{title}</h3>
             <div onClick={handleClose} className="cursor-pointer">
@@ -58,7 +62,9 @@ export const Modal: FC<PropsWithChildren<Props>> = ({
             </div>
           </div>
 
-          {children}
+          <div className="w-full h-full flex justify-center py-4">
+            {children}
+          </div>
 
           <div className="absolute bottom-4 right-4">{submitButton}</div>
         </div>

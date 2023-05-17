@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useMutation } from 'react-relay';
-import { Button } from '@scrib/ui/components';
+import { Button, Modal } from '@scrib/ui/components';
 import { CREATE_POST } from '@scrib/web/features/post';
 import { errorNotification } from '@scrib/web/lib/notification';
 import { useRouter } from 'next/router';
@@ -28,8 +28,21 @@ export const CreatePostButton: FC = () => {
   };
 
   return (
-    <Button loading={isLoading} className="" onClick={onSubmit}>
-      Create Post
-    </Button>
+    <>
+      <Modal
+        triggerButton={<Button>Create Post</Button>}
+        submitButton={
+          <Button loading={isLoading} className="" onClick={onSubmit}>
+            Create Post
+          </Button>
+        }
+        title="Create Post"
+        ariaLabelledBy="create-post-modal-title"
+        ariaDescribedBy="create-post-modal-description"
+        modalClassName="w-fit h-48"
+      >
+        <p className="text-xl">Are you sure you want to create a new post?</p>
+      </Modal>
+    </>
   );
 };
