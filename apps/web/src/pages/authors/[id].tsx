@@ -20,7 +20,7 @@ export default function AuthorPage({ authorId }: Props) {
   );
 
   return (
-    <div className="w-screen h-min-screen flex justify-center">
+    <div className="w-screen min-h-screen flex justify-center relative">
       <div className="flex flex-col w-3/4">
         <div className="w-full flex flex-row">
           <AuthorInfo user={query.user} authorSlug={authorId} />

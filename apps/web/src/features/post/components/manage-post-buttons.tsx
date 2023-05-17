@@ -9,13 +9,13 @@ type ManagePostProps = {
 
 export const ManagePostButtons: FC<ManagePostProps> = ({ id, onDelete }) => {
   const handleDelete = (event: MouseEvent) => {
-    event.stopPropagation();
+    event.preventDefault();
     onDelete();
   };
 
   return (
     <div
-      onClick={(event: MouseEvent) => event.stopPropagation()}
+      onClick={(event: MouseEvent) => event.preventDefault()}
       className="flex flex-row justify-center items-center gap-2 mb-2"
     >
       <div className="cursor-pointer hover:scale-125">
