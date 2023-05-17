@@ -13,6 +13,7 @@ export const UPDATE_POST = graphql`
       id
       title
       content
+      status
     }
   }
 `;

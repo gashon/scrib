@@ -48,12 +48,18 @@ export default function Post({ post: loadedPost }: Props) {
         if (errors) {
           errorNotification(errors);
         } else {
-          successNotification('Post saved successfully!');
+          if (status) {
+            successNotification('Post status updated');
+          } else {
+            successNotification('Post saved successfully!');
+          }
           setPost((p) => ({ ...p, saved: true }));
         }
       },
     });
   };
+
+  console.log('RERENDINGER', post.status);
 
   return (
     <div className="w-screen min-h-screen flex p-36 justify-center">

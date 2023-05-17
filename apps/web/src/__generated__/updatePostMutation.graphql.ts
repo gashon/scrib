@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<ac610a37b30cdeca34477ce75a7ba569>>
+ * @generated SignedSource<<886426c690783dc78f29bd611e322806>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -19,6 +19,7 @@ export type updatePostMutation$data = {
   readonly updatePost: {
     readonly content: string;
     readonly id: string;
+    readonly status: string;
     readonly title: string;
   } | null;
 };
@@ -104,6 +105,13 @@ v4 = [
         "kind": "ScalarField",
         "name": "content",
         "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "status",
+        "storageKey": null
       }
     ],
     "storageKey": null
@@ -137,16 +145,16 @@ return {
     "selections": (v4/*: any*/)
   },
   "params": {
-    "cacheID": "7f0e8634e1a9fe451e2c857dd7a54f75",
+    "cacheID": "47c5f70da39548d2b9618485b4fc101f",
     "id": null,
     "metadata": {},
     "name": "updatePostMutation",
     "operationKind": "mutation",
-    "text": "mutation updatePostMutation(\n  $id: ID!\n  $title: String!\n  $content: String!\n  $status: String!\n) {\n  updatePost(input: {id: $id, title: $title, content: $content, status: $status}) {\n    id\n    title\n    content\n  }\n}\n"
+    "text": "mutation updatePostMutation(\n  $id: ID!\n  $title: String!\n  $content: String!\n  $status: String!\n) {\n  updatePost(input: {id: $id, title: $title, content: $content, status: $status}) {\n    id\n    title\n    content\n    status\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "1b00c574bdda1535f6ab0e8c5e6be8da";
+(node as any).hash = "3c6ce7cb6dfc3918e9f2a22ea59cdd92";
 
 export default node;
