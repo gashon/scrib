@@ -34,6 +34,8 @@ export const updatePost: GraphQLFieldConfig<
     post.set(rest);
     await post.save();
 
+    console.log('GOt', post, rest);
+
     return post;
   },
 };

@@ -41,6 +41,7 @@ export default function Post({ post: loadedPost }: Props) {
       content: post.content,
       status: status || post.status,
     };
+    console.log('SENDING', status);
 
     commitUpdatePost({
       variables,
@@ -53,7 +54,11 @@ export default function Post({ post: loadedPost }: Props) {
           } else {
             successNotification('Post saved successfully!');
           }
-          setPost((p) => ({ ...p, saved: true }));
+          setPost((p) => ({
+            ...p,
+            ...(response?.updatePost ?? {}),
+            saved: true,
+          }));
         }
       },
     });
