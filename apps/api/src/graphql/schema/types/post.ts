@@ -54,6 +54,11 @@ export const postType = new GraphQLObjectType({
         return obj.created_by._id.toString();
       },
     },
+    isDeleted: {
+      type: new GraphQLNonNull(GraphQLBoolean),
+      description: 'Whether the post is deleted',
+      resolve: (obj: IPost) => !!obj?.deleted_at,
+    },
     isAuthor: {
       type: new GraphQLNonNull(GraphQLBoolean),
       description: 'Whether the current user is the author of the post',

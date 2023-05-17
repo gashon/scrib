@@ -13,6 +13,13 @@ export const post = {
   resolve: async (_: any, args: any, context: Context) => {
     const { id } = args;
     const post = await context.db.postRepository.findById(id);
+    const postObject = post?.toObject();
+
+    if (postObject?.deleted_at) {
+      return {
+        deleted_at: postObject.deleted_at,
+      };
+    }
     return post?.toObject();
   },
 };
