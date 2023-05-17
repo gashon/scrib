@@ -17,8 +17,12 @@ export type PostNode = {
   isAuthor: boolean;
 };
 
-export const AuthorPosts: FC<AuthorPostsProps> = ({ posts }) => {
-  const [isMounted, setIsMounted] = React.useState<boolean>(false);
+export const AuthorPosts: FC<AuthorPostsProps> = ({ posts: postsQuery }) => {
+  const [posts, setPosts] = React.useState<{
+    edges: { node: PostNode }[];
+  }>({
+    edges: [],
+  });
   const data = useFragment(
     graphql`
       fragment authorPosts on PostConnection {
@@ -34,14 +38,20 @@ export const AuthorPosts: FC<AuthorPostsProps> = ({ posts }) => {
         }
       }
     `,
-    posts
+    postsQuery
   );
 
   React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    if (data) {
+      setPosts(data);
+    }
+  }, [data]);
 
-  if (!data || !isMounted) return null;
+  const onDelete = (id: string) => {
+    setPosts((p) => ({
+      edges: p.edges.filter((e) => e.node.id !== id),
+    }));
+  };
 
   return (
     <ul className="w-full">
@@ -50,9 +60,9 @@ export const AuthorPosts: FC<AuthorPostsProps> = ({ posts }) => {
           <h3 className="text-lg opacity-75">No posts yet</h3>
         </li>
       )}
-      {data.edges.map(({ node }) => (
-        <PostItem node={node} />
-      ))}
+      {posts.edges.map(({ node }) => {
+        return <PostItem node={node} onDelete={() => onDelete(node.id)} />;
+      })}
     </ul>
   );
 };

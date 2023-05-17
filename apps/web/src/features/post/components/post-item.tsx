@@ -7,11 +7,12 @@ import dayjs from 'dayjs';
 
 type PostItemProps = {
   node: PostNode;
+  onDelete: () => void;
 };
 
 const CONTENT_PREVIEW_LENGTH = 50;
 
-export const PostItem: FC<PostItemProps> = ({ node }) => {
+export const PostItem: FC<PostItemProps> = ({ node, onDelete }) => {
   const firstLine = node?.content?.split('\n')[0];
   const content = stripMarkdown(firstLine ?? '');
   const shortContent = (content ?? '').slice(0, CONTENT_PREVIEW_LENGTH);
@@ -28,7 +29,9 @@ export const PostItem: FC<PostItemProps> = ({ node }) => {
             {node.title}{' '}
             {isDraft && <span className="text-red-500">(Draft)</span>}
           </h3>
-          {node.isAuthor && <ManagePostButtons id={node.id} />}
+          {node.isAuthor && (
+            <ManagePostButtons id={node.id} onDelete={onDelete} />
+          )}
         </div>
         <div className="opacity-50 flex justify-between">
           <p>
