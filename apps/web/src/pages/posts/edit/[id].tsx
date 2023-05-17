@@ -64,8 +64,6 @@ export default function Post({ post: loadedPost }: Props) {
     });
   };
 
-  console.log('RERENDINGER', post.status);
-
   return (
     <div className="w-screen min-h-screen flex p-36 justify-center">
       <div className="w-3/4 h-auto flex flex-col" style={{ height: '100%' }}>

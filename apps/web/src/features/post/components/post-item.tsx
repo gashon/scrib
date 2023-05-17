@@ -24,8 +24,10 @@ export const PostItem: FC<PostItemProps> = ({ node }) => {
         className="min-w-52 px-8 py-2 my-8 border-black border-b"
       >
         <div className="flex justify-between">
-          <h3 className="text-2xl">{node.title}</h3>
-          {isDraft && <p className="text-red-500">Draft</p>}
+          <h3 className="text-2xl">
+            {node.title}{' '}
+            {isDraft && <span className="text-red-500">(Draft)</span>}
+          </h3>
           {node.isAuthor && <ManagePostButtons id={node.id} />}
         </div>
         <div className="opacity-50 flex justify-between">
