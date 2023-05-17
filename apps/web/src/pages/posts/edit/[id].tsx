@@ -41,13 +41,14 @@ export default function Post({ post: loadedPost }: Props) {
       content: post.content,
       status: status || post.status,
     };
-    console.log('SENDING', status);
 
     commitUpdatePost({
       variables,
       onCompleted: (response, errors) => {
         if (errors) {
-          errorNotification(errors);
+          for (const { message } of errors) {
+            errorNotification(message);
+          }
         } else {
           if (status) {
             successNotification('Post status updated');
