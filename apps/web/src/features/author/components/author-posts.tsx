@@ -3,7 +3,7 @@ import { useFragment } from 'react-relay';
 import { authorPosts$key } from '@scrib/web/__generated__/authorPosts.graphql';
 import { graphql } from 'relay-runtime';
 import { PostItem } from '@scrib/web/features/post';
-
+import { useIsMounted } from '@scrib/web/hooks';
 interface AuthorPostsProps {
   posts: authorPosts$key;
 }
@@ -23,6 +23,7 @@ export const AuthorPosts: FC<AuthorPostsProps> = ({ posts: postsQuery }) => {
   }>({
     edges: [],
   });
+  const isMounted = useIsMounted();
   const data = useFragment(
     graphql`
       fragment authorPosts on PostConnection {
@@ -52,6 +53,8 @@ export const AuthorPosts: FC<AuthorPostsProps> = ({ posts: postsQuery }) => {
       edges: p.edges.filter((e) => e.node.id !== id),
     }));
   };
+
+  if (!isMounted) return null;
 
   return (
     <ul className="w-full">
