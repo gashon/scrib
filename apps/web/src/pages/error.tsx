@@ -29,13 +29,14 @@ const ErrorPage: FC<QueryParams> = ({
   description,
   redirect,
   retry,
+  ...rest
 }) => {
   const isLoggedIn = userIsLoggedIn();
 
   return (
     <>
       <Helmet>
-        <title>{title ?? 'Error'}</title>
+        <title>{title ?? 'Scrib'}</title>
         <meta name="description" content={description ?? 'Error'} />
         <meta name="robots" content="noindex" />
         <meta name="googlebot" content="noindex" />
@@ -74,7 +75,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      queryParams,
+      ...queryParams,
     },
   };
 }
