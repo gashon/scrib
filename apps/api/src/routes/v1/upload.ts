@@ -21,12 +21,11 @@ router.post(
     }
 
     const file = req.files.file as fileUpload.UploadedFile;
-    const { name: fileName, data: fileData } = file;
+    const { name: _, data: fileData } = file;
 
     try {
       const data = await upload({
         userId,
-        fileName,
         fileData,
         folder: 'profile',
       });
