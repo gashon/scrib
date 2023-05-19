@@ -5,16 +5,18 @@ type UploadParams = {
   userId: string;
   fileName: string;
   fileData: Buffer;
+  subFolder?: 'profile' | 'post';
 };
 
 export const upload = async ({
   userId,
   fileName,
   fileData,
+  subFolder,
 }: UploadParams): Promise<PutObjectCommandOutput> => {
   const bucketParams = {
     Bucket: `${process.env.S3_BUCKET_NAME}`, //env
-    Key: `${userId}/${fileName}`,
+    Key: `${`${subFolder + '/'}` ?? ''}${userId}/${fileName}`,
     Body: fileData,
   };
 
