@@ -3,7 +3,7 @@ import { IPost } from '@scrib/db/models/post';
 import { AxiosResponse } from 'axios';
 
 type GetPostResponse = {
-  data: IPost;
+  data: IPost | null;
 };
 
 export const getPost = async (id: string): Promise<IPost> => {
@@ -11,5 +11,5 @@ export const getPost = async (id: string): Promise<IPost> => {
     `/api/v1/posts/${id}`
   );
 
-  return response.data.data;
+  return response?.data?.data;
 };

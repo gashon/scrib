@@ -5,10 +5,14 @@ import { getPost } from '@scrib/web/features/post';
 import { IPost } from '@scrib/db/models/post';
 
 type Props = {
-  post: Partial<IPost>;
+  post: Partial<IPost> | null;
 };
 
 export default function Post({ post }: Props) {
+  if (!post) {
+    return <div>Post not found</div>;
+  }
+
   return (
     <>
       <Helmet>
@@ -39,7 +43,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      post,
+      post: post ?? null,
     },
   };
 }

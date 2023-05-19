@@ -5,6 +5,27 @@ import {
 import { NextMiddleware, NextResponse } from 'next/server';
 
 const middleware: NextMiddleware = async function middleware(req) {
+  // increment post `view` count
+  console.log(
+    'HITTING',
+    req.nextUrl.pathname,
+    req.nextUrl.pathname.includes('/posts/') &&
+      !req.nextUrl.pathname.includes('/posts/edit')
+  );
+  if (req.nextUrl.pathname.includes('/posts/')) {
+    const postId = req.nextUrl.pathname.split('/posts/')[1].split('/')[0];
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/posts/${postId}/views`,
+      {
+        method: 'POST',
+      }
+    );
+
+    return NextResponse.next();
+  }
+
+  // auth logic
   try {
     const token = req.nextUrl.searchParams.get(AUTH_COOKIE_NAME);
     const refreshToken = req.nextUrl.searchParams.get(AUTH_REFRESH_COOKIE_NAME);
@@ -14,14 +35,13 @@ const middleware: NextMiddleware = async function middleware(req) {
     }
 
     const redirect = decodeURIComponent(
-      req.nextUrl.searchParams.get('redirect') || '/dashboard',
+      req.nextUrl.searchParams.get('redirect') || '/dashboard'
     );
     // Construct the URL
     const url = new URL(`${process.env.NEXT_PUBLIC_WEB_BASE_URL}${redirect}`);
 
     // Create the response object
     const res = NextResponse.redirect(url);
-    console.log("url", url)
 
     // Set the authorization token
     res.cookies.set(AUTH_COOKIE_NAME, token, {
@@ -38,13 +58,13 @@ const middleware: NextMiddleware = async function middleware(req) {
     return res;
   } catch (err) {
     return NextResponse.redirect(
-      `${process.env.NEXT_PUBLIC_WEB_BASE_URL}/auth/login`,
+      `${process.env.NEXT_PUBLIC_WEB_BASE_URL}/auth/login`
     );
   }
 };
 
 export const config = {
-  matcher: ['/auth/login', '/auth'],
+  matcher: ['/auth/login', '/auth', '/posts/:postId'],
 };
 
 export default middleware;
