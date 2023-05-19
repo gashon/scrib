@@ -10,7 +10,7 @@ const router: express.Router = express.Router();
 router.use(fileUpload());
 
 router.post(
-  '/upload',
+  '/image',
   jwtMiddleware,
   async (req: express.Request, res: express.Response) => {
     const userId = req.locals.user.id;
@@ -24,7 +24,12 @@ router.post(
     const { name: fileName, data: fileData } = file;
 
     try {
-      const data = await upload({ userId, fileName, fileData });
+      const data = await upload({
+        userId,
+        fileName,
+        fileData,
+        folder: 'profile',
+      });
       res.status(status.OK).send(data);
     } catch (err) {
       logger.error(`Error uploading file: ${JSON.stringify(err)}`);
