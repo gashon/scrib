@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { useRouter } from 'next/router';
 import { userIsLoggedIn } from '@scrib/web/features/auth';
 import Link, { LinkProps } from 'next/link';
 import { Button } from '@scrib/ui/atoms';
@@ -21,10 +20,12 @@ type QueryParamsWithoutRedirect = {
 
 export type QueryParams = QueryParamsWithRedirect | QueryParamsWithoutRedirect;
 
-const ErrorPage: FC = ({}) => {
-  const router = useRouter();
-
-  const { title, description, redirect, retry } = router.query as QueryParams;
+const ErrorPage: FC<QueryParams> = ({
+  title,
+  description,
+  redirect,
+  retry,
+}) => {
   const isLoggedIn = userIsLoggedIn();
 
   return (
@@ -141,5 +142,15 @@ const ErrorPage: FC = ({}) => {
     </>
   );
 };
+
+export async function getServerSideProps(context) {
+  const queryParams = context.query as QueryParams;
+
+  return {
+    props: {
+      queryParams,
+    },
+  };
+}
 
 export default ErrorPage;
