@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Editor from '@scrib/editor/src';
-import { getPost } from '@scrib/web/features/post';
+import { getPost, viewPost } from '@scrib/web/features/post';
 import { IPost } from '@scrib/db/models/post';
 
 type Props = {
@@ -39,7 +39,13 @@ export default function Post({ post }: Props) {
 export async function getServerSideProps(context) {
   const { id } = context.params;
 
-  const post = await getPost(id);
+  const [postSettlement] = await Promise.allSettled([
+    getPost(id),
+    viewPost(id),
+  ]);
+
+  const post =
+    postSettlement.status === 'fulfilled' ? postSettlement.value : null;
 
   return {
     props: {

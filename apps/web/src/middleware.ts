@@ -5,26 +5,6 @@ import {
 import { NextMiddleware, NextResponse } from 'next/server';
 
 const middleware: NextMiddleware = async function middleware(req) {
-  // increment post `view` count
-  console.log(
-    'HITTING',
-    req.nextUrl.pathname,
-    req.nextUrl.pathname.includes('/posts/') &&
-      !req.nextUrl.pathname.includes('/posts/edit')
-  );
-  if (req.nextUrl.pathname.includes('/posts/')) {
-    const postId = req.nextUrl.pathname.split('/posts/')[1].split('/')[0];
-
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/posts/${postId}/views`,
-      {
-        method: 'POST',
-      }
-    );
-
-    return NextResponse.next();
-  }
-
   // auth logic
   try {
     const token = req.nextUrl.searchParams.get(AUTH_COOKIE_NAME);
@@ -64,7 +44,7 @@ const middleware: NextMiddleware = async function middleware(req) {
 };
 
 export const config = {
-  matcher: ['/auth/login', '/auth', '/posts/:postId*'],
+  matcher: ['/auth/login', '/auth',],
 };
 
 export default middleware;
