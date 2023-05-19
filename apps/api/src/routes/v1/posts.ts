@@ -1,7 +1,7 @@
 import express from 'express';
 import Post from '@scrib/db/models/post';
 import status from 'http-status';
-import mongoose from 'mongoose';
+import logger from '@scrib/api/lib/logger';
 
 const router: express.Router = express.Router();
 
@@ -20,20 +20,15 @@ router.get('/:id', async (req: express.Request, res: express.Response) => {
 router.post(
   '/:id/views',
   async (req: express.Request, res: express.Response) => {
-    const session = await mongoose.startSession();
-    session.startTransaction();
-
     try {
-      const post = await Post.findById(req.params.id).session(session);
+      const post = await Post.findById(req.params.id);
       if (post) {
         post.views += 1;
-        await post.save({ session });
+        await post.save();
       }
-      await session.commitTransaction();
     } catch (err) {
-      await session.abortTransaction();
+      logger.error(`${JSON.stringify(err)}`);
     }
-    session.endSession();
 
     return res.json({ message: 'success' });
   }
