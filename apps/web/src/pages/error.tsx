@@ -5,15 +5,17 @@ import Link, { LinkProps } from 'next/link';
 import { Button } from '@scrib/ui/atoms';
 
 type QueryParamsWithRedirect = {
-  message?: string;
+  title: string;
+  description?: string;
   redirect: LinkProps['href'];
-  retry?: string;
+  retry?: boolean;
 };
 
 type QueryParamsWithoutRedirect = {
-  message?: string;
-  redirect: never;
-  retry: never;
+  title: string;
+  description?: string;
+  redirect?: never;
+  retry?: never;
 };
 
 export type QueryParams = QueryParamsWithRedirect | QueryParamsWithoutRedirect;
@@ -21,14 +23,14 @@ export type QueryParams = QueryParamsWithRedirect | QueryParamsWithoutRedirect;
 const ErrorPage: FC = ({}) => {
   const router = useRouter();
 
-  const { message, redirect, retry } = router.query as QueryParams;
+  const { title, description, redirect, retry } = router.query as QueryParams;
   const isLoggedIn = userIsLoggedIn();
 
   return (
     <div className="relative w-screen h-screen  flex justify-center items-center">
       <main className="z-20 flex justify-center items-center flex-col">
-        <h1 className="text-4xl mb-10">{message ?? 'There was an error'}</h1>
-
+        <h1 className="text-4xl mb-4">{title ?? 'Error'}</h1>
+        {description && <p className="text-lg mb-10">{description}</p>}
         <div className="flex flex-row gap-5">
           {retry && redirect && (
             <Link href={redirect} className=" font-bold">

@@ -3,16 +3,13 @@ import { Helmet } from 'react-helmet-async';
 import Editor from '@scrib/editor/src';
 import { getPost, viewPost } from '@scrib/web/features/post';
 import { IPost } from '@scrib/db/models/post';
+import { redirectToErrorPageSSR } from '@scrib/web/utils';
 
 type Props = {
-  post: Partial<IPost> | null;
+  post: Partial<IPost>;
 };
 
 export default function Post({ post }: Props) {
-  if (!post) {
-    return <div>Post not found</div>;
-  }
-
   return (
     <>
       <Helmet>
@@ -47,9 +44,17 @@ export async function getServerSideProps(context) {
   const post =
     postSettlement.status === 'fulfilled' ? postSettlement.value : null;
 
+  if (!post)
+    return redirectToErrorPageSSR({
+      title: 'Post not found',
+      description: 'The post you are looking for does not exist',
+      redirect: context.resolvedUrl,
+      retry: true,
+    });
+
   return {
     props: {
-      post: post ?? null,
+      post,
     },
   };
 }
