@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<7b997760d394d64577899f8a4c7d6b28>>
+ * @generated SignedSource<<ba63637c9db7072a8bb43a62ea853f85>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -18,7 +18,7 @@ export type getAuthorAndPostsQuery$data = {
     readonly posts: {
       readonly " $fragmentSpreads": FragmentRefs<"authorPosts">;
     } | null;
-    readonly " $fragmentSpreads": FragmentRefs<"authorInfo">;
+    readonly " $fragmentSpreads": FragmentRefs<"authorInfo" | "settingsModalInfo">;
   } | null;
 };
 export type getAuthorAndPostsQuery = {
@@ -81,6 +81,11 @@ return {
             "name": "authorInfo"
           },
           {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "settingsModalInfo"
+          },
+          {
             "alias": null,
             "args": (v2/*: any*/),
             "concreteType": "PostConnection",
@@ -130,6 +135,27 @@ return {
             "args": null,
             "kind": "ScalarField",
             "name": "email",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "firstName",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "lastName",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "avatar",
             "storageKey": null
           },
           {
@@ -207,16 +233,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "83f281281fb7d995d57dda005c60f22d",
+    "cacheID": "46847be791d8733cdfdbfc3a74fcadbf",
     "id": null,
     "metadata": {},
     "name": "getAuthorAndPostsQuery",
     "operationKind": "query",
-    "text": "query getAuthorAndPostsQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    ...authorInfo\n    posts(orderBy: [{field: \"created_at\", order: DESC}]) {\n      ...authorPosts\n    }\n    id\n  }\n}\n\nfragment authorInfo on User {\n  fullName\n  id\n  email\n}\n\nfragment authorPosts on PostConnection {\n  edges {\n    node {\n      id\n      title\n      content\n      createdAt\n      status\n      isAuthor\n    }\n  }\n}\n"
+    "text": "query getAuthorAndPostsQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    ...authorInfo\n    ...settingsModalInfo\n    posts(orderBy: [{field: \"created_at\", order: DESC}]) {\n      ...authorPosts\n    }\n    id\n  }\n}\n\nfragment authorInfo on User {\n  fullName\n  id\n  email\n}\n\nfragment authorPosts on PostConnection {\n  edges {\n    node {\n      id\n      title\n      content\n      createdAt\n      status\n      isAuthor\n    }\n  }\n}\n\nfragment settingsModalInfo on User {\n  firstName\n  lastName\n  id\n  avatar\n}\n"
   }
 };
 })();
 
-(node as any).hash = "a3257e6a273379fe65e225a8aeb3c744";
+(node as any).hash = "e0a3942a2437c8bdfd9536a8716913e0";
 
 export default node;

@@ -2,9 +2,11 @@ import { useLazyLoadQuery } from 'react-relay';
 import {
   AuthorInfo,
   AuthorPosts,
+  SettingsModal,
   GET_AUTHOR_AND_POSTS_QUERY,
 } from '@scrib/web/features/author';
 import type { getAuthorAndPostsQuery } from '@scrib/web/__generated__/GetAuthorAndPostsQuery.graphql';
+import { Helmet } from 'react-helmet-async';
 
 type Props = {
   authorId: string;
@@ -20,14 +22,24 @@ export default function AuthorPage({ authorId }: Props) {
   );
 
   return (
-    <div className="w-screen min-h-screen flex justify-center relative">
-      <div className="flex flex-col w-3/4">
-        <div className="w-full flex flex-row">
-          <AuthorInfo user={query.user} authorSlug={authorId} />
+    <>
+      <Helmet>
+        <title>{query.user.fullName}</title>
+      </Helmet>
+
+      <div className="w-screen min-h-screen flex justify-center relative">
+        <main className="flex flex-col w-3/4">
+          <div className="w-full flex flex-row">
+            <AuthorInfo user={query.user} authorSlug={authorId} />
+          </div>
+          <AuthorPosts posts={query.user.posts} />
+        </main>
+
+        <div className="fixed left-5 bottom-5">
+          <SettingsModal user={query.user} />
         </div>
-        <AuthorPosts posts={query.user.posts} />
       </div>
-    </div>
+    </>
   );
 }
 
