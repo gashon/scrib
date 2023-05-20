@@ -2,12 +2,16 @@ import { IUser } from '@scrib/db/models/user';
 import { axios } from '@scrib/web/lib/axios';
 import { AxiosResponse } from 'axios';
 import { ParsedUrlQuery } from 'querystring';
-
+import { JwtPayload } from '@scrib/api/utils/jwt';
 import { LoginFormData } from '../types';
 
 export const getUser = async (headers?: {
   [key: string]: string;
-}): Promise<AxiosResponse<IUser>> => {
+}): Promise<
+  AxiosResponse<{
+    data: JwtPayload;
+  }>
+> => {
   return axios.get('/ajax/auth/user', {
     headers,
   });
@@ -16,7 +20,7 @@ export const getUser = async (headers?: {
 export const emailLogin = async (
   payload: LoginFormData,
   params: ParsedUrlQuery,
-  enabled?: boolean,
+  enabled?: boolean
 ) => {
   return axios.post('/ajax/auth/login/email', payload, { params });
 };

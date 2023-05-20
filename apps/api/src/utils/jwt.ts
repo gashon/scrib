@@ -3,12 +3,17 @@ import {
   AUTH_REFRESH_COOKIE_NAME,
 } from '@scrib/api/constants';
 import logger from '@scrib/api/lib/logger';
-import jwt, { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
+import jwt, {
+  JsonWebTokenError,
+  TokenExpiredError,
+  JwtPayload as JwtWebTokenLib,
+} from 'jsonwebtoken';
 
 const SECRET_KEY = process.env.JWT_SECRET_KEY!;
-export interface JwtPayload {
+export interface JwtPayload extends JwtWebTokenLib {
   id: string;
 }
+('');
 
 export type DecodedToken =
   | JwtPayload
@@ -25,7 +30,7 @@ export type DecodedToken =
  */
 export function sign(
   payload: JwtPayload,
-  expiresIn: number | string = 2592000, // 30 days
+  expiresIn: number | string = 2592000 // 30 days
 ): string {
   return jwt.sign(payload, SECRET_KEY, { expiresIn });
 }
@@ -60,7 +65,7 @@ export function createLoginLink({
   loginLink.searchParams.append(AUTH_COOKIE_NAME, encodeURIComponent(token));
   loginLink.searchParams.append(
     AUTH_REFRESH_COOKIE_NAME,
-    encodeURIComponent(token),
+    encodeURIComponent(token)
   );
   loginLink.searchParams.append('redirect', encodeURIComponent(redirect));
 
