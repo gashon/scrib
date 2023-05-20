@@ -12,6 +12,7 @@
     "lint": "eslint \"**/*.ts*\""
   },
   "dependencies": {
+    "handlebars": "^4.7.7",
     "md5": "^2.3.0",
     "mongoose": "^7.0.5",
     "mongoose-autopopulate": "^0.17.1"

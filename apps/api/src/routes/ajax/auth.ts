@@ -10,6 +10,7 @@ import User from '@scrib/db/models/user';
 import Notification from '@scrib/db/models/notification';
 import express, { NextFunction, Request, Response } from 'express';
 import status from 'http-status';
+import logger from '@scrib/api/lib/logger';
 const router: express.Router = express.Router();
 
 // Incomplete route!**
@@ -26,12 +27,16 @@ router.post(
       const loginLink = createLoginLink({
         token,
         refreshToken,
-        redirect: req.body.redirect,
+        redirect: req.body.redirect ?? '/dashboard',
       });
 
-      // todo send email
-      console.log(loginLink.toString());
+      await Notification.create({
+        type: 'login',
+        emails: [req.body.email],
+        data: { login_link: loginLink.toString() },
+      });
 
+      logger.info(`Login link: ${loginLink.toString()}`);
       res.sendStatus(status.OK);
     } catch (err) {
       next(err);

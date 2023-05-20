@@ -1,7 +1,7 @@
 import Handlebars from 'handlebars';
 import util from 'util';
-import sendgrid from '../../../sendgrid';
-import Template from '../../../templates/types/template';
+import sendgrid from '@scrib/api/lib/sendgrid';
+import Template from '@scrib/api/templates/types/template';
 import templates from '../templates';
 import { INotification } from '../types';
 
@@ -20,7 +20,7 @@ export default async function send(this: INotification) {
     to: this.emails,
     from: {
       email: template.from,
-      name: 'Nifty',
+      name: 'Scrib',
     },
     replyTo: {
       email: 'gashon@ghussein.org', // TODO: Set up emails
