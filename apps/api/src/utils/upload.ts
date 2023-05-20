@@ -37,13 +37,21 @@ const getFilePath = (params: UploadParams): string => {
 
 export const upload = async (
   params: UploadParams
-): Promise<PutObjectCommandOutput> => {
+): Promise<
+  PutObjectCommandOutput & {
+    url: `https://${string}.s3.amazonaws.com/${string}`;
+  }
+> => {
+  const key = getFilePath(params);
   const bucketParams = {
     Bucket: `${process.env.S3_BUCKET_NAME}`, //env
-    Key: getFilePath(params),
+    Key: key,
     Body: params.fileData,
   };
 
   const data = await s3Client.send(new PutObjectCommand(bucketParams));
-  return data;
+  return {
+    ...data,
+    url: `https://${process.env.S3_BUCKET_NAME}.s3.amazonaws.com/${key}`,
+  };
 };

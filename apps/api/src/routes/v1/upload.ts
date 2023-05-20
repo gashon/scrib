@@ -31,7 +31,7 @@ router.post(
         fileName: 'profile',
         rootDir: 'users',
       });
-      res.status(status.OK).send(data);
+      res.status(status.OK).json({ data });
     } catch (err) {
       logger.error(`Error uploading file: ${JSON.stringify(err)}`);
       res.status(status.INTERNAL_SERVER_ERROR).send('Error uploading file');
