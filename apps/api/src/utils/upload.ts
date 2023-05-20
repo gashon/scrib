@@ -7,11 +7,12 @@ type BaseUploadParams = {
 };
 
 type UserUploadParams = {
-  type: 'users';
+  rootDir: 'users';
 };
 
 type ProfileUploadParams = {
-  folder: 'profile';
+  fileName: 'profile';
+  folder?: never;
 } & BaseUploadParams &
   UserUploadParams;
 
@@ -28,10 +29,10 @@ const isPostUpload = (params: UploadParams): params is PostUploadParams =>
 
 const getFilePath = (params: UploadParams): string => {
   if (isPostUpload(params)) {
-    return `${params.type}/${params.userId}/${params.folder}/${params.postId}`;
+    return `${params.rootDir}/${params.userId}/${params.folder}/${params.postId}`;
   }
 
-  return `${params.type}/${params.userId}/${params.folder}`;
+  return `${params.rootDir}/${params.userId}/${params.fileName}`;
 };
 
 export const upload = async (

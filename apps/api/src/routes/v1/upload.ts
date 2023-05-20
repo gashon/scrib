@@ -4,6 +4,7 @@ import logger from '@scrib/api/lib/logger';
 import { jwtMiddleware } from '@scrib/api/routes/middleware/auth';
 import { upload } from '@scrib/api/utils/upload';
 import fileUpload from 'express-fileupload';
+import { FileUploadName } from '@scrib/api/types';
 
 const router: express.Router = express.Router();
 
@@ -20,14 +21,15 @@ router.post(
       return;
     }
 
-    const file = req.files.file as fileUpload.UploadedFile;
+    const file = req.files.file as fileUpload.UploadedFile & FileUploadName;
     const { name: _, data: fileData } = file;
 
     try {
       const data = await upload({
         userId,
         fileData,
-        folder: 'profile',
+        fileName: 'profile',
+        rootDir: 'users',
       });
       res.status(status.OK).send(data);
     } catch (err) {
