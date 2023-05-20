@@ -5,7 +5,7 @@ import {
 import passport from '@scrib/api/lib/passport';
 import { jwtMiddleware } from '@scrib/api/routes/middleware/auth';
 import { oauthLogin } from '@scrib/api/routes/middleware/oauth-login';
-import { createLoginLink, decodeToken, sign } from '@scrib/api/utils/jwt';
+import { createLoginLink, sign } from '@scrib/api/utils/jwt';
 import User from '@scrib/db/models/user';
 import Notification from '@scrib/db/models/notification';
 import express, { NextFunction, Request, Response } from 'express';
@@ -13,7 +13,6 @@ import status from 'http-status';
 import logger from '@scrib/api/lib/logger';
 const router: express.Router = express.Router();
 
-// Incomplete route!**
 router.post(
   '/login/email',
   async (req: Request, res: Response, next: NextFunction) => {

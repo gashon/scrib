@@ -6,7 +6,6 @@
     "apps/*"
   ],
   "scripts": {
-    "start": "pnpm run apps:start",
     "apps:build": "turbo run build",
     "apps:dev": "concurrently \"pnpm run mongo:start\" \"wait-on tcp:localhost:27017 && cross-env FORCE_COLOR=1 turbo run dev --parallel\"",
     "apps:lint": "turbo run lint",
