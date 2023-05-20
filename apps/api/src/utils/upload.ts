@@ -1,5 +1,10 @@
 import { s3Client } from '@scrib/api/lib/s3';
 import { PutObjectCommand, PutObjectCommandOutput } from '@aws-sdk/client-s3';
+import { v4 as uuidv4 } from 'uuid';
+
+export type UploadImageResponse = PutObjectCommandOutput & {
+  url: `https://${string}.s3.amazonaws.com/${string}`;
+};
 
 type BaseUploadParams = {
   userId: string;
@@ -18,6 +23,7 @@ type ProfileUploadParams = {
 
 type PostUploadParams = {
   folder: 'posts';
+  fileName: string;
   postId: string;
 } & BaseUploadParams &
   UserUploadParams;
@@ -29,7 +35,9 @@ const isPostUpload = (params: UploadParams): params is PostUploadParams =>
 
 const getFilePath = (params: UploadParams): string => {
   if (isPostUpload(params)) {
-    return `${params.rootDir}/${params.userId}/${params.folder}/${params.postId}`;
+    return `${params.rootDir}/${params.userId}/${params.folder}/${
+      params.postId
+    }/${uuidv4()}-${params.fileName}`;
   }
 
   return `${params.rootDir}/${params.userId}/${params.fileName}`;
@@ -37,11 +45,7 @@ const getFilePath = (params: UploadParams): string => {
 
 export const upload = async (
   params: UploadParams
-): Promise<
-  PutObjectCommandOutput & {
-    url: `https://${string}.s3.amazonaws.com/${string}`;
-  }
-> => {
+): Promise<UploadImageResponse> => {
   const key = getFilePath(params);
   const bucketParams = {
     Bucket: `${process.env.S3_BUCKET_NAME}`, //env

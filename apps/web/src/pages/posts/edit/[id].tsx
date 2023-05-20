@@ -13,6 +13,7 @@ import type {
   updatePostMutation$variables,
 } from '@scrib/web/__generated__/updatePostMutation.graphql';
 import { Button } from '@scrib/ui/atoms';
+import { uploadImage } from '@scrib/web/utils';
 
 type Props = {
   post: Partial<IPost>;
@@ -96,6 +97,12 @@ export default function Post({ post: loadedPost }: Props) {
             placeholder="Write something awesome..."
             onChange={(getValue) => {
               handleChange('content', getValue());
+            }}
+            uploadImage={async (file) => {
+              const { data } = await uploadImage('post', file, {
+                post_id: post._id,
+              });
+              return data.url;
             }}
           />
         </main>
