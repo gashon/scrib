@@ -14,7 +14,7 @@ module.exports = withBundleAnalyzer({
   images: {
     domains: [
       'localhost',
-      'scrib-dev.s3.amazonaws.com',
+      'scrib-app.s3.amazonaws.com',
       'lh3.googleusercontent.com',
     ],
   },

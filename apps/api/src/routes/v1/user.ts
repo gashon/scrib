@@ -2,12 +2,9 @@ import express from 'express';
 import User from '@scrib/db/models/user';
 import status from 'http-status';
 import logger from '@scrib/api/lib/logger';
-import fileUpload from 'express-fileupload';
 import { jwtMiddleware } from '@scrib/api/routes/middleware/auth';
 
 const router: express.Router = express.Router();
-
-router.use(fileUpload());
 
 router.patch(
   '/',

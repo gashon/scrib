@@ -30,7 +30,7 @@ export const uploadImage = async (
       }
     );
 
-    successNotification('Image uploaded');
+    successNotification('Image uploaded. It will be available shortly.');
     return data;
   } catch (err) {
     errorNotification('Error uploading image');

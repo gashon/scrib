@@ -40,8 +40,8 @@ export const SettingsModal: FC<SettingsModalProps> = ({ user }) => {
 
   if (!data) return null;
 
-  const onSubmit = (values: SettingsFormData) => {
-    updateAuthorAttributes({
+  const onSubmit = async (values: SettingsFormData) => {
+    await updateAuthorAttributes({
       first_name: values.first_name,
       last_name: values.last_name,
       avatar,
@@ -59,7 +59,7 @@ export const SettingsModal: FC<SettingsModalProps> = ({ user }) => {
       title="Settings"
       ariaDescribedBy="settings-modal"
       ariaLabelledBy="settings-modal"
-      modalClassName="sm:w-1/4"
+      modalClassName="w-1/2 lg:w-2/5"
     >
       <Form<SettingsFormData, typeof SettingsFormSchema>
         schema={SettingsFormSchema}
@@ -68,6 +68,20 @@ export const SettingsModal: FC<SettingsModalProps> = ({ user }) => {
       >
         {({ formState, register, getValues, setValue }) => (
           <>
+            <div className="w-full h-auto flex justify-center items-center">
+              <div className="overflow-hidden rounded-full w-1/4">
+                <FileInputField
+                  label="Avatar"
+                  error={formState.errors['avatar']}
+                  disabled={formState.isSubmitting}
+                  defaultValue={avatar}
+                  onFileChange={async (file) => {
+                    const { data } = await uploadImage('profile', file);
+                    setAvatar(data.url);
+                  }}
+                />
+              </div>
+            </div>
             <InputField
               label="First Name"
               type="text"
@@ -83,16 +97,6 @@ export const SettingsModal: FC<SettingsModalProps> = ({ user }) => {
               registration={register('last_name')}
               disabled={formState.isSubmitting}
               defaultValue={data.lastName}
-            />
-            <FileInputField
-              label="Avatar"
-              error={formState.errors['avatar']}
-              disabled={formState.isSubmitting}
-              defaultValue={avatar}
-              onFileChange={async (file) => {
-                const { data } = await uploadImage('profile', file);
-                setAvatar(data.url);
-              }}
             />
             <Button
               type="submit"
