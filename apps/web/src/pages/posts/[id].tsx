@@ -4,6 +4,7 @@ import Editor from '@scrib/editor/src';
 import { getPost, viewPost } from '@scrib/web/features/post';
 import { IPost } from '@scrib/db/models/post';
 import { redirectToErrorPageSSR } from '@scrib/web/utils';
+import { NavigationLayout } from '@scrib/web/layouts/navigation';
 
 type Props = {
   post: Partial<IPost>;
@@ -19,16 +20,21 @@ export default function Post({ post }: Props) {
         <meta property="og:description" content={'Blog Post'} />
       </Helmet>
 
-      <div className="w-screen min-h-screen flex p-36 justify-center">
-        <div className="w-3/4 h-auto flex flex-col" style={{ height: '100%' }}>
-          <h1 className="text-3xl mb-10 underline font-bold">
-            {post.title ?? 'Post'}
-          </h1>
-          <main className="">
-            <Editor readOnly={true} defaultValue={post.content} />
-          </main>
+      <NavigationLayout>
+        <div className="w-screen min-h-screen flex p-36 justify-center">
+          <div
+            className="w-3/4 h-auto flex flex-col"
+            style={{ height: '100%' }}
+          >
+            <h1 className="text-3xl mb-10 underline font-bold">
+              {post.title ?? 'Post'}
+            </h1>
+            <main className="">
+              <Editor readOnly={true} defaultValue={post.content} />
+            </main>
+          </div>
         </div>
-      </div>
+      </NavigationLayout>
     </>
   );
 }

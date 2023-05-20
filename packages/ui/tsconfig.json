@@ -4,7 +4,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@scrib/ui/*": ["./src/*"]
+      "@scrib/ui/*": ["./src/*"],
+      "@scrib/web/*": ["../../apps/web/src/*"]
     }
   },
   "exclude": ["dist", "build", "node_modules"]

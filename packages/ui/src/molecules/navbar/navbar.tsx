@@ -1,22 +1,30 @@
 import { FC } from 'react';
-
+import { userIsLoggedIn } from '@scrib/web/features/auth';
+import Link from 'next/link';
 import { Button } from '@scrib/ui/atoms';
+import { useRouter } from 'next/router';
 
 export const Navbar: FC = () => {
+  const isLoggedIn = userIsLoggedIn();
+  const isEditting = useRouter().pathname.includes('edit');
+
   return (
-    <div className="flex flex-row justify-between items-center w-full h-16 bg-gray-100">
-      <div className="flex flex-row items-center">
-        <div className="flex flex-row items-center">
-          <div className="w-16 h-16 bg-gray-300"></div>
-          <div className="flex flex-col ml-2">
-            <div className="text-sm font-bold">Scrib</div>
-            <div className="text-xs">A place to write</div>
+    <section className="h-auto w-full">
+      <div className="z-20 flex flex-row justify-between items-center w-full h-16 px-8 py-4">
+        <Link href="/">
+          <div className="border-black border-b">
+            <p className="font-bold text-3xl">Scrib</p>
           </div>
-        </div>
+        </Link>
+
+        {!isEditting && (
+          <Link href={isLoggedIn ? '/auth' : '/post'}>
+            <Button className="bg-transparent">
+              {isLoggedIn ? 'Register/Login' : 'Make a Post'}
+            </Button>
+          </Link>
+        )}
       </div>
-      <div className="flex flex-row items-center">
-        <Button className="h-8 w-24">Auth</Button>
-      </div>
-    </div>
+    </section>
   );
 };
