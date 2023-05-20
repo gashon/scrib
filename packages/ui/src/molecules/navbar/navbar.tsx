@@ -1,12 +1,19 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { userIsLoggedIn } from '@scrib/web/features/auth';
 import Link from 'next/link';
 import { Button } from '@scrib/ui/atoms';
 import { useRouter } from 'next/router';
 
 export const Navbar: FC = () => {
+  const [isMounted, setIsMounted] = useState<boolean>(false);
   const isLoggedIn = userIsLoggedIn();
-  const isEditting = useRouter().pathname.includes('edit');
+  const isEditing = useRouter().pathname.includes('edit');
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
 
   return (
     <section className="h-auto w-full">
@@ -17,7 +24,7 @@ export const Navbar: FC = () => {
           </div>
         </Link>
 
-        {!isEditting && (
+        {!isEditing && (
           <Link href={isLoggedIn ? '/auth' : '/post'}>
             <Button className="bg-transparent">
               {isLoggedIn ? 'Register/Login' : 'Make a Post'}
@@ -28,3 +35,5 @@ export const Navbar: FC = () => {
     </section>
   );
 };
+
+export default Navbar;

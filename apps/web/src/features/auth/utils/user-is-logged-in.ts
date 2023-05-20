@@ -1,8 +1,11 @@
 import { AUTH_COOKIE_NAME } from '@scrib/api/constants';
 
 export const userIsLoggedIn = (): boolean => {
-  if (typeof window !== 'undefined') {
-    const token = window.localStorage.getItem(AUTH_COOKIE_NAME);
+  if (typeof document !== 'undefined') {
+    const token = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith(AUTH_COOKIE_NAME))
+      ?.split('=')[1];
     return !!token;
   }
 };

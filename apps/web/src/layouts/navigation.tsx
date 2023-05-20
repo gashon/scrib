@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { Navbar } from '@scrib/ui/molecules';
+import { Navbar } from '@scrib/ui/molecules/navbar';
 
 export const NavigationLayout: FC<{
   children: ReactNode;
