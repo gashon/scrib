@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<ba63637c9db7072a8bb43a62ea853f85>>
+ * @generated SignedSource<<0d4c55b179dae40e524e2989da815a17>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -141,6 +141,13 @@ return {
             "alias": null,
             "args": null,
             "kind": "ScalarField",
+            "name": "avatar",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
             "name": "firstName",
             "storageKey": null
           },
@@ -149,13 +156,6 @@ return {
             "args": null,
             "kind": "ScalarField",
             "name": "lastName",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "avatar",
             "storageKey": null
           },
           {
@@ -233,12 +233,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "46847be791d8733cdfdbfc3a74fcadbf",
+    "cacheID": "ef3ffc486fb522c7039aeb2acc564ead",
     "id": null,
     "metadata": {},
     "name": "getAuthorAndPostsQuery",
     "operationKind": "query",
-    "text": "query getAuthorAndPostsQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    ...authorInfo\n    ...settingsModalInfo\n    posts(orderBy: [{field: \"created_at\", order: DESC}]) {\n      ...authorPosts\n    }\n    id\n  }\n}\n\nfragment authorInfo on User {\n  fullName\n  id\n  email\n}\n\nfragment authorPosts on PostConnection {\n  edges {\n    node {\n      id\n      title\n      content\n      createdAt\n      status\n      isAuthor\n    }\n  }\n}\n\nfragment settingsModalInfo on User {\n  firstName\n  lastName\n  id\n  avatar\n}\n"
+    "text": "query getAuthorAndPostsQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    ...authorInfo\n    ...settingsModalInfo\n    posts(orderBy: [{field: \"created_at\", order: DESC}]) {\n      ...authorPosts\n    }\n    id\n  }\n}\n\nfragment authorInfo on User {\n  fullName\n  id\n  email\n  avatar\n}\n\nfragment authorPosts on PostConnection {\n  edges {\n    node {\n      id\n      title\n      content\n      createdAt\n      status\n      isAuthor\n    }\n  }\n}\n\nfragment settingsModalInfo on User {\n  firstName\n  lastName\n  id\n  avatar\n}\n"
   }
 };
 })();

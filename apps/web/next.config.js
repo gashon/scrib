@@ -11,6 +11,13 @@ module.exports = withBundleAnalyzer({
   },
   poweredByHeader: false,
   eslint: { ignoreDuringBuilds: true },
+  images: {
+    domains: [
+      'localhost',
+      'scrib-dev.s3.amazonaws.com',
+      'lh3.googleusercontent.com',
+    ],
+  },
   async rewrites() {
     const HOST = process.env.API_BASE_URL ?? 'http://localhost:7000'; //env
     return [
