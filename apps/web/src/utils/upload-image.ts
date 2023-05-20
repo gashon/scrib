@@ -6,7 +6,7 @@ import { UploadImageResponse } from '@scrib/api/utils/upload';
 export const uploadImage = async (
   type: 'post' | 'profile',
   file: File,
-  payload: {
+  payload?: {
     post_id?: string;
   }
 ): Promise<{
@@ -15,7 +15,7 @@ export const uploadImage = async (
   const formData = new FormData();
   formData.append('file', file, file.name);
 
-  if (payload.post_id) {
+  if (payload?.post_id) {
     formData.append('post_id', payload.post_id);
   }
 

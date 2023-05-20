@@ -2,6 +2,7 @@
   "extends": "@scrib/tsconfig/react-library.json",
   "include": ["."],
   "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
     "baseUrl": ".",
     "paths": {
       "@scrib/ui/*": ["./src/*"],

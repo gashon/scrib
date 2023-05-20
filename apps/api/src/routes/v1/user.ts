@@ -1,5 +1,5 @@
 import express from 'express';
-import User, { IUser } from '@scrib/db/models/user';
+import User from '@scrib/db/models/user';
 import status from 'http-status';
 import logger from '@scrib/api/lib/logger';
 import fileUpload from 'express-fileupload';
@@ -17,7 +17,7 @@ router.patch(
 
     const { first_name, last_name, avatar } = req.body;
     try {
-      const user = User.findById(userId);
+      const user = await User.findById(userId);
       if (!user) throw new Error('User not found');
 
       user.set({
@@ -26,6 +26,10 @@ router.patch(
         avatar: avatar || user.avatar,
       });
       await user.save();
+
+      return res.status(status.OK).json({
+        data: user,
+      });
     } catch (err) {
       logger.error(`${JSON.stringify(err)}`);
       return res.status(status.INTERNAL_SERVER_ERROR).json({

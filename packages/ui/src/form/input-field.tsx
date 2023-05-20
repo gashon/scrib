@@ -1,6 +1,4 @@
-import clsx from 'clsx';
 import { UseFormRegisterReturn } from 'react-hook-form';
-
 import { FieldWrapper, FieldWrapperPassThroughProps } from './field-wrapper';
 import { Input } from '../atoms';
 

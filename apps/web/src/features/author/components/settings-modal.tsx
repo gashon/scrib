@@ -1,10 +1,12 @@
-import { FC, useCallback } from 'react';
-import { Form, InputField } from '@scrib/ui/form';
+import { FC, useState } from 'react';
+import { Form, InputField, FileInputField } from '@scrib/ui/form';
 import { Button, Modal } from '@scrib/ui/components';
 import { FiSettings } from 'react-icons/fi';
 import { useFragment } from 'react-relay';
 import { graphql } from 'relay-runtime';
 import { successNotification } from '@scrib/web/lib/notification';
+import { uploadImage } from '@scrib/web/utils';
+import { updateAuthorAttributes } from '@scrib/web/features/author';
 import { settingsModalInfo$key } from '@scrib/web/__generated__/authorInfo.graphql';
 import * as z from 'zod';
 
@@ -15,13 +17,11 @@ type SettingsModalProps = {
 type SettingsFormData = {
   first_name: string;
   last_name: string;
-  avatar: string;
 };
 
 const SettingsFormSchema = z.object({
   first_name: z.string().nonempty(),
   last_name: z.string().nonempty(),
-  avatar: z.string().nonempty(),
 });
 
 export const SettingsModal: FC<SettingsModalProps> = ({ user }) => {
@@ -36,12 +36,17 @@ export const SettingsModal: FC<SettingsModalProps> = ({ user }) => {
     `,
     user
   );
+  const [avatar, setAvatar] = useState(data?.avatar);
 
   if (!data) return null;
 
-  const onSubmit = () => {
-    console.log('submit');
-    successNotification('Settings saved');
+  const onSubmit = (values: SettingsFormData) => {
+    updateAuthorAttributes({
+      first_name: values.first_name,
+      last_name: values.last_name,
+      avatar,
+    });
+    successNotification('Settings updated');
   };
 
   return (
@@ -61,7 +66,7 @@ export const SettingsModal: FC<SettingsModalProps> = ({ user }) => {
         onSubmit={onSubmit}
         className="align-center flex w-full flex-col justify-center"
       >
-        {({ formState, register, getValues }) => (
+        {({ formState, register, getValues, setValue }) => (
           <>
             <InputField
               label="First Name"
@@ -79,17 +84,19 @@ export const SettingsModal: FC<SettingsModalProps> = ({ user }) => {
               disabled={formState.isSubmitting}
               defaultValue={data.lastName}
             />
-            <InputField
+            <FileInputField
               label="Avatar"
-              type="text"
               error={formState.errors['avatar']}
-              registration={register('avatar')}
               disabled={formState.isSubmitting}
-              defaultValue={data.avatar}
+              defaultValue={avatar}
+              onFileChange={async (file) => {
+                const { data } = await uploadImage('profile', file);
+                setAvatar(data.url);
+              }}
             />
             <Button
               type="submit"
-              disabled={!formState.isValid}
+              disabled={formState.isSubmitting}
               className="mt-4"
             >
               Save

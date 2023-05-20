@@ -19,7 +19,10 @@ export const PostItem: FC<PostItemProps> = ({ node, onDelete }) => {
   const hasMoreContent = content?.length > CONTENT_PREVIEW_LENGTH;
   const isDraft = node.status === 'draft';
   return (
-    <Link href={isDraft ? `/posts/edit/${node.id}` : `/posts/${node.id}`}>
+    <Link
+      href={isDraft ? `/posts/edit/${node.id}` : `/posts/${node.id}`}
+      key={node.id}
+    >
       <li
         key={node.id}
         className="min-w-52 px-8 py-2 my-8 border-black border-b"
