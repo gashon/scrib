@@ -4,6 +4,7 @@ import { Button, Modal } from '@scrib/ui/components';
 import { FiSettings } from 'react-icons/fi';
 import { useFragment } from 'react-relay';
 import { graphql } from 'relay-runtime';
+import { successNotification } from '@scrib/web/lib/notification';
 import { settingsModalInfo$key } from '@scrib/web/__generated__/authorInfo.graphql';
 import * as z from 'zod';
 
@@ -40,6 +41,7 @@ export const SettingsModal: FC<SettingsModalProps> = ({ user }) => {
 
   const onSubmit = () => {
     console.log('submit');
+    successNotification('Settings saved');
   };
 
   return (

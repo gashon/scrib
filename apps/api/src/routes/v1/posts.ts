@@ -28,6 +28,10 @@ router.post(
       }
     } catch (err) {
       logger.error(`${JSON.stringify(err)}`);
+      return res.status(status.INTERNAL_SERVER_ERROR).json({
+        message: 'Error updating post views',
+        data: null,
+      });
     }
 
     return res.json({ message: 'success' });
