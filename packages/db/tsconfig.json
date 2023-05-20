@@ -7,7 +7,8 @@
     "typeRoots": ["node_modules/@types"],
     "baseUrl": ".",
     "paths": {
-      "@scrib/db/*": ["./src/*"]
+      "@scrib/db/*": ["./src/*"],
+      "@scrib/api/*": ["../../apps/api/src/*"]
     },
     "outDir": "./dist"
   },

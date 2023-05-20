@@ -7,6 +7,7 @@ import { jwtMiddleware } from '@scrib/api/routes/middleware/auth';
 import { oauthLogin } from '@scrib/api/routes/middleware/oauth-login';
 import { createLoginLink, decodeToken, sign } from '@scrib/api/utils/jwt';
 import User from '@scrib/db/models/user';
+import Notification from '@scrib/db/models/notification';
 import express, { NextFunction, Request, Response } from 'express';
 import status from 'http-status';
 const router: express.Router = express.Router();
