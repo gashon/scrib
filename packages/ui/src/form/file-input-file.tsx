@@ -44,6 +44,7 @@ export const FileInputField: FC<FileInputFieldProps> = ({
         src={previewUrl ?? '/images/default-avatar.png'}
         alt="Preview"
         onClick={handleClick}
+        className="hover:opacity-50 transition-opacity duration-300"
         style={{ maxWidth: '100%', maxHeight: '100%', cursor: 'pointer' }}
       />
       <input
