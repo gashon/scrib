@@ -21,8 +21,8 @@ axios.interceptors.response.use(
     if (typeof window !== 'undefined' && error?.response?.status === 401) {
       location.replace(
         `/error/external?message=${encodeURIComponent(
-          message || 'Your session has expired. Please login again.',
-        )}&redirect=${encodeURIComponent(location.pathname + location.search)}`,
+          message || 'Your session has expired. Please login again.'
+        )}&redirect=${encodeURIComponent(location.pathname + location.search)}`
       );
       return;
     }
@@ -30,8 +30,8 @@ axios.interceptors.response.use(
     if (typeof window !== 'undefined' && error?.response?.status === 403) {
       location.replace(
         `/error/external?message=${encodeURIComponent(
-          message || 'You are not authorized to access this page.',
-        )}&redirect=${encodeURIComponent(location.pathname + location.search)}`,
+          message || 'You are not authorized to access this page.'
+        )}&redirect=${encodeURIComponent(location.pathname + location.search)}`
       );
       return;
     }
@@ -42,11 +42,11 @@ axios.interceptors.response.use(
         errorNotification(
           error.response?.status < 500 && error.response?.status !== 429
             ? message
-            : 'We are experiencing an unexpected rise in traffic. Please try again later.',
+            : 'We are experiencing an unexpected rise in traffic. Please try again later.'
         );
       else successNotification(message);
     }
 
     return error;
-  },
+  }
 );

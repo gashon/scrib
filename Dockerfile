@@ -1,3 +1,8 @@
+FROM nginx:1.21-alpine as nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+EXPOSE 8080
+CMD ["nginx", "-g", "daemon off;"]
+
 FROM node:20-alpine3.16 as base
 WORKDIR /app
 RUN apk add --no-cache --virtual .build-deps \
@@ -46,8 +51,10 @@ COPY packages/editor/ ./packages/editor/
 
 FROM api-dependencies as api
 RUN pnpm run apps:build 
+EXPOSE 7000
 CMD ["pnpm", "run", "apps:start", "--filter", "@scrib/api"]
 
 FROM web-dependencies as web
 RUN pnpm run apps:build 
+EXPOSE 3000
 CMD ["pnpm", "run", "apps:start", "--filter", "@scrib/web"]

@@ -24,3 +24,14 @@ services:
       - '3000:3000'
     environment:
       - DOPPLER_WEB_TOKEN=${DOPPLER_WEB_TOKEN}
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: nginx
+    ports:
+      - '8080:8080'
+    depends_on:
+      - api
+      - web
