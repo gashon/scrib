@@ -1,5 +1,6 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import { Helmet } from 'react-helmet-async';
 import Editor from '@scrib/editor/src';
 import { getPost, viewPost } from '@scrib/web/features/post';
@@ -44,14 +45,17 @@ export default function Post({ post }: Props) {
             <h1 className="text-3xl underline font-bold mb-2 lg:mb-4">
               {post.title ?? 'Post'}
             </h1>
-            <div className="lg:fixed lg:left-5 lg:bottom-0">
+            <Link
+              href={`/authors/${post.created_by._id}`}
+              className="lg:fixed lg:left-5 lg:bottom-0"
+            >
               <span className="text-xl">
                 {post.created_by?.first_name} {post.created_by?.last_name}
               </span>
               <p className="opacity-50 mb-10">
                 {Math.round(post.reading_time / 60)} min read
               </p>
-            </div>
+            </Link>
             <main className="w-full">
               <Editor readOnly={true} defaultValue={post.content} />
             </main>
