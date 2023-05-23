@@ -46,7 +46,6 @@ export function jwtMiddleware(req: Request, res: Response, next: NextFunction) {
     const isRefreshExpired = isTokenExpired(decodedRefresh);
 
     if (isRefreshExpired || decodedRefresh === null) {
-      console.log('HERE');
       next(); //todo implement refresh token
     }
 
@@ -60,7 +59,6 @@ export function jwtMiddleware(req: Request, res: Response, next: NextFunction) {
       maxAge: 2592000000,
     });
     req.locals.user = refreshPayload;
-    console.log('ref', req.locals.user);
     next();
   }
 
