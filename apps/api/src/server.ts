@@ -1,3 +1,4 @@
+require('tsconfig-paths').register();
 import { CustomError } from '@scrib/api/exceptions';
 import { Context, context, schema } from '@scrib/api/graphql';
 import logger from '@scrib/api/lib/logger';

@@ -9,7 +9,7 @@
     "dev": "doppler run -- nodemon src/server.ts",
     "build:graphql": "ts-node src/scripts/generate-schema",
     "lint": "eslint . --ext .ts",
-    "start": "sh ../../scripts/doppler_run.sh DOPPLER_API_TOKEN 'node -r esbuild-register src/server.ts'",
+    "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/apps/api/src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
