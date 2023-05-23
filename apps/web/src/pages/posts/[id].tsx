@@ -6,6 +6,7 @@ import { IPost } from '@scrib/db/models/post';
 import { IUser } from '@scrib/db/models/user';
 import { redirectToErrorPageSSR } from '@scrib/web/utils';
 import { NavigationLayout } from '@scrib/web/layouts/navigation';
+import { ScrollProgressBar } from '@scrib/ui/components';
 
 type Props = {
   post: Partial<IPost> & {
@@ -26,13 +27,13 @@ export default function Post({ post }: Props) {
       <NavigationLayout>
         <div className="w-screen min-h-screen flex p-36 justify-center relative">
           <div
-            className="w-3/4 h-auto flex flex-col"
+            className="w-auto h-auto flex flex-col"
             style={{ height: '100%' }}
           >
             <h1 className="text-3xl underline font-bold mb-2">
               {post.title ?? 'Post'}
             </h1>
-            <div className="fixed left-5 bottom-0">
+            <div className="lg:fixed lg:left-5 lg:bottom-0">
               <span className="text-xl">
                 {post.created_by?.first_name} {post.created_by?.last_name}
               </span>
@@ -45,6 +46,7 @@ export default function Post({ post }: Props) {
             </main>
           </div>
         </div>
+        <ScrollProgressBar />
       </NavigationLayout>
     </>
   );
