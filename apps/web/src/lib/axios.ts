@@ -1,4 +1,3 @@
-import { API_URL } from '@scrib/web/config';
 import {
   errorNotification,
   successNotification,
@@ -6,7 +5,7 @@ import {
 import Axios from 'axios';
 
 export const axios = Axios.create({
-  baseURL: API_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
 });
 
 axios.interceptors.response.use(
