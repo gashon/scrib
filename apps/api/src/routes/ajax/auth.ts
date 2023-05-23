@@ -99,7 +99,7 @@ router.get(
   }
 );
 
-router.get(
+router.post(
   '/logout',
   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {

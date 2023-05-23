@@ -7,6 +7,7 @@ import { graphql } from 'relay-runtime';
 import { successNotification } from '@scrib/web/lib/notification';
 import { uploadImage } from '@scrib/web/utils';
 import { updateAuthorAttributes } from '@scrib/web/features/author';
+import { useLogout } from '@scrib/web/features/auth';
 import { settingsModalInfo$key } from '@scrib/web/__generated__/authorInfo.graphql';
 import * as z from 'zod';
 
@@ -37,6 +38,7 @@ export const SettingsModal: FC<SettingsModalProps> = ({ user }) => {
     user
   );
   const [avatar, setAvatar] = useState(data?.avatar);
+  const logout = useLogout();
 
   if (!data) return null;
 
@@ -102,13 +104,15 @@ export const SettingsModal: FC<SettingsModalProps> = ({ user }) => {
               disabled={formState.isSubmitting}
               defaultValue={data.lastName}
             />
-            <Button
-              type="submit"
-              disabled={formState.isSubmitting}
-              className="mt-4"
-            >
-              Save
-            </Button>
+
+            <div className="flex flex-row justify-between mt-4">
+              <Button type="button" className="opacity-50" onClick={logout}>
+                Logout
+              </Button>
+              <Button type="submit" disabled={formState.isSubmitting}>
+                Save
+              </Button>
+            </div>
           </>
         )}
       </Form>
