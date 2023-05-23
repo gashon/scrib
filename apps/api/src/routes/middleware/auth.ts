@@ -2,6 +2,7 @@ import {
   AUTH_COOKIE_NAME,
   AUTH_REFRESH_COOKIE_NAME,
 } from '@scrib/api/constants';
+import { CustomError } from '@scrib/api/exceptions';
 import logger from '@scrib/api/lib/logger';
 import {
   DecodedToken,
@@ -31,6 +32,8 @@ const isTokenValid = (decoded: DecodedToken): boolean => {
 // attaches user to req.locals.user
 export function jwtMiddleware(req: Request, res: Response, next: NextFunction) {
   const token = req.cookies[AUTH_COOKIE_NAME];
+  if (!token) throw new CustomError('Unauthorized', 401);
+
   const decoded: DecodedToken = decodeToken(token);
   req.locals = { user: null };
 
@@ -44,6 +47,7 @@ export function jwtMiddleware(req: Request, res: Response, next: NextFunction) {
     const isRefreshExpired = isTokenExpired(decodedRefresh);
 
     if (isRefreshExpired || decodedRefresh === null) {
+      console.log('HERE');
       next(); //todo implement refresh token
     }
 
@@ -57,11 +61,13 @@ export function jwtMiddleware(req: Request, res: Response, next: NextFunction) {
       maxAge: 2592000000,
     });
     req.locals.user = refreshPayload;
+    console.log('ref', req.locals.user);
     next();
   }
 
   if (!isTokenValid(decoded)) throw new Error('Invalid token');
 
   req.locals.user = decoded as JwtPayload;
+  console.log('deco', decoded, token, AUTH_COOKIE_NAME);
   next();
 }
