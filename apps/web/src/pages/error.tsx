@@ -5,85 +5,88 @@ import { Button } from '@scrib/ui/atoms';
 import { Helmet } from 'react-helmet-async';
 import dynamic from 'next/dynamic';
 import { useIsMounted } from '@scrib/web/hooks';
+
 const ScribbleSVG = dynamic(() => import('@scrib/ui/svg/scribble'), {
-  ssr: false,
+    ssr: false,
 });
 
 type QueryParamsBase = {
-  title: string;
-  description?: string;
-  loggedIn?: boolean;
+    title: string;
+    description?: string;
+    loggedIn?: boolean;
 };
 
 type QueryParamsWithRedirect = {
-  redirect: LinkProps['href'];
-  retry?: boolean;
+    redirect: LinkProps['href'];
+    retry?: boolean;
 } & QueryParamsBase;
 
 type QueryParamsWithoutRedirect = {
-  redirect?: never;
-  retry?: never;
+    redirect?: never;
+    retry?: never;
 } & QueryParamsBase;
 
 export type QueryParams = QueryParamsWithRedirect | QueryParamsWithoutRedirect;
 
 const ErrorPage: FC<QueryParams> = ({
-  title,
-  description,
-  redirect,
-  retry,
-  loggedIn,
+    title,
+    description,
+    redirect,
+    retry,
+    loggedIn,
 }) => {
-  const isLoggedIn = loggedIn ?? userIsLoggedIn();
+    const isLoggedIn = loggedIn ?? userIsLoggedIn();
 
-  const mounted = useIsMounted();
-  if (!mounted) return null;
+    const mounted = useIsMounted();
+    if (!mounted) return null;
 
-  return (
-    <>
-      <Helmet>
-        <title>{title ?? 'Scrib'}</title>
-        <meta name="description" content={description ?? 'Error'} />
-        <meta name="robots" content="noindex" />
-        <meta name="googlebot" content="noindex" />
-        <meta name="bingbot" content="noindex" />
-        <meta name="yandex" content="none" />
-      </Helmet>
-      <div className="relative w-screen h-screen  flex justify-center items-center">
-        <main className="z-20 flex justify-center items-center flex-col">
-          <h1 className="text-4xl mb-4">{title ?? 'Error'}</h1>
-          {description && <p className="text-lg mb-10">{description}</p>}
-          <div className="flex flex-row gap-5">
-            {retry && redirect && (
-              <Link href={redirect} className=" font-bold">
-                <Button>Go Back</Button>
-              </Link>
-            )}
+    return (
+        <>
+            <Helmet>
+                <title>{title ?? 'Scrib'}</title>
+                <meta name="description" content={description ?? 'Error'} />
+                <meta name="robots" content="noindex" />
+                <meta name="googlebot" content="noindex" />
+                <meta name="bingbot" content="noindex" />
+                <meta name="yandex" content="none" />
+            </Helmet>
+            <div className="relative w-screen h-screen  flex justify-center items-center">
+                <main className="z-20 flex justify-center items-center flex-col">
+                    <h1 className="text-4xl mb-4">{title ?? 'Error'}</h1>
+                    {description && (
+                        <p className="text-lg mb-10">{description}</p>
+                    )}
+                    <div className="flex flex-row gap-5">
+                        {retry && redirect && (
+                            <Link href={redirect} className=" font-bold">
+                                <Button>Go Back</Button>
+                            </Link>
+                        )}
 
-            <Link href={isLoggedIn ? '/' : '/auth'}>
-              <Button variant="secondary">
-                {isLoggedIn ? 'Go to Landing Page' : 'Login'}
-              </Button>
-            </Link>
-          </div>
-        </main>
+                        <Link href={isLoggedIn ? '/' : '/auth'}>
+                            <Button variant="secondary">
+                                {isLoggedIn ? 'Go to Landing Page' : 'Login'}
+                            </Button>
+                        </Link>
+                    </div>
+                </main>
 
-        <div className="absolute inset-0 opacity-75 z-10">
-          <ScribbleSVG />
-        </div>
-      </div>
-    </>
-  );
+                <div className="absolute inset-0 opacity-75 z-10">
+                    <ScribbleSVG />
+                </div>
+            </div>
+        </>
+    );
 };
 
 export async function getServerSideProps(context) {
-  const queryParams = context.query as QueryParams;
+    const queryParams = context.query as QueryParams;
 
-  return {
-    props: {
-      ...queryParams,
-    },
-  };
+    return {
+        props: {
+            ...queryParams,
+        },
+    };
 }
 
 export default ErrorPage;
