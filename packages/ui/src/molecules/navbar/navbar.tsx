@@ -25,9 +25,9 @@ export const Navbar: FC = () => {
         </Link>
 
         {!isEditing && (
-          <Link href={isLoggedIn ? '/auth' : '/post'}>
+          <Link href={!isLoggedIn ? '/auth' : '/post'}>
             <Button className="bg-transparent">
-              {isLoggedIn ? 'Register/Login' : 'Make a Post'}
+              {!isLoggedIn ? 'Register/Login' : 'Make a Post'}
             </Button>
           </Link>
         )}
