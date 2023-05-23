@@ -12,7 +12,6 @@ import dynamic from 'next/dynamic';
 const UndulateSVG = dynamic(() => import('@scrib/ui/svg/undulate'), {
   ssr: false,
 });
-// import { UndulateSVG } from '@scrib/ui/svg';
 
 type Props = {
   triggerButton: ReactNode;
@@ -21,6 +20,7 @@ type Props = {
   ariaDescribedBy: string;
   title: string;
   modalClassName?: string;
+  hasBackgroundSVG?: boolean;
 };
 
 export const Modal: FC<PropsWithChildren<Props>> = ({
@@ -31,6 +31,7 @@ export const Modal: FC<PropsWithChildren<Props>> = ({
   ariaDescribedBy,
   title,
   modalClassName,
+  hasBackgroundSVG = true,
 }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = useCallback(() => setOpen(true), []);
@@ -60,10 +61,11 @@ export const Modal: FC<PropsWithChildren<Props>> = ({
         <div
           className={`overflow-hidden bg-white rounded w-3/4 p-4 relative ${modalClassName}`}
         >
-          <div className="absolute inset-0 opacity-75 z-10">
-            <UndulateSVG />
-          </div>
-
+          {hasBackgroundSVG && (
+            <div className="absolute inset-0 opacity-75 z-10">
+              <UndulateSVG />
+            </div>
+          )}
           <div className="w-full flex justify-between z-20">
             <h3 className="text-3xl">{title}</h3>
             <div onClick={handleClose} className="cursor-pointer">

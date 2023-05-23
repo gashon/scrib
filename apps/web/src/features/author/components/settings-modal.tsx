@@ -66,6 +66,7 @@ export const SettingsModal: FC<SettingsModalProps> = ({ user }) => {
       ariaDescribedBy="settings-modal"
       ariaLabelledBy="settings-modal"
       modalClassName="w-1/2 lg:w-2/5"
+      hasBackgroundSVG={false}
     >
       <Form<SettingsFormData, typeof SettingsFormSchema>
         schema={SettingsFormSchema}
