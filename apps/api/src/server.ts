@@ -62,6 +62,7 @@ app.all('/graphql', jwtMiddleware, (req, res) => {
 });
 
 async function startServer() {
+  logger.info('Connecting to MongoDB...');
   await mongoose.connect(process.env.MONGODB_URI!);
   logger.info('Connected to MongoDB');
 
