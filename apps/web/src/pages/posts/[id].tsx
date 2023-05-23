@@ -27,7 +27,7 @@ export default function Post({ post }: Props) {
       <NavigationLayout>
         <div className="w-screen min-h-screen flex p-36 justify-center relative">
           <div
-            className="w-auto h-auto flex flex-col"
+            className="w-3/4 h-auto flex flex-col"
             style={{ height: '100%' }}
           >
             <h1 className="text-3xl underline font-bold mb-2">
@@ -41,7 +41,7 @@ export default function Post({ post }: Props) {
                 {Math.round(post.reading_time / 60)} min read
               </p>
             </div>
-            <main className="">
+            <main className="w-full">
               <Editor readOnly={true} defaultValue={post.content} />
             </main>
           </div>

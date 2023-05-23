@@ -1002,7 +1002,12 @@ export const StyledEditor = styled('div')<{
   }
 
   h4 {
-    font-size: 1.125em;
+    font-size: 1.120em;
+  }
+
+  p { 
+    font-size: 1.175em;
+    line-height: 1.5em;
   }
 
   @media print {

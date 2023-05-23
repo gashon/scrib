@@ -85,6 +85,7 @@ export default function Post({ post: loadedPost }: Props) {
             style={{
               minHeight: '70vh',
             }}
+            className="w-full"
           >
             <input
               id="post-title"
