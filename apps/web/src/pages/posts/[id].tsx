@@ -1,4 +1,5 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { Helmet } from 'react-helmet-async';
 import Editor from '@scrib/editor/src';
 import { getPost, viewPost } from '@scrib/web/features/post';
@@ -7,6 +8,12 @@ import { IUser } from '@scrib/db/models/user';
 import { redirectToErrorPageSSR } from '@scrib/web/utils';
 import { NavigationLayout } from '@scrib/web/layouts/navigation';
 import { ScrollProgressBar } from '@scrib/ui/components';
+const RandomRepeatingSVGBackground = dynamic(
+  () => import('@scrib/web/components/random-svgs'),
+  {
+    ssr: false,
+  }
+);
 
 type Props = {
   post: Partial<IPost> & {
@@ -25,12 +32,16 @@ export default function Post({ post }: Props) {
       </Helmet>
 
       <NavigationLayout>
-        <div className="w-screen min-h-screen flex p-36 justify-center relative">
+        <div className="overflow-hidden w-screen min-h-screen flex p-24 justify-center relative">
+          <RandomRepeatingSVGBackground />
+
           <div
-            className="w-3/4 h-auto flex flex-col"
-            style={{ height: '100%' }}
+            className="z-20 w-10/12 lg:w-3/4 h-auto flex flex-col"
+            style={{
+              height: '100%',
+            }}
           >
-            <h1 className="text-3xl underline font-bold mb-2">
+            <h1 className="text-3xl underline font-bold mb-2 lg:mb-4">
               {post.title ?? 'Post'}
             </h1>
             <div className="lg:fixed lg:left-5 lg:bottom-0">

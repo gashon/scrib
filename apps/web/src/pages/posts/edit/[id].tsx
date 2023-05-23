@@ -89,7 +89,7 @@ export default function Post({ post: loadedPost }: Props) {
           >
             <input
               id="post-title"
-              className="w-full mb-10 text-3xl font-bold underline"
+              className="w-10/12 lg:w-full mb-10 text-3xl font-bold underline"
               onChange={(e) => handleChange('title', e.target.value)}
               value={post.title}
               style={{ outline: 'none', boxShadow: 'none' }}
