@@ -2,13 +2,14 @@ import express from 'express';
 import User from '@scrib/db/models/user';
 import status from 'http-status';
 import logger from '@scrib/api/lib/logger';
-import { jwtMiddleware } from '@scrib/api/routes/middleware/auth';
+import { jwtMiddleware, authGuard } from '@scrib/api/routes/middleware/auth';
 
 const router: express.Router = express.Router();
 
 router.patch(
   '/',
   jwtMiddleware,
+  authGuard,
   async (req: express.Request, res: express.Response) => {
     const userId = req.locals.user.id;
 

@@ -9,5 +9,7 @@ export const updateAuthorAttributes = async (
     data: IUser;
   }>
 > => {
-  return axios.patch('/api/v1/user', payload);
+  return axios.patch('/api/v1/user', payload, {
+    withCredentials: true,
+  });
 };

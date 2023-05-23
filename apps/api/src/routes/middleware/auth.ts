@@ -32,7 +32,6 @@ const isTokenValid = (decoded: DecodedToken): boolean => {
 // attaches user to req.locals.user
 export function jwtMiddleware(req: Request, res: Response, next: NextFunction) {
   const token = req.cookies[AUTH_COOKIE_NAME];
-  if (!token) throw new CustomError('Unauthorized', 401);
 
   const decoded: DecodedToken = decodeToken(token);
   req.locals = { user: null };
@@ -68,6 +67,12 @@ export function jwtMiddleware(req: Request, res: Response, next: NextFunction) {
   if (!isTokenValid(decoded)) throw new Error('Invalid token');
 
   req.locals.user = decoded as JwtPayload;
-  console.log('deco', decoded, token, AUTH_COOKIE_NAME);
+  next();
+}
+
+export function authGuard(req: Request, res: Response, next: NextFunction) {
+  if (!req.locals.user) {
+    throw new CustomError('Unauthorized', 401);
+  }
   next();
 }
