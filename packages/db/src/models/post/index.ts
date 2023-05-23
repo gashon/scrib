@@ -9,13 +9,11 @@ const postSchema = new mongoose.Schema<IPost>(
       type: String,
       required: true,
       trim: true,
-      maxlength: 100,
     },
     content: {
       type: String,
       required: false,
       trim: true,
-      maxlength: 1000,
       default: '',
     },
     views: {
