@@ -6,12 +6,6 @@ import helmet from 'helmet';
 import ajax from './ajax';
 import v1 from './v1';
 
-const WHITELIST = [
-  'http://localhost:3000',
-  'http://localhost:7000',
-  'https://scrib-web.vercel.app',
-];
-
 const router: express.Router = express.Router();
 
 router.use(express.json({ limit: '50mb' }));

@@ -3,11 +3,14 @@ import { Helmet } from 'react-helmet-async';
 import Editor from '@scrib/editor/src';
 import { getPost, viewPost } from '@scrib/web/features/post';
 import { IPost } from '@scrib/db/models/post';
+import { IUser } from '@scrib/db/models/user';
 import { redirectToErrorPageSSR } from '@scrib/web/utils';
 import { NavigationLayout } from '@scrib/web/layouts/navigation';
 
 type Props = {
-  post: Partial<IPost>;
+  post: Partial<IPost> & {
+    created_by?: Partial<IUser>;
+  };
 };
 
 export default function Post({ post }: Props) {
@@ -21,14 +24,22 @@ export default function Post({ post }: Props) {
       </Helmet>
 
       <NavigationLayout>
-        <div className="w-screen min-h-screen flex p-36 justify-center">
+        <div className="w-screen min-h-screen flex p-36 justify-center relative">
           <div
             className="w-3/4 h-auto flex flex-col"
             style={{ height: '100%' }}
           >
-            <h1 className="text-3xl mb-10 underline font-bold">
+            <h1 className="text-3xl underline font-bold mb-2">
               {post.title ?? 'Post'}
             </h1>
+            <div className="fixed left-5 bottom-0">
+              <span className="text-xl">
+                {post.created_by?.first_name} {post.created_by?.last_name}
+              </span>
+              <p className="opacity-50 mb-10">
+                {Math.round(post.reading_time / 60)} min read
+              </p>
+            </div>
             <main className="">
               <Editor readOnly={true} defaultValue={post.content} />
             </main>
