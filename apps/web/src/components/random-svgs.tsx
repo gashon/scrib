@@ -1,5 +1,5 @@
 import { useEffect, useState, FC } from 'react';
-import { ScribbleSVG, UndulateSVG } from '@scrib/ui/svg';
+import { ScribbleSVG } from '@scrib/ui/svg';
 
 export const RandomRepeatingSVGBackground: FC = () => {
   const [SVGs, setSVGs] = useState([]);

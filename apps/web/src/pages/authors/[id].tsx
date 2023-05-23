@@ -7,6 +7,10 @@ import {
 } from '@scrib/web/features/author';
 import type { getAuthorAndPostsQuery } from '@scrib/web/__generated__/GetAuthorAndPostsQuery.graphql';
 import { Helmet } from 'react-helmet-async';
+import dynamic from 'next/dynamic';
+const OrganizeSVG = dynamic(() => import('@scrib/ui/svg/organize'), {
+  ssr: false,
+});
 
 type Props = {
   authorId: string;
@@ -27,7 +31,17 @@ export default function AuthorPage({ authorId }: Props) {
         <title>{query.user.fullName}</title>
       </Helmet>
 
-      <div className="w-screen min-h-screen flex justify-center relative">
+      <div className="overflow-hidden w-screen min-h-screen flex justify-center relative">
+        <div
+          className="absolute inset-0"
+          style={{
+            zIndex: -1,
+            opacity: 0.5,
+          }}
+        >
+          <OrganizeSVG />
+        </div>
+
         <main className="flex flex-col w-3/4">
           <div className="w-full flex flex-row">
             <AuthorInfo user={query.user} authorSlug={authorId} />
