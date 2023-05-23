@@ -19,7 +19,8 @@ module.exports = withBundleAnalyzer({
     ],
   },
   async rewrites() {
-    const HOST = process.env.API_BASE_URL ?? 'http://localhost:7000'; //env
+    const HOST =
+      process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:7000'; //env
     return [
       {
         source: '/ajax/:path*',
