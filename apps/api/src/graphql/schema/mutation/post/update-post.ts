@@ -5,7 +5,7 @@ import {
   postType,
 } from '@scrib/api/graphql/schema/types';
 import { GraphQLFieldConfig, GraphQLNonNull } from 'graphql';
-import mongoose from 'mongoose';
+import { estimateReadingTimeInSecs } from '@scrib/api/utils/estimate-reading-time';
 
 export const updatePost: GraphQLFieldConfig<
   undefined,
@@ -31,7 +31,11 @@ export const updatePost: GraphQLFieldConfig<
       throw new Error('Post not found');
     }
 
-    post.set(rest);
+    const readingTime = estimateReadingTimeInSecs(rest.content);
+    post.set({
+      ...rest,
+      reading_time: readingTime,
+    });
     await post.save();
 
     console.log('GOt', post, rest);

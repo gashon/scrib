@@ -37,6 +37,10 @@ const postSchema = new mongoose.Schema<IPost>(
       enum: ['draft', 'published'],
       default: 'draft',
     },
+    reading_time: {
+      type: Number,
+      default: 0,
+    },
     deleted_at: {
       type: Date,
       default: null,

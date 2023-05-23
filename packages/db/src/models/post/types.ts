@@ -8,6 +8,7 @@ export interface IPost extends Resource {
   views: number;
   likes: number;
   status: 'draft' | 'published';
+  reading_time: number;
 }
 
 export type PostDocument = mongoose.Document<string, object, IPost> & IPost;
