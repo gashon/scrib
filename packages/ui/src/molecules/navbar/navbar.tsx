@@ -18,7 +18,7 @@ export const Navbar: FC = () => {
   return (
     <section className="h-auto w-full">
       <div className="z-20 flex flex-row justify-between items-center w-full h-16 px-8 py-4">
-        <Link href="/">
+        <Link href={isLoggedIn ? '/dashboard' : '/'}>
           <div className="border-black border-b">
             <p className="font-bold text-3xl">Scrib</p>
           </div>

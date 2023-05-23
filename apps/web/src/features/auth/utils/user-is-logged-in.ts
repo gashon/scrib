@@ -6,6 +6,7 @@ export const userIsLoggedIn = (): boolean => {
       .split('; ')
       .find((row) => row.startsWith(AUTH_COOKIE_NAME))
       ?.split('=')[1];
+
     return !!token;
   }
 };
