@@ -4,23 +4,26 @@ import Link, { LinkProps } from 'next/link';
 import { Button } from '@scrib/ui/atoms';
 import { Helmet } from 'react-helmet-async';
 import dynamic from 'next/dynamic';
+import { useIsMounted } from '@scrib/web/hooks';
 const ScribbleSVG = dynamic(() => import('@scrib/ui/svg/scribble'), {
   ssr: false,
 });
 
-type QueryParamsWithRedirect = {
+type QueryParamsBase = {
   title: string;
   description?: string;
-  redirect: LinkProps['href'];
-  retry?: boolean;
+  loggedIn?: boolean;
 };
 
+type QueryParamsWithRedirect = {
+  redirect: LinkProps['href'];
+  retry?: boolean;
+} & QueryParamsBase;
+
 type QueryParamsWithoutRedirect = {
-  title: string;
-  description?: string;
   redirect?: never;
   retry?: never;
-};
+} & QueryParamsBase;
 
 export type QueryParams = QueryParamsWithRedirect | QueryParamsWithoutRedirect;
 
@@ -29,9 +32,12 @@ const ErrorPage: FC<QueryParams> = ({
   description,
   redirect,
   retry,
-  ...rest
+  loggedIn,
 }) => {
-  const isLoggedIn = userIsLoggedIn();
+  const isLoggedIn = loggedIn ?? userIsLoggedIn();
+
+  const mounted = useIsMounted();
+  if (!mounted) return null;
 
   return (
     <>
