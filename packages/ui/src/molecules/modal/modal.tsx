@@ -67,8 +67,8 @@ export const Modal: FC<PropsWithChildren<Props>> = ({
             </div>
           )}
           <div className="w-full flex justify-between z-20">
-            <h3 className="text-3xl">{title}</h3>
-            <div onClick={handleClose} className="cursor-pointer">
+            <h3 className="text-3xl z-20">{title}</h3>
+            <div onClick={handleClose} className="cursor-pointer z-20">
               <AiOutlineClose size={30} />
             </div>
           </div>
