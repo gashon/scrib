@@ -5,6 +5,6 @@ export function estimateReadingTimeInSecs(article: string): number {
   const words = article.split(/\s+/);
   const minutes = words.length / AVERAGE_READING_SPEED_IN_WORDS_PER_MINUTE;
 
-  const seconds = minutes * 60;
+  const seconds = Math.round(minutes * 60 * 100) / 100;
   return seconds;
 }
