@@ -9,7 +9,7 @@ const router: express.Router = express.Router();
 router.patch(
   '/',
   jwtMiddleware,
-  authGuard,
+  // authGuard,
   async (req: express.Request, res: express.Response) => {
     const userId = req.locals.user.id;
 

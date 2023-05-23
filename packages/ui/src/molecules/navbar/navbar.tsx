@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 
 export const Navbar: FC = () => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
-  const isLoggedIn = userIsLoggedIn();
   const isEditing = useRouter().pathname.includes('edit');
 
   useEffect(() => {
@@ -14,6 +13,7 @@ export const Navbar: FC = () => {
   }, []);
 
   if (!isMounted) return null;
+  const isLoggedIn = userIsLoggedIn();
 
   return (
     <section className="h-auto w-full">
