@@ -2,6 +2,7 @@ import {
   errorNotification,
   successNotification,
 } from '@scrib/web/lib/notification';
+import { redirectToErrorPage } from '@scrib/web/utils/redirect-to-error-page';
 import Axios from 'axios';
 
 export const axios = Axios.create({
@@ -18,20 +19,20 @@ axios.interceptors.response.use(
 
     // token expired
     if (typeof window !== 'undefined' && error?.response?.status === 401) {
-      location.replace(
-        `/error/external?message=${encodeURIComponent(
-          message || 'Your session has expired. Please login again.'
-        )}&redirect=${encodeURIComponent(location.pathname + location.search)}`
-      );
+      redirectToErrorPage({
+        title: 'Session Expired',
+        description: message || 'Your session has expired. Please login again.',
+        redirect: location.pathname + location.search,
+      });
       return;
     }
 
     if (typeof window !== 'undefined' && error?.response?.status === 403) {
-      location.replace(
-        `/error/external?message=${encodeURIComponent(
-          message || 'You are not authorized to access this page.'
-        )}&redirect=${encodeURIComponent(location.pathname + location.search)}`
-      );
+      redirectToErrorPage({
+        title: 'Unauthorized',
+        description: message || 'You are not authorized to access this page.',
+        redirect: location.pathname + location.search,
+      });
       return;
     }
 

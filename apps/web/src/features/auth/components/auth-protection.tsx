@@ -1,5 +1,6 @@
 import { FC, PropsWithChildren, ReactElement, useEffect } from 'react';
 import { useAuth } from '@scrib/web/features/auth';
+import { redirectToErrorPage } from '@scrib/web/utils/redirect-to-error-page';
 
 type AuthProtectionProps = {
   loadingComponent: ReactElement;
@@ -17,11 +18,11 @@ export const AuthProtection: FC<PropsWithChildren<AuthProtectionProps>> = ({
 
   useEffect(() => {
     if (user === null) {
-      window.location.replace(
-        `/error/external?message=${encodeURIComponent(
-          'You are not logged in!',
-        )}&redirect=${encodeURIComponent(location.pathname + location.search)}`,
-      );
+      redirectToErrorPage({
+        title: 'Unauthorized',
+        description: 'You must be logged in to view this page.',
+        loggedIn: false,
+      });
     }
   }, [user, isLoading]);
 

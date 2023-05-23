@@ -41,12 +41,16 @@ export const SettingsModal: FC<SettingsModalProps> = ({ user }) => {
   if (!data) return null;
 
   const onSubmit = async (values: SettingsFormData) => {
-    await updateAuthorAttributes({
-      first_name: values.first_name,
-      last_name: values.last_name,
-      avatar,
-    });
-    successNotification('Settings updated');
+    try {
+      await updateAuthorAttributes({
+        first_name: values.first_name,
+        last_name: values.last_name,
+        avatar,
+      });
+      successNotification('Settings updated');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
