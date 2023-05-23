@@ -1,4 +1,3 @@
-require('tsconfig-paths').register();
 import { CustomError } from '@scrib/api/exceptions';
 import { Context, context, schema } from '@scrib/api/graphql';
 import logger from '@scrib/api/lib/logger';
@@ -13,7 +12,7 @@ import router from '@scrib/api/routes';
 // todo integrate
 import throng from 'throng';
 
-const port = parseInt(process.env.PORT!, 10) || 7000;
+const port = parseInt(process.env.SERVER_PORT!, 10) || 7000;
 const dev = process.env.NODE_ENV !== 'production';
 
 const app = express();
@@ -64,10 +63,11 @@ app.all('/graphql', jwtMiddleware, (req, res) => {
 
 async function startServer() {
   logger.info('Connecting to MongoDB...');
+
   await mongoose.connect(process.env.MONGODB_URI!);
   logger.info('Connected to MongoDB');
 
-  app.listen(port, () => logger.info(`API server listening on port ${port}`));
+  app.listen(port, () => console.log('LISTENING'));
 }
 
 startServer();
