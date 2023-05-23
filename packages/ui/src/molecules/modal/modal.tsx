@@ -8,6 +8,11 @@ import {
 } from 'react';
 import { Modal as ModalUI, Box } from '@mui/material';
 import { AiOutlineClose } from 'react-icons/ai';
+import dynamic from 'next/dynamic';
+const UndulateSVG = dynamic(() => import('@scrib/ui/svg/undulate'), {
+  ssr: false,
+});
+// import { UndulateSVG } from '@scrib/ui/svg';
 
 type Props = {
   triggerButton: ReactNode;
@@ -53,20 +58,24 @@ export const Modal: FC<PropsWithChildren<Props>> = ({
         }}
       >
         <div
-          className={`bg-white rounded w-3/4 p-4 relative ${modalClassName}`}
+          className={`overflow-hidden bg-white rounded w-3/4 p-4 relative ${modalClassName}`}
         >
-          <div className="w-full flex justify-between">
+          <div className="absolute inset-0 opacity-75 z-10">
+            <UndulateSVG />
+          </div>
+
+          <div className="w-full flex justify-between z-20">
             <h3 className="text-3xl">{title}</h3>
             <div onClick={handleClose} className="cursor-pointer">
               <AiOutlineClose size={30} />
             </div>
           </div>
 
-          <div className="w-full h-full flex justify-center py-4">
+          <div className="w-full h-full flex justify-center py-4 z-20">
             {children}
           </div>
 
-          <div className="absolute bottom-4 right-4">{submitButton}</div>
+          <div className="absolute bottom-4 right-4 z-20">{submitButton}</div>
         </div>
       </ModalUI>
     </>
