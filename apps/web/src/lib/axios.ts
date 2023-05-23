@@ -6,7 +6,7 @@ import { redirectToErrorPage } from '@scrib/web/utils/redirect-to-error-page';
 import Axios from 'axios';
 
 export const axios = Axios.create({
-  // baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
 });
 
 axios.interceptors.response.use(

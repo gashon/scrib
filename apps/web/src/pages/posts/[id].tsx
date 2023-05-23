@@ -50,13 +50,21 @@ export async function getServerSideProps(context) {
   const post =
     postSettlement.status === 'fulfilled' ? postSettlement.value : null;
 
-  if (!post)
-    return redirectToErrorPageSSR({
-      title: 'Post not found',
-      description: 'The post you are looking for does not exist',
-      redirect: context.resolvedUrl,
-      retry: true,
-    });
+  console.log(
+    postSettlement.status === 'rejected'
+      ? postSettlement.reason
+      : postSettlement.value,
+    post,
+    id
+  );
+
+  // if (!post)
+  //   return redirectToErrorPageSSR({
+  //     title: 'Post not found',
+  //     description: 'The post you are looking for does not exist',
+  //     redirect: context.resolvedUrl,
+  //     retry: true,
+  //   });
 
   return {
     props: {

@@ -10,6 +10,5 @@ export const getPost = async (id: string): Promise<IPost> => {
   const response: AxiosResponse<GetPostResponse> = await axios.get(
     `/api/v1/posts/${id}`
   );
-
   return response?.data?.data;
 };
