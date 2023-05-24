@@ -6,7 +6,7 @@ const config = withPlugins(
     [
       withBundleAnalyzer({
         enabled: process.env.ANALYZE === 'true',
-        openAnalyzer: false,
+        openAnalyzer: process.env.VIEW_ANALYZE === 'true',
       }),
     ],
   ],
