@@ -37,7 +37,7 @@ export default function Post({ post }: Props) {
           <RandomRepeatingSVGBackground />
 
           <div
-            className="z-20 w-10/12 lg:w-3/4 h-auto flex flex-col"
+            className="z-20 w-10/12 lg:w-3/5 h-auto flex flex-col"
             style={{
               height: '100%',
             }}
