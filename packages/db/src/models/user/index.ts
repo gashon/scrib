@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema<IUser>(
       type: String,
       default(this: IUser) {
         return (
-          this.email &&
+          this?.email &&
           `https://www.gravatar.com/avatar/${md5(this.email)}?d=retro`
         );
       },
