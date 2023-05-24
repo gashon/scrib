@@ -10,7 +10,7 @@ import rateLimit from 'express-rate-limit';
 import morgan from 'morgan';
 import router from '@scrib/api/routes';
 // todo integrate
-import throng from 'throng';
+// import throng from 'throng';
 
 const port = parseInt(process.env.SERVER_PORT!, 10) || 7000;
 const dev = process.env.NODE_ENV !== 'production';
