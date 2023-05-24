@@ -5,12 +5,14 @@ import { CreatePostButton } from '@scrib/web/features/post';
 import { graphql } from 'relay-runtime';
 import Link from 'next/link';
 import Image from 'next/image';
+import { userIsLoggedIn } from '@scrib/web/features/auth';
+
 interface AuthorInfoProps {
   user: authorInfo$key;
-  authorSlug: string;
+  createPost: boolean;
 }
 
-export const AuthorInfo: FC<AuthorInfoProps> = ({ user, authorSlug }) => {
+export const AuthorInfo: FC<AuthorInfoProps> = ({ user, createPost }) => {
   const data = useFragment(
     graphql`
       fragment authorInfo on User {
@@ -20,10 +22,11 @@ export const AuthorInfo: FC<AuthorInfoProps> = ({ user, authorSlug }) => {
         avatar
       }
     `,
-    user
+    user,
   );
-
   if (!data) return null;
+
+  const isLoggedIn = userIsLoggedIn();
 
   return (
     <div className="flex justify-between items-center w-full py-8">
@@ -39,14 +42,18 @@ export const AuthorInfo: FC<AuthorInfoProps> = ({ user, authorSlug }) => {
           <h2 className="text-3xl underline">{data.fullName}</h2>
         )}
       </div>
-      {data && data.id === authorSlug ? (
+      {createPost ? (
         <CreatePostButton />
       ) : (
-        <Link href="/auth">
-          <div className="border-black border rounded px-4 py-2">
-            Register/Login
-          </div>
-        </Link>
+        <>
+          {!isLoggedIn && (
+            <Link href="/auth">
+              <div className="border-black border rounded px-4 py-2">
+                Register/Login
+              </div>
+            </Link>
+          )}
+        </>
       )}
     </div>
   );

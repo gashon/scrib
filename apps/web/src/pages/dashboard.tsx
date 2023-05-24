@@ -7,7 +7,7 @@ type Props = {
 };
 
 export default function DashboardPage({ authorId }: Props) {
-  return <AuthorPage authorId={authorId} />;
+  return <AuthorPage authorId={authorId} isDashboard={true} />;
 }
 
 export async function getServerSideProps(context) {

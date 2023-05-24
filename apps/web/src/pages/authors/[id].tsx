@@ -14,15 +14,16 @@ const OrganizeSVG = dynamic(() => import('@scrib/ui/svg/organize'), {
 
 type Props = {
   authorId: string;
+  isDashboard: boolean;
 };
 
-export default function AuthorPage({ authorId }: Props) {
+export default function AuthorPage({ authorId, isDashboard = false }: Props) {
   const query = useLazyLoadQuery<getAuthorAndPostsQuery>(
     GET_AUTHOR_AND_POSTS_QUERY,
     {
       id: authorId,
     },
-    { fetchPolicy: 'store-or-network' }
+    { fetchPolicy: 'store-or-network' },
   );
 
   return (
@@ -44,14 +45,16 @@ export default function AuthorPage({ authorId }: Props) {
 
         <main className="flex flex-col w-3/4">
           <div className="w-full flex flex-row">
-            <AuthorInfo user={query.user} authorSlug={authorId} />
+            <AuthorInfo user={query.user} createPost={isDashboard} />
           </div>
           <AuthorPosts posts={query.user.posts} />
         </main>
 
-        <div className="fixed left-5 bottom-5">
-          <SettingsModal user={query.user} />
-        </div>
+        {isDashboard && (
+          <div className="fixed left-5 bottom-5">
+            <SettingsModal user={query.user} />
+          </div>
+        )}
       </div>
     </>
   );
