@@ -29,8 +29,8 @@ const googleStrategy = new GoogleStrategy(
         avatar: profile._json.picture,
         last_login: Date.now(),
         verified: true,
-        ...(firstName && { first_name: firstName }),
-        ...(lastName && { last_name: lastName }),
+        ...(firstName ? { first_name: firstName } : {}),
+        ...(lastName ? { last_name: lastName } : {}),
       },
       { upsert: true, new: true, setDefaultsOnInsert: true }
     );
