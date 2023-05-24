@@ -20,7 +20,7 @@ export const ScrollProgressBar: FC = () => {
   }, []);
 
   return (
-    <div className="w-full h-2 bg-gray-200 fixed bottom-0">
+    <div className="w-full h-2 bg-gray-200 fixed bottom-0 z-50">
       <div style={{ width: `${scroll}%` }} className="h-2 bg-black" />
     </div>
   );
