@@ -33,7 +33,11 @@ export const userType = new GraphQLObjectType({
     fullName: {
       type: GraphQLString,
       description: 'The full name of the user.',
-      resolve: (obj: IUser) => `${obj.first_name} ${obj.last_name}`,
+      resolve: (obj: IUser) => {
+        if (!obj.first_name && !obj.last_name) return null;
+        
+        return `${obj.first_name} ${obj.last_name}`;
+      }
     },
     email: {
       type: GraphQLString,
