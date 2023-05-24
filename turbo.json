@@ -3,7 +3,7 @@
   "globalDependencies": ["**/.env.*local"],
   "pipeline": {
     "build": {
-      "outputs": ["dist/**"]
+      "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {},
     "dev": {
@@ -13,10 +13,6 @@
     "start": {
       "cache": false,
       "persistent": true
-    },
-    "web#build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
     }
   }
 }
