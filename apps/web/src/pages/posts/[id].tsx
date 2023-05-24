@@ -13,7 +13,7 @@ const RandomRepeatingSVGBackground = dynamic(
   () => import('@scrib/web/components/random-svgs'),
   {
     ssr: false,
-  }
+  },
 );
 
 type Props = {
@@ -56,7 +56,12 @@ export default function Post({ post }: Props) {
                 {Math.round(post.reading_time / 60)} min read
               </p>
             </Link>
-            <main className="w-full">
+            <main
+              className="w-full p-4 rounded"
+              style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.75)',
+              }}
+            >
               <Editor readOnly={true} defaultValue={post.content} />
             </main>
           </div>
