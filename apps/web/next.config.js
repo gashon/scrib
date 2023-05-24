@@ -16,6 +16,7 @@ module.exports = withBundleAnalyzer({
       'localhost',
       'scrib-app.s3.amazonaws.com',
       'lh3.googleusercontent.com',
+      'avatars.githubusercontent.com',
     ],
   },
   async rewrites() {
