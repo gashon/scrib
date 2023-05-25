@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "./node_modules/.bin/next build && pnpm run build:graphql ",
-    "build:analyze": "ANALYZE=true next build",
+    "build:analyze": "ANALYZE=true VIEW_ANALYZE=true next build",
     "dev": "doppler run -- next dev",
     "lint": "next lint",
     "build:graphql": "relay-compiler ./relay.config.json",
