@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'IBM Plex Mono', 'Menlo', 'Monaco', monospace;
 }
 :root {
   --font-inter: 'Inter', sans-serif;
